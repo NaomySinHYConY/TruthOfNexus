@@ -1,0 +1,112 @@
+{
+    "frames": [
+        {
+            "filename": "dragon1",
+            "frame": {
+                "w": 132,
+                "h": 107,
+                "x": 2,
+                "y": 2
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "dragon2",
+            "frame": {
+                "w": 132,
+                "h": 107,
+                "x": 138,
+                "y": 2
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "dragon3",
+            "frame": {
+                "w": 132,
+                "h": 107,
+                "x": 274,
+                "y": 2
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "dragon4",
+            "frame": {
+                "w": 132,
+                "h": 107,
+                "x": 410,
+                "y": 2
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "dragon5",
+            "frame": {
+                "w": 132,
+                "h": 107,
+                "x": 546,
+                "y": 2
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "dragon6",
+            "frame": {
+                "w": 132,
+                "h": 107,
+                "x": 682,
+                "y": 2
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "dragon7",
+            "frame": {
+                "w": 132,
+                "h": 107,
+                "x": 818,
+                "y": 2
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "dragon8",
+            "frame": {
+                "w": 132,
+                "h": 107,
+                "x": 954,
+                "y": 2
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        }
+    ],
+    "meta": {
+        "description": "Atlas generado con Atlas Packer Gamma V2",
+        "web": "https://gammafp.github.io/atlas-packer-phaser/"
+    }
+}

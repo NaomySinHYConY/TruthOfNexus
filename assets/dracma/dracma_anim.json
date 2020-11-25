@@ -1,0 +1,40 @@
+{
+    "anims": [
+        {
+            "key": "dracma",
+            "type": "frames",
+            "repeat": -1,
+            "frameRate": 5,
+            "frames": [
+                {
+                    "key": "dracmas",
+                    "frame": "dracma_0"
+                },
+                {
+                    "key": "dracmas",
+                    "frame": "dracma_1"
+                },
+                {
+                    "key": "dracmas",
+                    "frame": "dracma_2"
+                },
+                {
+                    "key": "dracmas",
+                    "frame": "dracma_3"
+                },
+                {
+                    "key": "dracmas",
+                    "frame": "dracma_4"
+                },
+                {
+                    "key": "dracmas",
+                    "frame": "dracma_5"
+                },
+                {
+                    "key": "dracmas",
+                    "frame": "dracma_6"
+                }
+            ]
+        }
+    ]
+}

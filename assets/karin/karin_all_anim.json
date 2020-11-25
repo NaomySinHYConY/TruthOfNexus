@@ -1,0 +1,44 @@
+{
+    "anims": [
+        {
+            "key": "karin_walk",
+            "type": "frames",
+            "repeat": -1,
+            "frameRate": 11,
+            "frames": [
+                {
+                    "key": "karin_all",
+                    "frame": "karin_1"
+                },
+                {
+                    "key": "karin_all",
+                    "frame": "karin_2"
+                },
+                {
+                    "key": "karin_all",
+                    "frame": "karin_3"
+                },
+                {
+                    "key": "karin_all",
+                    "frame": "karin_4"
+                },
+                {
+                    "key": "karin_all",
+                    "frame": "karin_5"
+                },
+                {
+                    "key": "karin_all",
+                    "frame": "karin_6"
+                },
+                {
+                    "key": "karin_all",
+                    "frame": "karin_7"
+                },
+                {
+                    "key": "karin_all",
+                    "frame": "karin_8"
+                }
+            ]
+        }
+    ]
+}

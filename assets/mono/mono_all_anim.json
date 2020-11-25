@@ -1,0 +1,112 @@
+{
+    "anims": [
+        {
+            "key": "mono_walk",
+            "type": "frames",
+            "repeat": -1,
+            "frameRate": 8,
+            "frames": [
+                {
+                    "key": "mono_all",
+                    "frame": "walk_1"
+                },
+                {
+                    "key": "mono_all",
+                    "frame": "walk_2"
+                },
+                {
+                    "key": "mono_all",
+                    "frame": "walk_3"
+                },
+                {
+                    "key": "mono_all",
+                    "frame": "walk_4"
+                }
+            ]
+        },
+        {
+            "key": "mono_eat",
+            "type": "frames",
+            "repeat": -1,
+            "frameRate": 8,
+            "frames": [
+                {
+                    "key": "mono_all",
+                    "frame": "jump_9"
+                },
+                {
+                    "key": "mono_all",
+                    "frame": "eat_1"
+                },
+                {
+                    "key": "mono_all",
+                    "frame": "jump_8"
+                },
+                {
+                    "key": "mono_all",
+                    "frame": "eat_2"
+                },
+                {
+                    "key": "mono_all",
+                    "frame": "eat_3"
+                },
+                {
+                    "key": "mono_all",
+                    "frame": "eat_4"
+                },
+                {
+                    "key": "mono_all",
+                    "frame": "eat_5"
+                },
+                {
+                    "key": "mono_all",
+                    "frame": "eat_6"
+                },
+                {
+                    "key": "mono_all",
+                    "frame": "eat_7"
+                },
+                {
+                    "key": "mono_all",
+                    "frame": "eat_8"
+                }
+            ]
+        },
+        {
+            "key": "mono_jump",
+            "type": "frames",
+            "repeat": -1,
+            "frameRate": 10,
+            "frames": [
+                {
+                    "key": "mono_all",
+                    "frame": "jump_1"
+                },
+                {
+                    "key": "mono_all",
+                    "frame": "jump_2"
+                },
+                {
+                    "key": "mono_all",
+                    "frame": "jump_3"
+                },
+                {
+                    "key": "mono_all",
+                    "frame": "jump_4"
+                },
+                {
+                    "key": "mono_all",
+                    "frame": "jump_5"
+                },
+                {
+                    "key": "mono_all",
+                    "frame": "jump_6"
+                },
+                {
+                    "key": "mono_all",
+                    "frame": "jump_7"
+                }
+            ]
+        }
+    ]
+}

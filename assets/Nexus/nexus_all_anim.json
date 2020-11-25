@@ -1,0 +1,168 @@
+{
+    "anims": [
+        {
+            "key": "die",
+            "type": "frames",
+            "repeat": 0,
+            "frameRate": 10,
+            "frames": [
+                {
+                    "key": "nexus_all",
+                    "frame": "die_1"
+                },
+                {
+                    "key": "nexus_all",
+                    "frame": "die_2"
+                },
+                {
+                    "key": "nexus_all",
+                    "frame": "die_3"
+                },
+                {
+                    "key": "nexus_all",
+                    "frame": "die_4"
+                }
+            ]
+        },
+        {
+            "key": "jump",
+            "type": "frames",
+            "repeat": 0,
+            "frameRate": 10,
+            "frames": [
+                {
+                    "key": "nexus_all",
+                    "frame": "jump_1"
+                },
+                {
+                    "key": "nexus_all",
+                    "frame": "jump_2"
+                },
+                {
+                    "key": "nexus_all",
+                    "frame": "jump_3"
+                },
+                {
+                    "key": "nexus_all",
+                    "frame": "jump_4"
+                },
+                {
+                    "key": "nexus_all",
+                    "frame": "jump_3"
+                },
+                {
+                    "key": "nexus_all",
+                    "frame": "jump_2"
+                },
+                {
+                    "key": "nexus_all",
+                    "frame": "jump_1"
+                }
+            ]
+        },
+        {
+            "key": "attack",
+            "type": "frames",
+            "repeat": 0,
+            "frameRate": 11,
+            "frames": [
+                {
+                    "key": "nexus_all",
+                    "frame": "attack_1"
+                },
+                {
+                    "key": "nexus_all",
+                    "frame": "attack_2"
+                },
+                {
+                    "key": "nexus_all",
+                    "frame": "attack_3"
+                },
+                {
+                    "key": "nexus_all",
+                    "frame": "attack_4"
+                },
+                {
+                    "key": "nexus_all",
+                    "frame": "attack_5"
+                },
+                {
+                    "key": "nexus_all",
+                    "frame": "attack_6"
+                }
+            ]
+        },
+        {
+            "key": "walk",
+            "type": "frames",
+            "repeat": -1,
+            "frameRate": 10,
+            "frames": [
+                {
+                    "key": "nexus_all",
+                    "frame": "walk_1"
+                },
+                {
+                    "key": "nexus_all",
+                    "frame": "walk_2"
+                },
+                {
+                    "key": "nexus_all",
+                    "frame": "walk_3"
+                },
+                {
+                    "key": "nexus_all",
+                    "frame": "walk_4"
+                },
+                {
+                    "key": "nexus_all",
+                    "frame": "walk_5"
+                },
+                {
+                    "key": "nexus_all",
+                    "frame": "walk_6"
+                },
+                {
+                    "key": "nexus_all",
+                    "frame": "walk_7"
+                },
+                {
+                    "key": "nexus_all",
+                    "frame": "walk_8"
+                }
+            ]
+        },
+        {
+            "key": "stand",
+            "type": "frames",
+            "repeat": -1,
+            "frameRate": 10,
+            "frames": [
+                {
+                    "key": "nexus_all",
+                    "frame": "stand_1"
+                },
+                {
+                    "key": "nexus_all",
+                    "frame": "stand_2"
+                },
+                {
+                    "key": "nexus_all",
+                    "frame": "stand_3"
+                },
+                {
+                    "key": "nexus_all",
+                    "frame": "stand_4"
+                },
+                {
+                    "key": "nexus_all",
+                    "frame": "stand_5"
+                },
+                {
+                    "key": "nexus_all",
+                    "frame": "stand_6"
+                }
+            ]
+        }
+    ]
+}

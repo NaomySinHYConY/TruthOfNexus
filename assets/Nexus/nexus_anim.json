@@ -1,0 +1,196 @@
+{
+    "anims": [
+        {
+            "key": "ataque",
+            "type": "frames",
+            "repeat": -1,
+            "frameRate": 12,
+            "frames": [
+                {
+                    "key": "nexus",
+                    "frame": "nexus_attack_0"
+                },
+                {
+                    "key": "nexus",
+                    "frame": "nexus_attack_1"
+                },
+                {
+                    "key": "nexus",
+                    "frame": "nexus_attack_2"
+                },
+                {
+                    "key": "nexus",
+                    "frame": "nexus_attack_3"
+                },
+                {
+                    "key": "nexus",
+                    "frame": "nexus_attack_4"
+                },
+                {
+                    "key": "nexus",
+                    "frame": "nexus_attack_5"
+                }
+            ]
+        },
+        {
+            "key": "die",
+            "type": "frames",
+            "repeat": 1,
+            "frameRate": 15,
+            "frames": [
+                {
+                    "key": "nexus",
+                    "frame": "nexus_die"
+                },
+                {
+                    "key": "nexus",
+                    "frame": "nexus_die_(1)"
+                },
+                {
+                    "key": "nexus",
+                    "frame": "nexus_die_(2)"
+                },
+                {
+                    "key": "nexus",
+                    "frame": "nexus_die_(3)"
+                }
+            ]
+        },
+        {
+            "key": "hurt",
+            "type": "frames",
+            "repeat": 1,
+            "frameRate": 15,
+            "frames": [
+                {
+                    "key": "nexus",
+                    "frame": "nexus_hurt"
+                },
+                {
+                    "key": "nexus",
+                    "frame": "nexus_hurt_1"
+                },
+                {
+                    "key": "nexus",
+                    "frame": "nexus_hurt_2"
+                },
+                {
+                    "key": "nexus",
+                    "frame": "nexus_hurt_3"
+                }
+            ]
+        },
+        {
+            "key": "camina_adelante",
+            "type": "frames",
+            "repeat": -1,
+            "frameRate": 15,
+            "frames": [
+                {
+                    "key": "nexus",
+                    "frame": "nexus_camina"
+                },
+                {
+                    "key": "nexus",
+                    "frame": "nexus_camina_3"
+                },
+                {
+                    "key": "nexus",
+                    "frame": "nexus_camina_1"
+                },
+                {
+                    "key": "nexus",
+                    "frame": "nexus_camina_5"
+                },
+                {
+                    "key": "nexus",
+                    "frame": "nexus_camina_2"
+                },
+                {
+                    "key": "nexus",
+                    "frame": "nexus_camina_4"
+                },
+                {
+                    "key": "nexus",
+                    "frame": "nexus_camina_6"
+                },
+                {
+                    "key": "nexus",
+                    "frame": "nexus_camina_7"
+                }
+            ]
+        },
+        {
+            "key": "camina_lado",
+            "type": "frames",
+            "repeat": -1,
+            "frameRate": 15,
+            "frames": [
+                {
+                    "key": "nexus",
+                    "frame": "nexus"
+                },
+                {
+                    "key": "nexus",
+                    "frame": "nexus_1"
+                },
+                {
+                    "key": "nexus",
+                    "frame": "nexus_2"
+                },
+                {
+                    "key": "nexus",
+                    "frame": "nexus_3"
+                },
+                {
+                    "key": "nexus",
+                    "frame": "nexus_4"
+                },
+                {
+                    "key": "nexus",
+                    "frame": "nexus_5"
+                },
+                {
+                    "key": "nexus",
+                    "frame": "nexus_6"
+                },
+                {
+                    "key": "nexus",
+                    "frame": "nexus_7"
+                }
+            ]
+        },
+        {
+            "key": "idle",
+            "type": "frames",
+            "repeat": -1,
+            "frameRate": 15,
+            "frames": [
+                {
+                    "key": "nexus",
+                    "frame": "nexus_idle"
+                },
+                {
+                    "key": "nexus",
+                    "frame": "nexus_idle_1"
+                },
+                {
+                    "key": "nexus",
+                    "frame": "nexus_idle_2"
+                },
+                {
+                    "key": "nexus",
+                    "frame": "nexus_idle_3"
+                },
+                {
+                    "key": "nexus",
+                    "frame": "nexus_idle_4"
+                },
+                {
+                    "key": "nexus",
+                    "frame": "nexus_idle_5"
+                }
+            ]
+        }
+    ]
+}

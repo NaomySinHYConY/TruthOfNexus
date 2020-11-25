@@ -1,0 +1,112 @@
+{
+    "frames": [
+        {
+            "filename": "karin_1",
+            "frame": {
+                "w": 52,
+                "h": 92,
+                "x": 1,
+                "y": 1
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "karin_2",
+            "frame": {
+                "w": 52,
+                "h": 92,
+                "x": 55,
+                "y": 1
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "karin_3",
+            "frame": {
+                "w": 52,
+                "h": 92,
+                "x": 109,
+                "y": 1
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "karin_4",
+            "frame": {
+                "w": 52,
+                "h": 92,
+                "x": 163,
+                "y": 1
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "karin_5",
+            "frame": {
+                "w": 52,
+                "h": 92,
+                "x": 217,
+                "y": 1
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "karin_6",
+            "frame": {
+                "w": 52,
+                "h": 92,
+                "x": 271,
+                "y": 1
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "karin_7",
+            "frame": {
+                "w": 52,
+                "h": 92,
+                "x": 325,
+                "y": 1
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "karin_8",
+            "frame": {
+                "w": 52,
+                "h": 92,
+                "x": 379,
+                "y": 1
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        }
+    ],
+    "meta": {
+        "description": "Atlas generado con Atlas Packer Gamma V2",
+        "web": "https://gammafp.github.io/atlas-packer-phaser/"
+    }
+}

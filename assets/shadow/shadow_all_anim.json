@@ -1,0 +1,84 @@
+{
+    "anims": [
+        {
+            "key": "shadow_die",
+            "type": "frames",
+            "repeat": -1,
+            "frameRate": 10,
+            "frames": [
+                {
+                    "key": "shadow_all",
+                    "frame": "die_1"
+                },
+                {
+                    "key": "shadow_all",
+                    "frame": "die_2"
+                },
+                {
+                    "key": "shadow_all",
+                    "frame": "die_3"
+                },
+                {
+                    "key": "shadow_all",
+                    "frame": "die_4"
+                },
+                {
+                    "key": "shadow_all",
+                    "frame": "die_5"
+                },
+                {
+                    "key": "shadow_all",
+                    "frame": "die_6"
+                },
+                {
+                    "key": "shadow_all",
+                    "frame": "die_7"
+                },
+                {
+                    "key": "shadow_all",
+                    "frame": "die_8"
+                },
+                {
+                    "key": "shadow_all",
+                    "frame": "die_9"
+                },
+                {
+                    "key": "shadow_all",
+                    "frame": "die_10"
+                }
+            ]
+        },
+        {
+            "key": "shadow_stand",
+            "type": "frames",
+            "repeat": -1,
+            "frameRate": 10,
+            "frames": [
+                {
+                    "key": "shadow_all",
+                    "frame": "stand_1"
+                },
+                {
+                    "key": "shadow_all",
+                    "frame": "stand_2"
+                },
+                {
+                    "key": "shadow_all",
+                    "frame": "stand_3"
+                },
+                {
+                    "key": "shadow_all",
+                    "frame": "stand_4"
+                },
+                {
+                    "key": "shadow_all",
+                    "frame": "stand_5"
+                },
+                {
+                    "key": "shadow_all",
+                    "frame": "stand_6"
+                }
+            ]
+        }
+    ]
+}

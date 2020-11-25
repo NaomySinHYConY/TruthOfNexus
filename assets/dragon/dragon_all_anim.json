@@ -1,0 +1,48 @@
+{
+    "anims": [
+        {
+            "key": "dragon_fly",
+            "type": "frames",
+            "repeat": -1,
+            "frameRate": 13,
+            "frames": [
+                {
+                    "key": "dragon_all",
+                    "frame": "dragon1"
+                },
+                {
+                    "key": "dragon_all",
+                    "frame": "dragon2"
+                },
+                {
+                    "key": "dragon_all",
+                    "frame": "dragon3"
+                },
+                {
+                    "key": "dragon_all",
+                    "frame": "dragon4"
+                },
+                {
+                    "key": "dragon_all",
+                    "frame": "dragon5"
+                },
+                {
+                    "key": "dragon_all",
+                    "frame": "dragon6"
+                },
+                {
+                    "key": "dragon_all",
+                    "frame": "dragon7"
+                },
+                {
+                    "key": "dragon_all",
+                    "frame": "dragon8"
+                },
+                {
+                    "key": "dragon_all",
+                    "frame": "dragon8"
+                }
+            ]
+        }
+    ]
+}

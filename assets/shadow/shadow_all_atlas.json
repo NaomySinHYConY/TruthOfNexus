@@ -1,0 +1,216 @@
+{
+    "frames": [
+        {
+            "filename": "die_1",
+            "frame": {
+                "w": 80,
+                "h": 100,
+                "x": 1,
+                "y": 1
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "die_2",
+            "frame": {
+                "w": 80,
+                "h": 100,
+                "x": 83,
+                "y": 1
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "die_3",
+            "frame": {
+                "w": 80,
+                "h": 100,
+                "x": 165,
+                "y": 1
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "die_4",
+            "frame": {
+                "w": 80,
+                "h": 100,
+                "x": 247,
+                "y": 1
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "die_5",
+            "frame": {
+                "w": 80,
+                "h": 100,
+                "x": 329,
+                "y": 1
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "die_6",
+            "frame": {
+                "w": 80,
+                "h": 100,
+                "x": 411,
+                "y": 1
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "die_7",
+            "frame": {
+                "w": 80,
+                "h": 100,
+                "x": 493,
+                "y": 1
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "die_8",
+            "frame": {
+                "w": 80,
+                "h": 100,
+                "x": 575,
+                "y": 1
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "die_9",
+            "frame": {
+                "w": 80,
+                "h": 100,
+                "x": 657,
+                "y": 1
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "die_10",
+            "frame": {
+                "w": 80,
+                "h": 100,
+                "x": 739,
+                "y": 1
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "stand_1",
+            "frame": {
+                "w": 80,
+                "h": 100,
+                "x": 821,
+                "y": 1
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "stand_2",
+            "frame": {
+                "w": 80,
+                "h": 100,
+                "x": 903,
+                "y": 1
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "stand_3",
+            "frame": {
+                "w": 80,
+                "h": 100,
+                "x": 985,
+                "y": 1
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "stand_4",
+            "frame": {
+                "w": 80,
+                "h": 100,
+                "x": 1067,
+                "y": 1
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "stand_5",
+            "frame": {
+                "w": 80,
+                "h": 100,
+                "x": 1149,
+                "y": 1
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "stand_6",
+            "frame": {
+                "w": 80,
+                "h": 100,
+                "x": 1231,
+                "y": 1
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        }
+    ],
+    "meta": {
+        "description": "Atlas generado con Atlas Packer Gamma V2",
+        "web": "https://gammafp.github.io/atlas-packer-phaser/"
+    }
+}

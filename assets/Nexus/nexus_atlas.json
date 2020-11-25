@@ -1,0 +1,476 @@
+{
+    "frames": [
+        {
+            "filename": "nexus",
+            "frame": {
+                "w": 73,
+                "h": 147,
+                "x": 0,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "nexus_1",
+            "frame": {
+                "w": 72,
+                "h": 147,
+                "x": 73,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "nexus_2",
+            "frame": {
+                "w": 73,
+                "h": 147,
+                "x": 145,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "nexus_3",
+            "frame": {
+                "w": 71,
+                "h": 147,
+                "x": 218,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "nexus_4",
+            "frame": {
+                "w": 66,
+                "h": 147,
+                "x": 289,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "nexus_5",
+            "frame": {
+                "w": 72,
+                "h": 147,
+                "x": 355,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "nexus_6",
+            "frame": {
+                "w": 64,
+                "h": 147,
+                "x": 427,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "nexus_7",
+            "frame": {
+                "w": 63,
+                "h": 147,
+                "x": 0,
+                "y": 147
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "nexus_attack_0",
+            "frame": {
+                "w": 72,
+                "h": 120,
+                "x": 63,
+                "y": 147
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "nexus_attack_1",
+            "frame": {
+                "w": 67,
+                "h": 117,
+                "x": 135,
+                "y": 147
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "nexus_attack_2",
+            "frame": {
+                "w": 100,
+                "h": 120,
+                "x": 202,
+                "y": 147
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "nexus_attack_3",
+            "frame": {
+                "w": 100,
+                "h": 120,
+                "x": 302,
+                "y": 147
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "nexus_attack_4",
+            "frame": {
+                "w": 100,
+                "h": 120,
+                "x": 402,
+                "y": 147
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "nexus_attack_5",
+            "frame": {
+                "w": 100,
+                "h": 120,
+                "x": 502,
+                "y": 147
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "nexus_camina",
+            "frame": {
+                "w": 75,
+                "h": 131,
+                "x": 0,
+                "y": 294
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "nexus_camina_3",
+            "frame": {
+                "w": 67,
+                "h": 130,
+                "x": 75,
+                "y": 294
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "nexus_camina_1",
+            "frame": {
+                "w": 68,
+                "h": 131,
+                "x": 142,
+                "y": 294
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "nexus_camina_5",
+            "frame": {
+                "w": 65,
+                "h": 131,
+                "x": 210,
+                "y": 294
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "nexus_camina_2",
+            "frame": {
+                "w": 56,
+                "h": 131,
+                "x": 275,
+                "y": 294
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "nexus_camina_4",
+            "frame": {
+                "w": 67,
+                "h": 131,
+                "x": 331,
+                "y": 294
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "nexus_camina_6",
+            "frame": {
+                "w": 70,
+                "h": 131,
+                "x": 398,
+                "y": 294
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "nexus_camina_7",
+            "frame": {
+                "w": 65,
+                "h": 131,
+                "x": 0,
+                "y": 425
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "nexus_die",
+            "frame": {
+                "w": 65,
+                "h": 123,
+                "x": 65,
+                "y": 425
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "nexus_die_(1)",
+            "frame": {
+                "w": 56,
+                "h": 123,
+                "x": 130,
+                "y": 425
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "nexus_die_(2)",
+            "frame": {
+                "w": 58,
+                "h": 123,
+                "x": 186,
+                "y": 425
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "nexus_die_(3)",
+            "frame": {
+                "w": 92,
+                "h": 122,
+                "x": 244,
+                "y": 425
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "nexus_hurt",
+            "frame": {
+                "w": 57,
+                "h": 111,
+                "x": 336,
+                "y": 425
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "nexus_hurt_1",
+            "frame": {
+                "w": 65,
+                "h": 111,
+                "x": 393,
+                "y": 425
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "nexus_hurt_2",
+            "frame": {
+                "w": 76,
+                "h": 111,
+                "x": 0,
+                "y": 556
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "nexus_hurt_3",
+            "frame": {
+                "w": 96,
+                "h": 111,
+                "x": 76,
+                "y": 556
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "nexus_idle",
+            "frame": {
+                "w": 57,
+                "h": 118,
+                "x": 172,
+                "y": 556
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "nexus_idle_1",
+            "frame": {
+                "w": 62,
+                "h": 118,
+                "x": 229,
+                "y": 556
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "nexus_idle_2",
+            "frame": {
+                "w": 56,
+                "h": 118,
+                "x": 291,
+                "y": 556
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "nexus_idle_3",
+            "frame": {
+                "w": 73,
+                "h": 118,
+                "x": 347,
+                "y": 556
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "nexus_idle_4",
+            "frame": {
+                "w": 56,
+                "h": 118,
+                "x": 420,
+                "y": 556
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "nexus_idle_5",
+            "frame": {
+                "w": 63,
+                "h": 118,
+                "x": 0,
+                "y": 674
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        }
+    ],
+    "meta": {
+        "description": "Atlas generado con Atlas Packer Gamma V2",
+        "web": "https://gammafp.github.io/atlas-packer-phaser/"
+    }
+}

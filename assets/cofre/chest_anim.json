@@ -1,0 +1,24 @@
+{
+    "anims": [
+        {
+            "key": "abrir",
+            "type": "frames",
+            "repeat": 0,
+            "frameRate": 2,
+            "frames": [
+                {
+                    "key": "chest",
+                    "frame": "chest_1"
+                },
+                {
+                    "key": "chest",
+                    "frame": "chest_2"
+                },
+                {
+                    "key": "chest",
+                    "frame": "chest_3"
+                }
+            ]
+        }
+    ]
+}
