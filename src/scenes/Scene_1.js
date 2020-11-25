@@ -1,3 +1,5 @@
+//Escena dummie de la p10 o algo así, nivel creado por Dama y Lluvia.
+
 class Scene_1 extends Phaser.Scene{
     constructor(){
         super({
