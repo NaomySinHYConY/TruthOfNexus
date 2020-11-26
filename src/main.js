@@ -1,5 +1,7 @@
 import Bootloader from "./scenes/Bootloader.js"
-//import Scene_1 from "./scenes/Scene_1.js";
+import Scene_1 from "./scenes/Scene_1.js"
+import Scene_tienda from "./scenes/Scene_tienda.js"
+import Scene_puzzle1 from "./scenes/Scene_puzzle1.js"
 
 const config = {
     title: "Curso Phaser",		    //Nombre del juego (opcional)
@@ -12,8 +14,15 @@ const config = {
     parent: "contenedor",		    //Nombre del id del elemento <div> en el index.html
                                     // se refiere a dónde se pondrá el canvas o lienzo
     pixelArt: true,		            //Diseño con pixeles definidos (no borrosos)
+    scale: {
+        parent: "contenedor",
+        width: 1000,
+        height: 640,
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH
+        },
     backgroundColor: "#34495e", 	//Color de fondo del canvas ()
-    scene: [Bootloader],    //Aquí irá la lista de scenas del juego
+    scene: [Bootloader, Scene_1, Scene_puzzle1, Scene_tienda],    //Aquí irá la lista de scenas del juego
     banner:{
         hidePhaser: true,
         text: "#fff00f",

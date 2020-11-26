@@ -1,0 +1,156 @@
+{
+    "anims": [
+        {
+            "key": "mcueva_fly",
+            "type": "frames",
+            "repeat": -1,
+            "frameRate": 10,
+            "frames": [
+                {
+                    "key": "monstruo_fly",
+                    "frame": "fly_28"
+                },
+                {
+                    "key": "monstruo_fly",
+                    "frame": "fly_27"
+                },
+                {
+                    "key": "monstruo_fly",
+                    "frame": "fly_26"
+                },
+                {
+                    "key": "monstruo_fly",
+                    "frame": "fly_25"
+                },
+                {
+                    "key": "monstruo_fly",
+                    "frame": "fly_24"
+                },
+                {
+                    "key": "monstruo_fly",
+                    "frame": "fly_23"
+                },
+                {
+                    "key": "monstruo_fly",
+                    "frame": "fly_22"
+                },
+                {
+                    "key": "monstruo_fly",
+                    "frame": "fly_21"
+                },
+                {
+                    "key": "monstruo_fly",
+                    "frame": "fly_20"
+                },
+                {
+                    "key": "monstruo_fly",
+                    "frame": "fly_19"
+                },
+                {
+                    "key": "monstruo_fly",
+                    "frame": "fly_18"
+                },
+                {
+                    "key": "monstruo_fly",
+                    "frame": "fly_17"
+                },
+                {
+                    "key": "monstruo_fly",
+                    "frame": "fly_16"
+                },
+                {
+                    "key": "monstruo_fly",
+                    "frame": "fly_15"
+                },
+                {
+                    "key": "monstruo_fly",
+                    "frame": "fly_14"
+                },
+                {
+                    "key": "monstruo_fly",
+                    "frame": "fly_13"
+                },
+                {
+                    "key": "monstruo_fly",
+                    "frame": "fly_12"
+                },
+                {
+                    "key": "monstruo_fly",
+                    "frame": "fly_11"
+                },
+                {
+                    "key": "monstruo_fly",
+                    "frame": "fly_10"
+                },
+                {
+                    "key": "monstruo_fly",
+                    "frame": "fly_9"
+                },
+                {
+                    "key": "monstruo_fly",
+                    "frame": "fly_8"
+                },
+                {
+                    "key": "monstruo_fly",
+                    "frame": "fly_7"
+                },
+                {
+                    "key": "monstruo_fly",
+                    "frame": "fly_6"
+                },
+                {
+                    "key": "monstruo_fly",
+                    "frame": "fly_5"
+                },
+                {
+                    "key": "monstruo_fly",
+                    "frame": "fly_4"
+                },
+                {
+                    "key": "monstruo_fly",
+                    "frame": "fly_3"
+                },
+                {
+                    "key": "monstruo_fly",
+                    "frame": "fly_2"
+                },
+                {
+                    "key": "monstruo_fly",
+                    "frame": "fly_1"
+                },
+                {
+                    "key": "monstruo_fly",
+                    "frame": "fly_21"
+                },
+                {
+                    "key": "monstruo_fly",
+                    "frame": "fly_22"
+                },
+                {
+                    "key": "monstruo_fly",
+                    "frame": "fly_23"
+                },
+                {
+                    "key": "monstruo_fly",
+                    "frame": "fly_24"
+                },
+                {
+                    "key": "monstruo_fly",
+                    "frame": "fly_25"
+                },
+                {
+                    "key": "monstruo_fly",
+                    "frame": "fly_26"
+                },
+                {
+                    "key": "monstruo_fly",
+                    "frame": "fly_27"
+                },
+                {
+                    "key": "monstruo_fly",
+                    "frame": "fly_28"
+                }
+            ]
+        }
+    ]
+}

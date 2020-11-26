@@ -424,7 +424,8 @@ class Scene_1 extends Phaser.Scene{
         if(this.score==140){
             let win = this.sound.add("impressive",{loop:false});
             win.play();
-            this.scene.restart();
+            this.scene.stop();
+            this.scene.start('Scene_puzzle1');
         }
     }
 
