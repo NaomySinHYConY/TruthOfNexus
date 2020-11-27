@@ -388,7 +388,11 @@ class Shop extends Phaser.Scene{
         });
         
         //Falta el boton o puerta para salir
-
+        if(this.nexus.x === 50){
+            this.scene.stop();
+            this.scene.sendToBack();
+            this.scene.start('Scene_2');
+        }
         
     }
 
