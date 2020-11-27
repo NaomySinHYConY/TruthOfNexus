@@ -12,7 +12,7 @@ class Scene_1 extends Phaser.Scene{
     }
     preload() {
         this.load.path = './assets/';      
-        this.load.image(['p1', 'p2', 'p3', 'cantDracmas', 'salida', 'aviso', 'aviso_1', 'aviso_2']);
+        this.load.image(['pl1', 'pl2', 'pl3', 'cantDracmas', 'aCueva', 'aviso', 'aviso_1', 'aviso_2']);
         this.load.spritesheet('fondo', 'fondo/fondoAnim.png', {
             frameWidth: 2000,
             frameHeight: 640,
@@ -62,10 +62,10 @@ class Scene_1 extends Phaser.Scene{
         this.titleDracmas = this.add.image(160, 45, 'cantDracmas');
         this.score = 0;
         this.scoreText = this.add.text(230, 30, '0', { fontSize: '32px', fill: '#fff' });
-        this.salida = this.add.image(890, 250, 'salida').setInteractive().setOrigin(0).setScale(0.2);
-        this.physics.add.existing(this.salida, true);
-        this.salida.body.setSize(50, 400);
-        this.salida.body.setOffset(80, 0);
+        this.aCueva = this.add.image(890, 250, 'aCueva').setInteractive().setOrigin(0).setScale(0.2);
+        this.physics.add.existing(this.aCueva, true);
+        this.aCueva.body.setSize(50, 400);
+        this.aCueva.body.setOffset(80, 0);
         this.control = this.add.image(340,30,'aviso').setScale(0.3).setAlpha(0);
         this.control_2 = this.add.image(530,30,'aviso_1').setScale(0.3).setAlpha(0);
         this.control_3 = this.add.image(730,30,'aviso_2').setScale(0.3).setAlpha(0);
@@ -92,11 +92,11 @@ class Scene_1 extends Phaser.Scene{
         });
         //let cofreOpen = this.sound.add("cofreOpen",{loop:false});
         //Plataformas
-        this.plat1 = this.add.image(0, 510, 'p1').setInteractive().setOrigin(0).setScale(1.1);
+        this.plat1 = this.add.image(0, 510, 'pl1').setInteractive().setOrigin(0).setScale(1.1);
         this.physics.add.existing(this.plat1, true);
-        this.plat2 = this.add.image(895, 515, 'p2').setInteractive().setOrigin(0).setScale(1.1);
+        this.plat2 = this.add.image(895, 515, 'pl2').setInteractive().setOrigin(0).setScale(1.1);
         this.physics.add.existing(this.plat2, true);
-        this.plat3 = this.add.image(500, 300, 'p3').setInteractive();
+        this.plat3 = this.add.image(500, 300, 'pl3').setInteractive();
         this.physics.add.existing(this.plat3, true);
         this.plat3.body.setSize(470, 70);
         this.plat3.body.setOffset(0, 250);
@@ -150,7 +150,7 @@ class Scene_1 extends Phaser.Scene{
         });
 
         this.physics.add.collider(this.nexus,this.plat1);
-        this.physics.add.collider(this.nexus,this.salida);
+        this.physics.add.collider(this.nexus,this.aCueva);
         this.physics.add.collider(this.nexus,this.plat2);
         this.physics.add.collider(this.nexus,this.plat3);
         this.physics.add.collider(this.shadow,this.plat3);
@@ -198,7 +198,7 @@ class Scene_1 extends Phaser.Scene{
         this.physics.add.overlap(this.nexus, this.fuego, this.muere_nexus, null, this);
         this.physics.add.overlap(this.nexus, this.fuego_2, this.muere_nexus, null, this);
         this.physics.add.overlap(this.nexus, this.shadow, this.ataque, null, this);
-        this.physics.add.overlap(this.nexus, this.salida, this.ganar, null, this);
+        this.physics.add.overlap(this.nexus, this.aCueva, this.ganar, null, this);
         this.physics.add.overlap(this.shadow, this.fondo, this.shadDi, null, this);
 
         this.tweenFuego = this.add.tween({
@@ -425,7 +425,7 @@ class Scene_1 extends Phaser.Scene{
             let win = this.sound.add("impressive",{loop:false});
             win.play();
             this.scene.stop();
-            this.scene.start('Scene_puzzle1');
+            this.scene.launch('Scene_puzzle1');
         }
     }
 

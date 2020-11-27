@@ -11,7 +11,7 @@ class Scene_puzzle1 extends Phaser.Scene{
     preload(){
         
         this.load.path = './assets/puzzle1/';
-        this.load.image(['fondo', 'fondo-izq', 'fondo-der', 'p1', 'p2', 'p3', 'p4', 'p5', 'p6', 'p7', 'p8', 'p9', 'p10', 'p11', 'p12', 'p13', 'p14', 'p15', 'p16', 'p17', 'p18', 'p19', 'p20', 'p21', 'p22', 'hoyo', 'salida']);
+        this.load.image(['fondoP', 'fondo-izq', 'fondo-der', 'p1', 'p2', 'p3', 'p4', 'p5', 'p6', 'p7', 'p8', 'p9', 'p10', 'p11', 'p12', 'p13', 'p14', 'p15', 'p16', 'p17', 'p18', 'p19', 'p20', 'p21', 'p22', 'hoyo', 'salida']);
         this.load.atlas('monstruo_fly','mCueva/monstruo_fly.png','mCueva/monstruo_fly_atlas.json');
         this.load.animation('mCuevaAnim','mCueva/monstruo_fly_anim.json');
         this.load.atlas('nexus_head','nexusHead/nexus_head.png','nexusHead/nexus_head_atlas.json');
@@ -31,7 +31,7 @@ class Scene_puzzle1 extends Phaser.Scene{
         const keyCodes = Phaser.Input.Keyboard.KeyCodes;
         this.velocidadNexus = 300;
         this.musica();
-        this.fondo = this.add.image(500, 320, 'fondo');
+        this.fondoP = this.add.image(500, 320, 'fondoP');
 
         this.fondoizq = this.physics.add.image(0, 0, 'fondo-izq').setOrigin(0).setImmovable(true);
         this.fondoizq.body.allowGravity = false;
