@@ -87,8 +87,8 @@ class Shop extends Phaser.Scene{
         this.anims.create({
             key: 'fondo_anim',
             frames: this.anims.generateFrameNumbers('fondo', {
-            start: 1,
-            end: 12
+            start: 0,
+            end: 11
             }),
             repeat: -1,
             frameRate: 8
@@ -97,7 +97,7 @@ class Shop extends Phaser.Scene{
         this.fondo.setScale(1.8);
 
         //Nexus
-        this.nexus = this.physics.add.sprite(20,300, 'nexus_all', 0).setInteractive();
+        this.nexus = this.physics.add.sprite(80,300, 'nexus_all', 0).setInteractive();
         this.nexus.setScale(1.7);
         this.nexus.setName('Nexus');
         this.nexus.setFlipX(true);
@@ -125,16 +125,16 @@ class Shop extends Phaser.Scene{
             frameRate: 8
         });
         this.vendedor.anims.play('vendedor_anim');
-        this.vendedor.setScale(1.5);
+        this.vendedor.setScale(1.6);
         this.vendedor.body.setSize(80,100);
         this.vendedor.body.setOffset(35,20);
         this.vendedor.setDepth(2);
         this.vendedor.setCollideWorldBounds(true);
         //Diálogos del vendedor
-        this.dialogo1 = this.add.image(270,410,'dialogo1').setScale(0.2).setOrigin(0).setDepth(3);
-        this.dialogo2 = this.add.image(270,410,'dialogo2').setScale(0.2).setOrigin(0).setDepth(3).setVisible(false);
-        this.dialogo3 = this.add.image(270,410,'dialogo3').setScale(0.2).setOrigin(0).setDepth(3).setVisible(false);
-        this.dialogo4 = this.add.image(270,410,'dialogo4').setScale(0.2).setOrigin(0).setDepth(3).setVisible(false);
+        this.dialogo1 = this.add.image(270,400,'dialogo1').setScale(0.21).setOrigin(0).setDepth(3);
+        this.dialogo2 = this.add.image(270,400,'dialogo2').setScale(0.21).setOrigin(0).setDepth(3).setVisible(false);
+        this.dialogo3 = this.add.image(270,400,'dialogo3').setScale(0.21).setOrigin(0).setDepth(3).setVisible(false);
+        this.dialogo4 = this.add.image(270,400,'dialogo4').setScale(0.21).setOrigin(0).setDepth(3).setVisible(false);
         //Placas de items
         this.placaVida = this.add.image(520,0,'pvida').setOrigin(0).setScale(1).setDepth(2);
         this.placaDiamante = this.add.image(520,0,'pdiamante').setOrigin(0).setScale(1).setDepth(2).setVisible(false);
@@ -214,7 +214,7 @@ class Shop extends Phaser.Scene{
         this.scoreText = this.add.text(230, 30, '600', { fontSize: '32px', fill: '#fff' });
 
         //Botones para comprar
-        this.btn_comprar = this.add.image(700,550,'btn_comprar').setDepth(4).setInteractive().setScale(0.7);
+        this.btn_comprar = this.add.image(730,550,'btn_comprar').setDepth(4).setInteractive().setScale(0.7);
 
         //Colisión entre el vendedor y Nexus
         this.physics.add.collider(this.nexus,this.vendedor);
@@ -257,6 +257,7 @@ class Shop extends Phaser.Scene{
                     this.placaTalisman.setVisible(false);
 
                     precio = 200;
+                    console.log(this.score);
                     cantidad = this.score - precio;
                 }else if(contItem === 2){           //Talisman
                     this.diamante.setVisible(false);
@@ -380,6 +381,8 @@ class Shop extends Phaser.Scene{
             }else if(gameObject === this.btn_comprar){
                 this.score = cantidad;
                 this.scoreText.setText(this.score);
+                this.recoge = this.sound.add("moneda",{loop:false});
+                this.recoge.play();
             }
             
         });
