@@ -1,3 +1,4 @@
+//import Shop from "../scenes/Shop.js"
 class Bootloader extends Phaser.Scene{
     constructor(){
         super({
@@ -29,6 +30,7 @@ class Bootloader extends Phaser.Scene{
         this.load.audio("abrirConf", ["/sounds/abrir_menu_config.mp3"]);
     }
     create() {
+        //this.scene.add('Shop',Shop);
         this.musica();
         const keyCodes = Phaser.Input.Keyboard.KeyCodes;
         const eventos = Phaser.Input.Events;
@@ -186,6 +188,7 @@ class Bootloader extends Phaser.Scene{
             //Escena dummie
             //this.scene.stop(this);
             //this.scene.start('Scene_1');
+            this.scene.start('Scene_2');
         });
         this.cerrar.on(eventos.POINTER_DOWN, () => {
             this.grupoMenu.children.iterate( (elemento) => {
