@@ -15,13 +15,13 @@ const config = {
     parent: "contenedor",		    //Nombre del id del elemento <div> en el index.html
                                     // se refiere a dónde se pondrá el canvas o lienzo
     pixelArt: true,		            //Diseño con pixeles definidos (no borrosos)
-    scale: {
-        parent: "contenedor",
-        width: 1000,
-        height: 640,
-        mode: Phaser.Scale.FIT,
-        autoCenter: Phaser.Scale.CENTER_BOTH
-        },
+    // scale: {
+    //     parent: "contenedor",
+    //     width: 1000,
+    //     height: 640,
+    //     mode: Phaser.Scale.FIT,
+    //     autoCenter: Phaser.Scale.CENTER_BOTH
+    //     },
     backgroundColor: "#34495e", 	//Color de fondo del canvas ()
     scene: [Bootloader, Scene_1, Scene_puzzle1, Scene_puzzle1_caida, Scene_tienda],    //Aquí irá la lista de scenas del juego
     banner:{
