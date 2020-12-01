@@ -5,27 +5,35 @@ class Shop extends Phaser.Scene{
         });
     }
 
-    init() {
+    init(dato) {
         console.log('Escena Shop');
+        console.log('Tienes ',dato,' dracmas');
+        this.dato = dato;
     }
 
     preload(){
+        console.log(this.dato);
         this.load.path = "./assets/"; 
         this.load.image('dialogo1','/shop/dialogoVendedor1.png');
         this.load.image('dialogo2','/shop/dialogoVendedor2.png');
         this.load.image('dialogo3','/shop/dialogoVendedor3.png');
         this.load.image('dialogo4','/shop/dialogoVendedor4.png');
+        //Dialogos en caso de que no tenga dracmas
+        this.load.image('dialogo5','/shop/dialogoV5.png');
+        this.load.image('dialogo6','/shop/dialogoV6.png');
+        //Dialogos en caso de que le pegue al vendedor
+        this.load.image('dialogo7','/shop/dialogoV8.png');
+        this.load.image('dialogo8','/shop/dialogoV7.png');
+        //Flechas
         this.load.image('flechaDER','/shop/flechaDER.png');
         this.load.image('flechaIZ','/shop/flechaIZ.png');
-        //this.load.image('fondo','fondoNegro.png');
-
+        //Fondo
         this.load.spritesheet('fondo', 'shop/fondo.png', {
             frameWidth: 828,
             frameHeight: 358,
             margin: 0,
             spacing: 0
         });
-
         //Vendedor para la escena de la tienda
         this.load.spritesheet('vendedor', 'shop/vendedor.png', {
             frameWidth: 160,
@@ -34,55 +42,72 @@ class Shop extends Phaser.Scene{
             spacing: 0
         });
 
-        this.load.spritesheet('vida', 'shop/vida.png', {
+        this.load.spritesheet('vida', '/shop/items/vida.png', {
             frameWidth: 82.25,
             frameHeight: 85,
             margin: 0,
             spacing: 0
         });
 
-        this.load.spritesheet('diamante', 'shop/diamante.png', {
+        this.load.spritesheet('diamante', '/shop/items/diamante.png', {
             frameWidth: 82.25,
             frameHeight: 85,
             margin: 0,
             spacing: 0
         });
 
-        this.load.spritesheet('talisman', 'shop/talisman.png', {
+        this.load.spritesheet('talisman', '/shop/items/talisman.png', {
             frameWidth: 82.25,
             frameHeight: 85,
             margin: 0,
             spacing: 0
         });
 
-        this.load.spritesheet('hierro', 'shop/hierro.png', {
+        this.load.spritesheet('hierro', '/shop/items/hierro.png', {
             frameWidth: 60,
             frameHeight: 62,
             margin: 0,
             spacing: 0
         });
 
+        this.load.spritesheet('poder', '/shop/items/poder.png', {
+            frameWidth: 60,
+            frameHeight: 62,
+            margin: 0,
+            spacing: 0
+        });
+        //Armas
+        this.load.image('axe','/shop/armas/axe2.png');
+        this.load.image('axeDoble','/shop/armas/axeDouble2.png');
+        this.load.image('mazo','/shop/armas/hammer.png');
         //Placas de los items
         this.load.image('pvida','/shop/pvida2.png');
         this.load.image('ptalisman','/shop/pvida4.png');
         this.load.image('pdiamante','/shop/pvida3.png');
         this.load.image('phierro','/shop/pvida5.png');
+        this.load.image('ppoder','/shop/ppoder.png');
+
+        //Placas de las  armas
+        this.load.image('paxe','/shop/armas/paxe.png');
+        this.load.image('paxe_doble','/shop/armas/paxeDoble.png');
+        this.load.image('mazo','/shop/armas/mazo.png');
 
         this.load.image('btn_comprar','/shop/btn_comprar.png');
 
         this.load.image('inventario','inventario.png');
 
-        //this.load.audio('shopSound', ["/sounds/shop.wav"]);
         this.load.audio('moneda', 'sounds/moneda.mp3');
+        this.load.audio('hit', 'sounds/hit.mp3');
+        this.load.audio('laugh', 'sounds/laugh.mp3');
+
+        this.score = this.dato;
     }
     
     create() {
         const keyCodes = Phaser.Input.Keyboard.KeyCodes;
         const eventos = Phaser.Input.Events;
 
-        //Fondo negro
-        //this.fondo = this.add.image(0,0,'fondo').setOrigin(0);
-        //this.fondo.setScale(2);
+        //Fondo
         this.fondo = this.add.sprite(0, 0,'fondo',0).setOrigin(0);
         this.anims.create({
             key: 'fondo_anim',
@@ -112,6 +137,9 @@ class Shop extends Phaser.Scene{
         this.nexusWalkIz = this.input.keyboard.addKey(keyCodes.LEFT);
         this.nexusWalkDer = this.input.keyboard.addKey(keyCodes.RIGHT);
         this.nexusDown = this.input.keyboard.addKey(keyCodes.DOWN);
+        this.nexusUp = this.input.keyboard.addKey(keyCodes.UP)
+        this.nexusAttack = this.input.keyboard.addKey(keyCodes.O);
+        this.nexusJump = this.input.keyboard.addKey(keyCodes.SPACE);
 
         //Vendedor
         this.vendedor = this.physics.add.sprite(320, 100, 'vendedor', 0).setInteractive();
@@ -135,12 +163,16 @@ class Shop extends Phaser.Scene{
         this.dialogo2 = this.add.image(270,400,'dialogo2').setScale(0.21).setOrigin(0).setDepth(3).setVisible(false);
         this.dialogo3 = this.add.image(270,400,'dialogo3').setScale(0.21).setOrigin(0).setDepth(3).setVisible(false);
         this.dialogo4 = this.add.image(270,400,'dialogo4').setScale(0.21).setOrigin(0).setDepth(3).setVisible(false);
+        this.dialogo5 = this.add.image(270,400,'dialogo5').setScale(0.21).setOrigin(0).setDepth(3).setVisible(false);
+        this.dialogo6 = this.add.image(270,400,'dialogo6').setScale(0.21).setOrigin(0).setDepth(3).setVisible(false);
+        this.dialogo7 = this.add.image(270,400,'dialogo7').setScale(0.21).setOrigin(0).setDepth(3).setVisible(false);
+        this.dialogo8 = this.add.sprite(270,400,'dialogo8').setScale(0.21).setOrigin(0).setDepth(3).setVisible(false).setInteractive();
         //Placas de items
         this.placaVida = this.add.image(520,0,'pvida').setOrigin(0).setScale(1).setDepth(2);
         this.placaDiamante = this.add.image(520,0,'pdiamante').setOrigin(0).setScale(1).setDepth(2).setVisible(false);
         this.placaTalisman = this.add.image(520,0,'ptalisman').setOrigin(0).setScale(1).setDepth(2).setVisible(false);
         this.placaHierro = this.add.image(520,0,'phierro').setOrigin(0).setScale(1).setDepth(2).setVisible(false);
-
+        this.placaPoder = this.add.image(520,0,'ppoder').setOrigin(0).setScale(1).setDepth(2).setVisible(false);
         //Cargar flechas
         this.flechaI = this.add.image(550,350,'flechaIZ').setScale(0.7).setInteractive().setDepth(3);
         this.flechaD = this.add.image(900,350,'flechaDER').setScale(0.7).setInteractive().setDepth(3);
@@ -158,7 +190,6 @@ class Shop extends Phaser.Scene{
             frameRate: 8
         });
         this.vida.anims.play('vida_anim');
-        //this.vida.setScale(1.5);
         this.vida.setDepth(2);
 
         //--->>Diamante
@@ -205,19 +236,40 @@ class Shop extends Phaser.Scene{
             frameRate: 8
         });
         this.hierro.anims.play('hierro_anim');
-        //this.vida.setScale(1.5);
         this.hierro.setDepth(2);
 
+        //--->>Poder
+        this.poder = this.add.sprite(660, 300, 'poder', 0).setOrigin(0).setVisible(false).setScale(2);
+        this.anims.create({
+            key: 'poder_anim',
+            frames: this.anims.generateFrameNumbers('poder', {
+            start: 0,
+            end: 8
+            }),
+            repeat: -1,
+            frameRate: 8
+        });
+        this.poder.anims.play('poder_anim');
+        this.poder.setDepth(2);
+
         //Letrero de cantidad de dracmas
-        this.titleDracmas = this.add.image(160, 45, 'cantDracmas');
-        this.score = 600;
-        this.scoreText = this.add.text(230, 30, '600', { fontSize: '32px', fill: '#fff' });
+        //this.titleDracmas = this.add.image(160, 45, 'cantDracmas').setVisible(false);
+        //this.scoreText = this.add.text(230, 30, '600', { fontSize: '32px', fill: '#fff' }).setVisible(false);
+        //Probar el pase de datos
+        this.scene.launch('Dracmas');
+        this.scene.bringToTop('Dracmas');
 
         //Botones para comprar
         this.btn_comprar = this.add.image(730,550,'btn_comprar').setDepth(4).setInteractive().setScale(0.7);
 
         //Colisión entre el vendedor y Nexus
-        this.physics.add.collider(this.nexus,this.vendedor);
+        /*
+        this.physics.add.collider(this.nexus,this.vendedor, () => {
+            this.vendedor.setVelocity(0);
+            this.vendedor.setAcceleration(0);
+        });*/
+
+        this.physics.add.overlap(this.nexus, this.vendedor, this.ataque, null, this);
 
         //Control para los diálogos
         var contador = 0;
@@ -231,16 +283,20 @@ class Shop extends Phaser.Scene{
                 if(contador === 1){
                     this.dialogo1.setVisible(false);
                     this.dialogo2.setVisible(true);
+                    this.dialogo8.setVisible(false);
                 }else if(contador === 2){
                     this.dialogo2.setVisible(false);
                     this.dialogo3.setVisible(true);
+                    this.dialogo8.setVisible(false);
                 }else if(contador === 3){
                     this.dialogo3.setVisible(false);
                     this.dialogo4.setVisible(true);
+                    this.dialogo8.setVisible(false);
                     contador = 0;
                 }else if(contador === 0){
                     this.dialogo1.setVisible(true);
                     this.dialogo4.setVisible(false);
+                    this.dialogo8.setVisible(false);
                 }
             }else if(gameObject === this.flechaI){
                 contItem = contItem-1;
@@ -249,12 +305,14 @@ class Shop extends Phaser.Scene{
                     this.talisman.setVisible(false);
                     this.diamante.setVisible(true);
                     this.hierro.setVisible(false);
+                    this.poder.setVisible(false);
 
                     //Mover placa
                     this.placaVida.setVisible(false);
                     this.placaDiamante.setVisible(true);
                     this.placaHierro.setVisible(false);
                     this.placaTalisman.setVisible(false);
+                    this.placaPoder.setVisible(false);
 
                     precio = 200;
                     console.log(this.score);
@@ -264,12 +322,14 @@ class Shop extends Phaser.Scene{
                     this.vida.setVisible(false);
                     this.talisman.setVisible(true);
                     this.hierro.setVisible(false);
+                    this.poder.setVisible(false);
 
                     //Mover placa
                     this.placaVida.setVisible(false);
                     this.placaDiamante.setVisible(false);
                     this.placaHierro.setVisible(false);
                     this.placaTalisman.setVisible(true);
+                    this.placaPoder.setVisible(false);
 
                     precio = 150;
                     cantidad = this.score - precio;
@@ -279,26 +339,46 @@ class Shop extends Phaser.Scene{
                     this.vida.setVisible(false);
                     this.talisman.setVisible(false);
                     this.hierro.setVisible(true);
+                    this.poder.setVisible(false);
 
                     //Mover placa
                     this.placaVida.setVisible(false);
                     this.placaDiamante.setVisible(false);
                     this.placaHierro.setVisible(true);
                     this.placaTalisman.setVisible(false);
+                    this.placaPoder.setVisible(false);
                     
                     precio = 150;
+                    cantidad = this.score - precio;
+                }else if(contItem === 4){           //Poder
+                    this.diamante.setVisible(false);
+                    this.vida.setVisible(false);
+                    this.talisman.setVisible(false);
+                    this.hierro.setVisible(false);
+                    this.poder.setVisible(true);
+
+                    //Mover placa
+                    this.placaVida.setVisible(false);
+                    this.placaDiamante.setVisible(false);
+                    this.placaHierro.setVisible(false);
+                    this.placaTalisman.setVisible(false);
+                    this.placaPoder.setVisible(true);
+                    
+                    precio = 50;
                     cantidad = this.score - precio;
                 }else if(contItem === 0){           //Vida
                     this.talisman.setVisible(false);
                     this.diamante.setVisible(false);
                     this.vida.setVisible(true);
                     this.hierro.setVisible(false);
+                    this.poder.setVisible(false);
 
                     //Mover placa
                     this.placaVida.setVisible(true);
                     this.placaDiamante.setVisible(false);
                     this.placaHierro.setVisible(false);
                     this.placaTalisman.setVisible(false);
+                    this.placaPoder.setVisible(false);
 
                     precio = 100;
                     cantidad = this.score - precio;
@@ -307,12 +387,14 @@ class Shop extends Phaser.Scene{
                     this.vida.setVisible(false);
                     this.talisman.setVisible(true);
                     this.hierro.setVisible(false);
+                    this.poder.setVisible(false);
 
                     //Mover placa
                     this.placaVida.setVisible(false);
                     this.placaDiamante.setVisible(false);
                     this.placaHierro.setVisible(false);
                     this.placaTalisman.setVisible(true);
+                    this.placaPoder.setVisible(false);
 
                     //contItem = 0;
                     precio = 150;
@@ -325,12 +407,14 @@ class Shop extends Phaser.Scene{
                     this.talisman.setVisible(false);
                     this.diamante.setVisible(true);
                     this.hierro.setVisible(false);
+                    this.poder.setVisible(false);
 
                     //Mover placa
                     this.placaVida.setVisible(false);
                     this.placaDiamante.setVisible(true);
                     this.placaHierro.setVisible(false);
                     this.placaTalisman.setVisible(false);
+                    this.placaPoder.setVisible(false);
 
                     precio = 200;
                     cantidad = this.score - precio;
@@ -339,12 +423,14 @@ class Shop extends Phaser.Scene{
                     this.vida.setVisible(false);
                     this.talisman.setVisible(true);
                     this.hierro.setVisible(false);
+                    this.poder.setVisible(false);
 
                      //Mover placa
                      this.placaVida.setVisible(false);
                      this.placaDiamante.setVisible(false);
                      this.placaHierro.setVisible(false);
                      this.placaTalisman.setVisible(true);
+                     this.placaPoder.setVisible(false);
 
                     precio = 150;
                     cantidad = this.score - precio;
@@ -354,44 +440,84 @@ class Shop extends Phaser.Scene{
                     this.vida.setVisible(false);
                     this.talisman.setVisible(false);
                     this.hierro.setVisible(true);
+                    this.poder.setVisible(false);
 
                     //Mover placa
                     this.placaVida.setVisible(false);
                     this.placaDiamante.setVisible(false);
                     this.placaHierro.setVisible(true);
                     this.placaTalisman.setVisible(false);
+                    this.placaPoder.setVisible(false);
 
                     precio = 150;
+                    cantidad = this.score - precio;
+                }else if(contItem === 4){           //Poder
+                    this.diamante.setVisible(false);
+                    this.vida.setVisible(false);
+                    this.talisman.setVisible(false);
+                    this.hierro.setVisible(false);
+                    this.poder.setVisible(true);
+
+                    //Mover placa
+                    this.placaVida.setVisible(false);
+                    this.placaDiamante.setVisible(false);
+                    this.placaHierro.setVisible(false);
+                    this.placaTalisman.setVisible(false);
+                    this.placaPoder.setVisible(true);
+                    
+                    precio = 50;
                     cantidad = this.score - precio;
                 }else if(contItem === 0){
                     this.talisman.setVisible(false);
                     this.diamante.setVisible(false);
                     this.vida.setVisible(true);
                     this.hierro.setVisible(false);
+                    this.poder.setVisible(false);
 
                     //Mover placa
                     this.placaVida.setVisible(true);
                     this.placaDiamante.setVisible(false);
                     this.placaHierro.setVisible(false);
                     this.placaTalisman.setVisible(false);
+                    this.placaPoder.setVisible(false);
 
                     precio = 100;
                     cantidad = this.score - precio;
                 }
             }else if(gameObject === this.btn_comprar){
                 this.score = cantidad;
-                this.scoreText.setText(this.score);
-                this.recoge = this.sound.add("moneda",{loop:false});
-                this.recoge.play();
+                //this.scoreText.setText(this.score);
+                this.registry.events.emit('score',this.score);
+
+                this.comprar = this.sound.add("moneda",{loop:false});
+                this.comprar.play();
             }
-            
         });
-        
+
+        //En caso de que Nexus no tenga dracmas
+        /*
+        if(this.score === 0 ){
+            this.dialogo8.setVisible(false);
+            this.tweensSinDinero = this.add.tween({
+                targets: [this.dialogo5,this.dialogo6],
+                ease: 'Expo',
+                y:{
+                    value: this..y++,
+                    duration: 500
+                },
+                repeat: 0,
+                onComplete: () => {
+                    this.nexus.anims.play('stand');
+                }
+            });
+        }
+        */
+
         //Falta el boton o puerta para salir
         if(this.nexus.x === 50){
-            this.scene.stop();
-            this.scene.sendToBack();
-            this.scene.start('Scene_2');
+            //this.scene.stop();
+            //this.scene.sendToBack();
+            this.scene.restart('Scene_2');
         }
         
     }
@@ -426,8 +552,45 @@ class Shop extends Phaser.Scene{
             });
         }
 
-        if(Phaser.Input.Keyboard.JustUp(this.nexusWalkDer) || Phaser.Input.Keyboard.JustUp(this.nexusWalkIz) || Phaser.Input.Keyboard.JustUp(this.nexusDown)){
+        if(Phaser.Input.Keyboard.JustDown(this.nexusAttack)){
+            this.nexus.anims.play('attack');
+             if(this.nexus.flipX){
+                 //this.nexus.body.setSize(70,85);
+                 this.nexus.body.setOffset(20, 10);
+             }
+             else{
+                 //this.nexus.body.setSize(70,85);
+                 this.nexus.body.setOffset(-20, 10);
+             }
+            this.tweensAtaque = this.add.tween({
+                targets: [this.nexus],
+                ease: 'Power2',
+                //y:posInY+50,
+                x:{
+                    value: posInX+10,
+                    ease: 'Circ',
+                    duration: 300
+                },
+                y:{
+                    value: posInY--,
+                    duration: 300,
+                    offset: true
+                },
+                repeat: 0,
+                onComplete: () => {
+                    this.nexus.anims.play('stand');
+                    //this.nexus.body.setSize(50,85);
+                    this.nexus.setOffset(0);
+                    this.nexus.setX(posInX);
+                    this.nexus.setY(posInY);
+                }
+            });
+        }
+
+        if( Phaser.Input.Keyboard.JustUp(this.nexusAttack) || Phaser.Input.Keyboard.JustUp(this.nexusWalkDer) || Phaser.Input.Keyboard.JustUp(this.nexusWalkIz) || Phaser.Input.Keyboard.JustUp(this.nexusDown)
+        || Phaser.Input.Keyboard.JustUp(this.nexusJump) ){
             this.nexus.anims.play('stand');
+            //this.nexus.setFlipX(true);
             this.nexus.clearTint();
             this.nexus.setScale(1.7);
             this.nexus.setAngle(0);
@@ -437,8 +600,48 @@ class Shop extends Phaser.Scene{
 
         
     }
-
-
+/*
+    addPoints(puntos){
+        this.puntos.setText(puntos);
+    }
+*/
+    ataque(){
+        if(this.nexusAttack.isDown){
+            this.tweenRobo = this.add.tween({
+                targets: [this.vendedor],
+                ease: 'Power2',
+                x:{
+                    value: this.vendedor.x+=50,
+                    duration: 1000
+                },
+                repeat: 0,
+                onStart: () => {
+                    let hit = this.sound.add("hit",{loop:false});
+                    hit.play();
+                },
+                onComplete: () => {
+                    this.dialogo8.setVisible(true);
+                }
+            });
+            this.tweenDesaparece = this.add.tween({
+                targets: [this.dialogo8],
+                ease:'Expo',
+                y:{
+                    value: this.dialogo8.y+=10,
+                    duration: 500
+                },
+                repeat: 0,
+                onComplete: () => {
+                    this.dialogo8.setAlpha(0);
+                }
+            });
+            this.score = 0;
+            //this.scoreText.setText(this.score);
+            this.registry.events.emit('score',this.score);
+            let end = this.sound.add("laugh",{loop:false});
+            end.play();
+        }
+    }
     
 }
 
