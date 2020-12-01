@@ -101,6 +101,7 @@ class Shop extends Phaser.Scene{
         this.load.audio('laugh', 'sounds/laugh.mp3');
 
         this.score = this.dato;
+        this.registry.events.emit('score',this.score);
     }
     
     create() {
@@ -163,8 +164,8 @@ class Shop extends Phaser.Scene{
         this.dialogo2 = this.add.image(270,400,'dialogo2').setScale(0.21).setOrigin(0).setDepth(3).setVisible(false);
         this.dialogo3 = this.add.image(270,400,'dialogo3').setScale(0.21).setOrigin(0).setDepth(3).setVisible(false);
         this.dialogo4 = this.add.image(270,400,'dialogo4').setScale(0.21).setOrigin(0).setDepth(3).setVisible(false);
-        this.dialogo5 = this.add.image(270,400,'dialogo5').setScale(0.21).setOrigin(0).setDepth(3).setVisible(false);
-        this.dialogo6 = this.add.image(270,400,'dialogo6').setScale(0.21).setOrigin(0).setDepth(3).setVisible(false);
+        this.dialogo5 = this.add.image(270,400,'dialogo5').setScale(0.21).setOrigin(0).setDepth(4).setVisible(false);
+        this.dialogo6 = this.add.image(270,400,'dialogo6').setScale(0.21).setOrigin(0).setDepth(5).setVisible(false);
         this.dialogo7 = this.add.image(270,400,'dialogo7').setScale(0.21).setOrigin(0).setDepth(3).setVisible(false);
         this.dialogo8 = this.add.sprite(270,400,'dialogo8').setScale(0.21).setOrigin(0).setDepth(3).setVisible(false).setInteractive();
         //Placas de items
@@ -175,7 +176,7 @@ class Shop extends Phaser.Scene{
         this.placaPoder = this.add.image(520,0,'ppoder').setOrigin(0).setScale(1).setDepth(2).setVisible(false);
         //Cargar flechas
         this.flechaI = this.add.image(550,350,'flechaIZ').setScale(0.7).setInteractive().setDepth(3);
-        this.flechaD = this.add.image(900,350,'flechaDER').setScale(0.7).setInteractive().setDepth(3);
+        this.flechaD = this.add.image(890,350,'flechaDER').setScale(0.7).setInteractive().setDepth(3);
         //Cargar items
         //--->>Vida
         this.vida = this.add.sprite(660, 300, 'vida', 0).setOrigin(0).setScale(1.5);
@@ -258,6 +259,7 @@ class Shop extends Phaser.Scene{
         //Probar el pase de datos
         this.scene.launch('Dracmas');
         this.scene.bringToTop('Dracmas');
+        this.registry.events.emit('score',this.score);
 
         //Botones para comprar
         this.btn_comprar = this.add.image(730,550,'btn_comprar').setDepth(4).setInteractive().setScale(0.7);
@@ -417,7 +419,7 @@ class Shop extends Phaser.Scene{
                     this.placaPoder.setVisible(false);
 
                     precio = 200;
-                    cantidad = this.score - precio;
+                    cantidad = this.score - 200;
                 }else if(contItem === 2){
                     this.diamante.setVisible(false);
                     this.vida.setVisible(false);
@@ -482,7 +484,7 @@ class Shop extends Phaser.Scene{
                     this.placaPoder.setVisible(false);
 
                     precio = 100;
-                    cantidad = this.score - precio;
+                    cantidad = this.score - 100;
                 }
             }else if(gameObject === this.btn_comprar){
                 this.score = cantidad;
@@ -495,23 +497,28 @@ class Shop extends Phaser.Scene{
         });
 
         //En caso de que Nexus no tenga dracmas
-        /*
+        
         if(this.score === 0 ){
-            this.dialogo8.setVisible(false);
-            this.tweensSinDinero = this.add.tween({
-                targets: [this.dialogo5,this.dialogo6],
-                ease: 'Expo',
-                y:{
-                    value: this..y++,
-                    duration: 500
+            this.dialogo5.setVisible(true);
+            this.tweenSinDinero = this.add.tween({
+                targets: [this.dialogo6],
+                ease: 'Power2',
+                x:{
+                    value: this.vendedor.x-=50,
+                    duration: 1000
                 },
                 repeat: 0,
+                onStart: () => {
+                    this.dialogo6.setVisible(true);
+                },
                 onComplete: () => {
-                    this.nexus.anims.play('stand');
+                    this.dialogo6.setAlpha(0);
+                    this.dialogo5.setAlpha(0);
+                    //this.dialogo5.setDepth(5);
                 }
             });
         }
-        */
+        
 
         //Falta el boton o puerta para salir
         if(this.nexus.x === 50){
@@ -600,11 +607,7 @@ class Shop extends Phaser.Scene{
 
         
     }
-/*
-    addPoints(puntos){
-        this.puntos.setText(puntos);
-    }
-*/
+
     ataque(){
         if(this.nexusAttack.isDown){
             this.tweenRobo = this.add.tween({
@@ -612,29 +615,34 @@ class Shop extends Phaser.Scene{
                 ease: 'Power2',
                 x:{
                     value: this.vendedor.x+=50,
-                    duration: 1000
+                    duration: 1500
                 },
                 repeat: 0,
                 onStart: () => {
                     let hit = this.sound.add("hit",{loop:false});
+                    this.dialogo8.setVisible(true);
                     hit.play();
                 },
                 onComplete: () => {
-                    this.dialogo8.setVisible(true);
+                    this.dialogo8.setVisible(false);
+                    this.dialogo8.setDepth(5);
                 }
             });
+            /*
             this.tweenDesaparece = this.add.tween({
                 targets: [this.dialogo8],
-                ease:'Expo',
                 y:{
                     value: this.dialogo8.y+=10,
-                    duration: 500
+                    duration: 5000
                 },
                 repeat: 0,
+                yoyo: true,
+                repeat: 0,
+                easy: 'Expo',
                 onComplete: () => {
                     this.dialogo8.setAlpha(0);
                 }
-            });
+            });*/
             this.score = 0;
             //this.scoreText.setText(this.score);
             this.registry.events.emit('score',this.score);

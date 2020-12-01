@@ -112,10 +112,11 @@ class Scene_2 extends Phaser.Scene{
     }
 //Función para entrar a la tienda
     store(){
-        if(this.score===600 || this.score >= 600){
+        if(this.score===0 || this.score >= 600){
             //Se muestra la pantalla negra de cambio de escena
-            this.fN = this.add.image(0, 0,'fondoN').setAlpha(0);
+            this.fN = this.add.image(0, 0,'fondoN');
             this.fN.setDepth(3);
+            this.fN.setScale(2.5);
            // this.fN.setOrigin(0);
 
             this.add.tween({
@@ -127,7 +128,7 @@ class Scene_2 extends Phaser.Scene{
                 alpha:{
                     value: 1
                 },
-                duration: 5000,
+                duration: 10000,
                 yoyo: true,
                 repeat: 0,
                 easy: 'Expo',
