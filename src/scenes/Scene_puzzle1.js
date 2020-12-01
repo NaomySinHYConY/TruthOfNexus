@@ -28,6 +28,7 @@ class Scene_puzzle1 extends Phaser.Scene{
     }
 
     create() {
+        console.log(this.data.getAll());
         const keyCodes = Phaser.Input.Keyboard.KeyCodes;
         this.velocidadNexus = 300;
         this.musica();
@@ -41,11 +42,6 @@ class Scene_puzzle1 extends Phaser.Scene{
 
         this.salida = this.physics.add.image(496.5, 48.5, 'salida').setImmovable(true);
         this.salida.body.allowGravity = false;
-
-        this.nexus = this.physics.add.sprite(30, 600, 'nexus_head').setInteractive().setScale(1.3).setCollideWorldBounds(true);
-        this.nexus.body.allowGravity = false;
-        //this.nexus.anims.play('nexus_dead');
-        //this.nexus.setFrame('head_6');
 
 
         this.grupoMonstruos = this.physics.add.group();
@@ -95,10 +91,10 @@ class Scene_puzzle1 extends Phaser.Scene{
         this.hoyos = this.physics.add.group();
         this.hoyos.create(37.5, 266.5, 'hoyo');
         this.hoyos.create(455.5, 183.5, 'hoyo');
-        this.hoyos.create(335, 285.5, 'hoyo').setScale(0.6);
+        this.hoyos.create(335, 285.5, 'hoyo');
         //this.hoyos.create(228.5, 424.5, 'hoyo');
-        this.hoyos.create(326.5, 478.5, 'hoyo').setScale(0.6);
-        this.hoyos.create(638.5, 478.5, 'hoyo').setScale(0.65);
+        this.hoyos.create(326.5, 478.5, 'hoyo');
+        this.hoyos.create(638.5, 478.5, 'hoyo');
         this.hoyos.create(860.5, 228.5, 'hoyo');
         this.hoyos.create(965.5, 196.5, 'hoyo');
         
@@ -106,7 +102,15 @@ class Scene_puzzle1 extends Phaser.Scene{
             h.body.allowGravity = false;
             h.alpha = 0.1;
             h.setImmovable(true);
+            h.body.setSize(50,5);
         });
+
+        this.nexus = this.physics.add.sprite(30, 600, 'nexus_head').setInteractive().setScale(1.3).setCollideWorldBounds(true);
+        this.nexus.body.allowGravity = false;
+        this.nexus.body.setSize(20,15);
+        this.nexus.body.setOffset(5,10);
+        //this.nexus.anims.play('nexus_dead');
+        //this.nexus.setFrame('head_6');
 
         this.physics.add.collider(this.paredes,this.grupoMonstruos, this.choquePared, null, this);
         this.physics.add.collider(this.fondoder, this.nexus);
@@ -144,6 +148,7 @@ class Scene_puzzle1 extends Phaser.Scene{
     }
 
     choqueNexus(nexus, monstruo){
+        nexus.anims.play('nexus_dead');
         this.tweens = this.add.tween({
             targets: [this.nexus],
             ease: 'Linear',
@@ -152,13 +157,15 @@ class Scene_puzzle1 extends Phaser.Scene{
             onStart: () => {
                 nexus.body.enable = false;
                 this.golpe.play(this.musicConf2);
-                nexus.anims.play('nexus_dead');
+                
+                //nexus.anims.play('nexus_dead');
             },
             onComplete: () => {
                 nexus.body.enable = true;
                 nexus.x = 30;
                 nexus.y = 600;
                 nexus.alpha = 1;
+                nexus.setFrame(0);
             }, 
         });
         
@@ -190,7 +197,7 @@ class Scene_puzzle1 extends Phaser.Scene{
 
     caida(nexus, hoyo){
         hoyo.body.enable = false;
-        //nexus.body.enable = false;
+        nexus.body.enable = false;
         // setTimeout(() => {
         //     this.caer.play(this.musicConf2);
         //     nexus.anims.play('nexus_fall');
@@ -199,6 +206,8 @@ class Scene_puzzle1 extends Phaser.Scene{
             targets: [this.nexus],
             ease: 'Linear',
             alpha: 0,
+            x: hoyo.x,
+            y: hoyo.y,
             duration: 2000,
             onStart: () => {
                 this.caer.play(this.musicConf2);
@@ -216,6 +225,7 @@ class Scene_puzzle1 extends Phaser.Scene{
             targets: [this.nexus],
             ease: 'Linear',
             y: 10,
+            x:500,
             duration: 3000,
             onStart: () => {
                 nexus.body.enable = false;

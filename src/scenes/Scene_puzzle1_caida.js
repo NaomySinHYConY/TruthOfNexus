@@ -59,6 +59,7 @@ class Scene_puzzle1_caida extends Phaser.Scene{
             targets: [this.nexus],
             ease: 'Linear',
             y: 10,
+            x:500,
             duration: 3000,
             onStart: () => {
                 nexus.body.enable = false;
@@ -75,6 +76,7 @@ class Scene_puzzle1_caida extends Phaser.Scene{
     }
 
     update(time, delta) {
+        
         if(this.nexusWalkDer.isDown){
             this.nexus.setFrame('head_10');
             this.nexus.body.velocity.x = this.velocidadNexus;

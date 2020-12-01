@@ -1,4 +1,5 @@
 import Bootloader from "./scenes/Bootloader.js"
+import Scene_estado from "./scenes/Scene_estado.js"
 import Scene_1 from "./scenes/Scene_1.js"
 import Scene_tienda from "./scenes/Scene_tienda.js"
 import Scene_puzzle1 from "./scenes/Scene_puzzle1.js"
@@ -23,7 +24,7 @@ const config = {
     //     autoCenter: Phaser.Scale.CENTER_BOTH
     //     },
     backgroundColor: "#34495e", 	//Color de fondo del canvas ()
-    scene: [Bootloader, Scene_1, Scene_puzzle1, Scene_puzzle1_caida, Scene_tienda],    //Aquí irá la lista de scenas del juego
+    scene: [Bootloader, Scene_1, Scene_puzzle1, Scene_puzzle1_caida, Scene_tienda, Scene_estado],    //Aquí irá la lista de scenas del juego
     banner:{
         hidePhaser: true,
         text: "#fff00f",
@@ -31,7 +32,7 @@ const config = {
                 "#16a085",
                 "#2ecc71",
                 "#e74c3c", 
-                "#000000"]
+                "#000000"] 
     },
     physics: {
         default: 'arcade',
@@ -39,7 +40,7 @@ const config = {
             gravity:{
                 y:800
             },
-            debug: false
+            debug: true
         }
     }
 };

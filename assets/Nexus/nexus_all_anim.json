@@ -4,7 +4,7 @@
             "key": "die",
             "type": "frames",
             "repeat": 0,
-            "frameRate": 10,
+            "frameRate": 8,
             "frames": [
                 {
                     "key": "nexus_all",
@@ -64,7 +64,7 @@
             "key": "attack",
             "type": "frames",
             "repeat": 0,
-            "frameRate": 11,
+            "frameRate": 15,
             "frames": [
                 {
                     "key": "nexus_all",
@@ -89,6 +89,18 @@
                 {
                     "key": "nexus_all",
                     "frame": "attack_6"
+                },
+                {
+                    "key": "nexus_all",
+                    "frame": "jump_3"
+                },
+                {
+                    "key": "nexus_all",
+                    "frame": "jump_2"
+                },
+                {
+                    "key": "nexus_all",
+                    "frame": "jump_1"
                 }
             ]
         },

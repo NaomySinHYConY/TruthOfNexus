@@ -12,7 +12,7 @@ class Scene_1 extends Phaser.Scene{
     }
     preload() {
         this.load.path = './assets/';      
-        this.load.image(['pl1', 'pl2', 'pl3', 'cantDracmas', 'aCueva', 'aviso', 'aviso_1', 'aviso_2']);
+        this.load.image(['pl1', 'pl2', 'pl3', 'aCueva', 'aviso', 'aviso_1', 'aviso_2']);
         this.load.spritesheet('fondo', 'fondo/fondoAnim.png', {
             frameWidth: 2000,
             frameHeight: 640,
@@ -44,6 +44,11 @@ class Scene_1 extends Phaser.Scene{
         const eventos = Phaser.Input.Events;
         const keyCodes = Phaser.Input.Keyboard.KeyCodes;
         
+        this.data.set('dracmas', 0);
+        this.data.set('monedas', 0);
+        console.log(this.data.getAll());
+        this.scene.launch('Scene_estado');
+
         this.fondo = this.add.sprite(0, 0, 'fondo', 1).setOrigin(0).setInteractive();
         this.physics.add.existing(this.fondo, true);
         this.anims.create({
@@ -59,16 +64,17 @@ class Scene_1 extends Phaser.Scene{
         this.fondo.body.setSize(1000, 40);
         this.fondo.body.setOffset(0, 570);
         
-        this.titleDracmas = this.add.image(160, 45, 'cantDracmas');
-        this.score = 0;
-        this.scoreText = this.add.text(230, 30, '0', { fontSize: '32px', fill: '#fff' });
-        this.aCueva = this.add.image(890, 250, 'aCueva').setInteractive().setOrigin(0).setScale(0.2);
+        // this.titleDracmas = this.add.image(860, 45, 'cantDracmas').setScale(0.9);
+        // this.score = 0;
+        // this.scoreText = this.add.text(940, 30, '0', { fontSize: '32px', fill: '#fff' });
+        this.aCueva = this.add.image(920, 330, 'aCueva').setInteractive().setOrigin(0).setScale(0.15);
         this.physics.add.existing(this.aCueva, true);
         this.aCueva.body.setSize(50, 400);
-        this.aCueva.body.setOffset(80, 0);
-        this.control = this.add.image(340,30,'aviso').setScale(0.3).setAlpha(0);
-        this.control_2 = this.add.image(530,30,'aviso_1').setScale(0.3).setAlpha(0);
-        this.control_3 = this.add.image(730,30,'aviso_2').setScale(0.3).setAlpha(0);
+        this.aCueva.body.setOffset(60, 0);
+
+        this.control = this.add.image(280,40,'aviso').setScale(0.3).setAlpha(0);
+        this.control_2 = this.add.image(470,40,'aviso_1').setScale(0.3).setAlpha(0);
+        this.control_3 = this.add.image(670,40,'aviso_2').setScale(0.3).setAlpha(0);
 
         this.add.tween({
             targets: [this.control, this.control_2, this.control_3],
@@ -125,8 +131,9 @@ class Scene_1 extends Phaser.Scene{
         this.nexus.setOrigin(0.5);
         this.nexus.setDepth(2);
         this.nexus.body.setSize(50,85);
-        this.nexus.body.setOffset(-10,0);
+        this.nexus.body.setOffset(30,30);
         this.nexus.setCollideWorldBounds(true);
+        this.nexus.anims.play('stand');
 
         this.chest = this.physics.add.sprite(500,300,'chest').setInteractive();
         this.chest.setDepth(2);
@@ -134,13 +141,13 @@ class Scene_1 extends Phaser.Scene{
         this.chest.setCollideWorldBounds(true);
         
         //Controles:
-        this.nexusWalkA = this.input.keyboard.addKey(keyCodes.U);
+        //this.nexusWalkA = this.input.keyboard.addKey(keyCodes.U);
         this.nexusWalkIz = this.input.keyboard.addKey(keyCodes.LEFT);
         this.nexusWalkDer = this.input.keyboard.addKey(keyCodes.RIGHT);
         this.nexusUp = this.input.keyboard.addKey(keyCodes.UP);
         this.nexusDown = this.input.keyboard.addKey(keyCodes.DOWN);
         this.nexusAttack = this.input.keyboard.addKey(keyCodes.O);
-        this.nexusJump = this.input.keyboard.addKey(keyCodes.SPACE);
+        //this.nexusJump = this.input.keyboard.addKey(keyCodes.SPACE);
         this.abrir = this.input.keyboard.addKey(keyCodes.ENTER);
 
         //Colisiones
@@ -150,7 +157,7 @@ class Scene_1 extends Phaser.Scene{
         });
 
         this.physics.add.collider(this.nexus,this.plat1);
-        this.physics.add.collider(this.nexus,this.aCueva);
+        //this.physics.add.collider(this.nexus,this.aCueva);
         this.physics.add.collider(this.nexus,this.plat2);
         this.physics.add.collider(this.nexus,this.plat3);
         this.physics.add.collider(this.shadow,this.plat3);
@@ -198,7 +205,7 @@ class Scene_1 extends Phaser.Scene{
         this.physics.add.overlap(this.nexus, this.fuego, this.muere_nexus, null, this);
         this.physics.add.overlap(this.nexus, this.fuego_2, this.muere_nexus, null, this);
         this.physics.add.overlap(this.nexus, this.shadow, this.ataque, null, this);
-        this.physics.add.overlap(this.nexus, this.aCueva, this.ganar, null, this);
+        this.physics.add.collider(this.nexus, this.aCueva, this.ganar, null, this);
         this.physics.add.overlap(this.shadow, this.fondo, this.shadDi, null, this);
 
         this.tweenFuego = this.add.tween({
@@ -238,7 +245,7 @@ class Scene_1 extends Phaser.Scene{
         var posInY =  this.nexus.y;
         
 
-        if(Phaser.Input.Keyboard.JustDown(this.abrir)){
+        if(Phaser.Input.Keyboard.JustDown(this.abrir) && this.data.list.dracmas<140 && this.data.list.monedas<12){
             this.chest.anims.play('abrir');
             let cofreOpen = this.sound.add("cofreOpen",{loop:false});
             cofreOpen.play();
@@ -248,7 +255,7 @@ class Scene_1 extends Phaser.Scene{
                 repeat: 6,
                 setXY: { x:300, y: 300, stepX: 70 }
             });
-    
+            
             this.grupod.children.iterate( (girar) => {
                 girar.setScale(1.5);
                 girar.setDepth(3);
@@ -261,17 +268,22 @@ class Scene_1 extends Phaser.Scene{
             this.physics.add.collider(this.grupod,this.fondo);
             this.physics.add.collider(this.grupod,this.plat3);
             this.physics.add.overlap(this.nexus, this.grupod, this.recoger, null, this);
+            this.data.list.monedas+=6;
         }
 
         if( Phaser.Input.Keyboard.JustDown(this.nexusWalkDer)){
             //band = true;
             this.nexus.setFlipX(true);
+            //this.nexus.body.setSize(50,85);
+            this.nexus.body.setOffset(30,30);
             this.nexus.body.velocity.x = 160;
             this.nexus.anims.play('walk');
         }else if(Phaser.Input.Keyboard.JustDown(this.nexusWalkIz)){
             //band = false;
             this.nexus.setFlipX(false);
             this.nexus.body.velocity.x = -160;
+            //this.nexus.body.setSize(50,85);
+            this.nexus.body.setOffset(20,30);
             this.nexus.anims.play('walk');
          }
         else if(Phaser.Input.Keyboard.JustDown(this.nexusDown)){
@@ -299,42 +311,46 @@ class Scene_1 extends Phaser.Scene{
         }
 
         if(Phaser.Input.Keyboard.JustDown(this.nexusAttack)){
-            this.nexus.anims.play('attack');
-             if(this.nexus.flipX){
-                 //this.nexus.body.setSize(70,85);
-                 this.nexus.body.setOffset(20, 10);
-             }
-             else{
-                 //this.nexus.body.setSize(70,85);
-                 this.nexus.body.setOffset(-20, 10);
-             }
+            //this.nexus.anims.play('attack');
             this.tweensAtaque = this.add.tween({
                 targets: [this.nexus],
                 ease: 'Power2',
                 //y:posInY+50,
                 x:{
+                    //delay: 100,
                     value: posInX+10,
                     ease: 'Circ',
-                    duration: 300
+                    duration: 600
                 },
                 y:{
+                    //delay: 100,
                     value: posInY--,
-                    duration: 300,
+                    duration: 600,
                     offset: true
                 },
                 repeat: 0,
+                onStart: () =>{
+                    this.nexus.anims.play('attack');
+                    if(this.nexus.flipX){
+                        this.nexus.body.setSize(70,85);
+                        this.nexus.body.setOffset(40, 30);
+                    }
+                    else{
+                        this.nexus.body.setSize(70,85);
+                        this.nexus.body.setOffset(0, 30);
+                    }
+                },
                 onComplete: () => {
                     this.nexus.anims.play('stand');
-                    //this.nexus.body.setSize(50,85);
-                    this.nexus.setOffset(0);
-                    this.nexus.setX(posInX);
-                    this.nexus.setY(posInY);
+                    this.nexus.body.setSize(50,85);
+                    this.nexus.setOffset(30,30);
+                    //this.nexus.setX(posInX);
+                    //this.nexus.setY(posInY);
                 }
             });
         }
 
-        if( Phaser.Input.Keyboard.JustUp(this.nexusAttack) || Phaser.Input.Keyboard.JustUp(this.nexusWalkDer) || Phaser.Input.Keyboard.JustUp(this.nexusWalkIz) || Phaser.Input.Keyboard.JustUp(this.nexusDown)
-        || Phaser.Input.Keyboard.JustUp(this.nexusJump) ){
+        if( Phaser.Input.Keyboard.JustUp(this.nexusAttack) || Phaser.Input.Keyboard.JustUp(this.nexusWalkDer) || Phaser.Input.Keyboard.JustUp(this.nexusWalkIz) || Phaser.Input.Keyboard.JustUp(this.nexusDown)){
             this.nexus.anims.play('stand');
             //this.nexus.setFlipX(true);
             this.nexus.clearTint();
@@ -354,10 +370,14 @@ class Scene_1 extends Phaser.Scene{
     recoger(nexus, dracmas)
     {
        dracmas.destroy();
-       this.score += 20;
+       this.data.list.dracmas += 20;
+       //console.log(this.score);
+       this.registry.events.emit('recogeMoneda', 20);
+       //this.scene.launch('Scene_estado');
+    //    this.score += 20;
        this.recoge = this.sound.add("moneda",{loop:false});
        this.recoge.play();
-       this.scoreText.setText(this.score);
+    //    this.scoreText.setText(this.score);
     }
 
     muere_nexus(nexus,fuego)
@@ -421,9 +441,12 @@ class Scene_1 extends Phaser.Scene{
     }
 
     ganar(){
-        if(this.score==140){
+
+        //console.log('POs ya ganó xd');
+        if(this.data.list.dracmas>=140){
             let win = this.sound.add("impressive",{loop:false});
             win.play();
+            //Agregar cámar o r something
             this.scene.stop();
             this.scene.launch('Scene_puzzle1');
         }
