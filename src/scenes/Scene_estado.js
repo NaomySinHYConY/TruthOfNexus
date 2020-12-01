@@ -22,6 +22,8 @@ class Scene_estado extends Phaser.Scene{
         //Llaves que tiene de la tienda
         this.data.set('llaves', 0);
 
+        //console.log('Datos escena estado');
+        //console.log(this.data.getAll());
         //this.score = 0;
         this.titleDracmas = this.add.image(840, 45, 'cantDracmas').setScale(0.9);
         this.scoreText = this.add.text(920, 30, '0', { fontSize: '32px', fill: '#fff' });
@@ -50,7 +52,7 @@ class Scene_estado extends Phaser.Scene{
             this.data.list.vidas--;
             console.log(this.data.list.vidas);
             this.grupoV.getChildren()[this.data.list.vidas].destroy();
-            if(this.data.list.vidas == 0){
+            if(this.data.list.vidas <= 0){
                 this.scene.start('Scene_gameOver');
                 this.scene.stop();
             }
