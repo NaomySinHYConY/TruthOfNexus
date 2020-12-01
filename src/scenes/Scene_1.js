@@ -46,7 +46,9 @@ class Scene_1 extends Phaser.Scene{
         
         this.data.set('dracmas', 0);
         this.data.set('monedas', 0);
-        console.log(this.data.getAll());
+        this.data.set('vidas', 4);
+
+        //console.log(this.data.getAll());
         this.scene.launch('Scene_estado');
 
         this.fondo = this.add.sprite(0, 0, 'fondo', 1).setOrigin(0).setInteractive();
@@ -72,9 +74,9 @@ class Scene_1 extends Phaser.Scene{
         this.aCueva.body.setSize(50, 400);
         this.aCueva.body.setOffset(60, 0);
 
-        this.control = this.add.image(280,40,'aviso').setScale(0.3).setAlpha(0);
-        this.control_2 = this.add.image(470,40,'aviso_1').setScale(0.3).setAlpha(0);
-        this.control_3 = this.add.image(670,40,'aviso_2').setScale(0.3).setAlpha(0);
+        this.control = this.add.image(260,40,'aviso').setScale(0.3).setAlpha(0);
+        this.control_2 = this.add.image(450,40,'aviso_1').setScale(0.3).setAlpha(0);
+        this.control_3 = this.add.image(650,40,'aviso_2').setScale(0.3).setAlpha(0);
 
         this.add.tween({
             targets: [this.control, this.control_2, this.control_3],
@@ -109,6 +111,7 @@ class Scene_1 extends Phaser.Scene{
 
         this.fuego = this.physics.add.sprite(180,600,'explosion').setInteractive();
         this.fuego.body.setCircle(35);
+        this.fuego.body.setImmovable = true;
         this.fuego.body.setOffset(27,50);
         this.fuego.anims.play('explotar');
         this.fuego_2 = this.physics.add.sprite(800,600,'explosion').setInteractive();
@@ -124,7 +127,7 @@ class Scene_1 extends Phaser.Scene{
         this.shadow.anims.play('shadow_stand');
 
         //Nexus
-        this.nexus = this.physics.add.sprite(20,300, 'nexus_all', 0).setInteractive();
+        this.nexus = this.physics.add.sprite(20,370, 'nexus_all', 0).setInteractive();
         this.nexus.setScale(1.7);
         this.nexus.setName('Nexus');
         this.nexus.setFlipX(true);
@@ -163,22 +166,7 @@ class Scene_1 extends Phaser.Scene{
         this.physics.add.collider(this.shadow,this.plat3);
         //this.physics.add.collider(this.shadow,this.fondo);
         this.physics.add.collider(this.nexus,this.fondo, () =>{
-            this.tweenMuerte = this.add.tween({
-                targets: [this.nexus],
-                ease: 'Power2',
-                //y:posInY+50,
-                y:{
-                    value: this.nexus.y-=110,
-                    duration: 1000
-                },
-                repeat: 0,
-                onStart: () => {
-                    let end = this.sound.add("laugh",{loop:false});
-                    end.play();
-                    //this.nexus.anims.play('die');
-                    this.scene.restart();
-                },
-            });
+            this.muere_nexus();
             //this.nexus.anims.play('die');
         });
         
@@ -380,23 +368,39 @@ class Scene_1 extends Phaser.Scene{
     //    this.scoreText.setText(this.score);
     }
 
-    muere_nexus(nexus,fuego)
+    muere_nexus()
     {
+        this.nexus.body.enable = false;
+        this.data.list.vidas--;
+        
+        this.registry.events.emit('menosVida');
         this.tweenMuerte = this.add.tween({
             targets: [this.nexus],
             ease: 'Power2',
+            duration:3000,
             //y:posInY+50,
-            y:{
-                value: this.nexus.y-=110,
+            x:{
+                value: this.nexus.x-=1,
                 duration: 1000
             },
             repeat: 0,
             onStart: () => {
                 let end = this.sound.add("laugh",{loop:false});
                 end.play();
-                //this.nexus.anims.play('die');
-                this.scene.restart();
+                this.nexus.anims.play('die');
+                //this.scene.restart();
             },
+            onComplete: () => {
+                this.nexus.x= 20;
+                this.nexus.y = 370;
+                this.nexus.anims.play('stand');
+                if(this.data.list.vidas!=0){
+                    this.nexus.body.enable = true;
+                }
+                else{
+                    this.scene.stop();
+                }
+            }
         });
     }
 
@@ -421,32 +425,33 @@ class Scene_1 extends Phaser.Scene{
             this.shadow.anims.play('shadow_die');
         }
         else{
-            this.tweenMuerte = this.add.tween({
-                targets: [this.nexus],
-                ease: 'Power2',
-                //y:posInY+50,
-                y:{
-                    value: this.nexus.y-=110,
-                    duration: 1000
-                },
-                repeat: 0,
-                onStart: () => {
-                    let end = this.sound.add("laugh",{loop:false});
-                    end.play();
-                    //this.nexus.anims.play('die');
-                    this.scene.restart();
-                },
-            });
+            this.muere_nexus();
+            // this.tweenMuerte = this.add.tween({
+            //     targets: [this.nexus],
+            //     ease: 'Power2',
+            //     //y:posInY+50,
+            //     y:{
+            //         value: this.nexus.y-=110,
+            //         duration: 1000
+            //     },
+            //     repeat: 0,
+            //     onStart: () => {
+            //         let end = this.sound.add("laugh",{loop:false});
+            //         end.play();
+            //         //this.nexus.anims.play('die');
+            //         this.scene.restart();
+            //     },
+            // });
         }
     }
 
     ganar(){
-
         //console.log('POs ya ganó xd');
         if(this.data.list.dracmas>=140){
             let win = this.sound.add("impressive",{loop:false});
             win.play();
             //Agregar cámar o r something
+            this.registry.events.emit('vidasRestantes', this.data.list.vidas);
             this.scene.stop();
             this.scene.launch('Scene_puzzle1');
         }

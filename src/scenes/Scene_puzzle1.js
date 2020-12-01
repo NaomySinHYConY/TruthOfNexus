@@ -28,7 +28,12 @@ class Scene_puzzle1 extends Phaser.Scene{
     }
 
     create() {
-        console.log(this.data.getAll());
+        this.registry.events.on('vidasRestantes', (vidas) => {
+            this.data.set('vidas', vidas);
+        });
+        
+        //console.log(this.data.getAll());
+
         const keyCodes = Phaser.Input.Keyboard.KeyCodes;
         this.velocidadNexus = 300;
         this.musica();
@@ -149,6 +154,9 @@ class Scene_puzzle1 extends Phaser.Scene{
 
     choqueNexus(nexus, monstruo){
         nexus.anims.play('nexus_dead');
+        this.data.list.vidas--;
+        this.registry.events.emit('menosVida');
+
         this.tweens = this.add.tween({
             targets: [this.nexus],
             ease: 'Linear',
@@ -161,11 +169,17 @@ class Scene_puzzle1 extends Phaser.Scene{
                 //nexus.anims.play('nexus_dead');
             },
             onComplete: () => {
-                nexus.body.enable = true;
+                //nexus.body.enable = true;
                 nexus.x = 30;
                 nexus.y = 600;
                 nexus.alpha = 1;
                 nexus.setFrame(0);
+                if(this.data.list.vidas!=0){
+                    this.nexus.body.enable = true;
+                }
+                else{
+                    this.scene.stop();
+                }
             }, 
         });
         
