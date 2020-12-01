@@ -41,6 +41,18 @@ class Scene_1 extends Phaser.Scene{
         this.load.audio('shadowDie', 'sounds/shadowDie.mp3');
     }
     create() {
+
+        this.cameras.main.setViewport(0, 0, 1000, 640)
+        .fadeOut(2000)
+        //.setRotation(360)
+        .shake(2000, 0.01)
+        .setBackgroundColor('rgba(0, 0, 0, 0)')
+        .flash(2000);
+
+        this.cameras.main.on(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
+            this.cameras.main.fadeIn(2000);
+        });
+
         const eventos = Phaser.Input.Events;
         const keyCodes = Phaser.Input.Keyboard.KeyCodes;
         
@@ -237,6 +249,37 @@ class Scene_1 extends Phaser.Scene{
                 this.nexus.anims.play('walk');
             }
         });
+
+        
+
+        /*this.events.on('transitionstart', function (fromScene, duration) {
+
+            this.tweens.add({
+                targets: [this.fondo],
+                scaleX: 1.5,
+                scaleY: 1.5,
+                duration: duration
+            });
+
+        }, this);
+
+        this.events.on('transitioncomplete', () => { 
+            this.fondo.scaleX = 1;
+            this.fondo.scaleY = 1;
+        });
+
+        this.events.on('transitionout', function (toScene, duration) {
+
+            this.tweens.add({
+                targets: this.fondo,
+                scaleX: 1,
+                scaleY: 1,
+                duration: duration
+            });
+
+        }, this);*/
+
+
         
     }
 
@@ -449,6 +492,15 @@ class Scene_1 extends Phaser.Scene{
             //Agregar cámar o r something
             this.scene.stop();
             this.scene.launch('Scene_puzzle1');
+            /*this.scene.transition({
+                target: 'Scene_puzzle1',
+                duration: 3000,
+                moveBelow: true,
+                //onUpdate: this.transitionOut,
+                //data: { x: 400, y: 300 }
+                data: { x: 500, y: 320 }
+            });*/
+
         }
     }
 
@@ -456,6 +508,27 @@ class Scene_1 extends Phaser.Scene{
         this.shadow.destroy();
         let shadDie = this.sound.add("shadowDie",{loop:false});
         shadDie.play();
+    }
+
+    transitionOut(progress){
+
+        // this.grupo = this.add.group();
+        // this.grupo.add(this.fondo);
+        // this.grupo.add(this.aCueva);
+        // this.grupo.add(this.plat1);
+        // this.grupo.add(this.plat2);
+        // this.grupo.add(this.plat3);
+        // this.grupo.add(this.chest);
+        // this.grupo.children.iterate( (elemento) => {
+        //     elemento.y = (640 * progress);
+        // });
+        this.fondo.y = (640 * progress);
+        this.aCueva.y = (130 * progress);
+        this.plat1.y = (810 * progress);
+        this.plat2.y = (815 * progress);
+        this.plat3.y = (600 * progress);
+        this.chest.y = (600 * progress);
+        //this.nexus.y = (640 * progress);
     }
 }
 export default Scene_1;

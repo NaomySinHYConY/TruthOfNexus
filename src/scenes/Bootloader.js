@@ -185,7 +185,16 @@ class Bootloader extends Phaser.Scene{
         this.comenzar.on(eventos.POINTER_DOWN, () => {
             //Escena dummie
             this.scene.stop(this);
-            this.scene.start('Scene_1');
+            //this.scene.start('Scene_1');
+
+            this.scene.transition({
+                target: 'Scene_1',
+                duration: 2000,
+                moveBelow: true,
+                onUpdate: this.transitionOut,
+                //data: { x: 400, y: 300 }
+                data: { x: 500, y: 320 }
+            });
             //this.scene.launch('Scene_estado');
         });
         this.cerrar.on(eventos.POINTER_DOWN, () => {
@@ -242,9 +251,31 @@ class Bootloader extends Phaser.Scene{
             yoyo: true,
             repeat: 0,
           });
-        })
+        });
         
+        this.cameras.main.setViewport(0, 0, 1000, 640)
+        .fadeOut(4000)
+        //.setRotation(360)
+        .setBackgroundColor('rgba(0, 0, 0, 0)')
+        .flash(4000);
 
+        this.cameras.main.on(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
+            this.cameras.main.fadeIn(4000);
+        });
+
+        //this.cameras.main.setSize(1000, 640);
+        //this.cameras.add(500, 0, 1000, 640);
+
+        /*const camara1 = 
+        this.cameras.add(220, 480, 497, 318)
+        .fadeOut(2000);*/
+
+        //this.cameras.main.fadeOutScene('Scene_1', this);
+
+    }
+
+    transitionOut(progress){
+        this.fondo.y = (640 * progress);
     }
 
     musica(){
