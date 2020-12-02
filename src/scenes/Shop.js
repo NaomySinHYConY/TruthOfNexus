@@ -494,30 +494,51 @@ class Shop extends Phaser.Scene{
                 this.comprar = this.sound.add("moneda",{loop:false});
                 this.comprar.play();
             }
+
+            if(this.score === 0 || this.score <= 0 ){
+                //this.dialogo5.setVisible(true);
+                this.tweenSinDinero1 = this.add.tween({
+                    targets: [this.dialogo5],
+                    ease: 'Expo',
+                    y:{
+                        value: -2,
+                        duration: 1500
+                    },
+                    repeat: 0,
+                    onStart: () => {
+                        this.vendedor.setScale(1.9);
+                        this.dialogo5.setVisible(true);
+                    },
+                    onComplete: () => {
+                        //this.dialogo6.setAlpha(1);
+                        this.dialogo5.setAlpha(0);
+                        //this.dialogo5.setDepth(5);
+                    }
+                });
+                this.tweenSinDinero = this.add.tween({
+                    targets: [this.dialogo6],
+                    ease: 'Expo',
+                    y:{
+                        value: -8,
+                        duration: 1200
+                    },
+                    repeat: 0,
+                    onStart: () => {
+                        this.vendedor.setScale(2.2);
+                        this.dialogo6.setVisible(true);
+                    },
+                    onComplete: () => {
+                        this.dialogo6.setAlpha(0);
+                        //this.dialogo5.setAlpha(0);
+                        //this.dialogo5.setDepth(5);
+                    }
+                });
+            }
         });
 
         //En caso de que Nexus no tenga dracmas
         
-        if(this.score === 0 ){
-            this.dialogo5.setVisible(true);
-            this.tweenSinDinero = this.add.tween({
-                targets: [this.dialogo6],
-                ease: 'Power2',
-                x:{
-                    value: this.vendedor.x-=50,
-                    duration: 1000
-                },
-                repeat: 0,
-                onStart: () => {
-                    this.dialogo6.setVisible(true);
-                },
-                onComplete: () => {
-                    this.dialogo6.setAlpha(0);
-                    this.dialogo5.setAlpha(0);
-                    //this.dialogo5.setDepth(5);
-                }
-            });
-        }
+        
         
 
         //Falta el boton o puerta para salir
