@@ -29,9 +29,9 @@ class Scene_gameOver extends Phaser.Scene{
               alpha: { value: 1, duration: 3000}
             },
             repeat: 0,
-          });
+        });
 
-          this.input.on(eventos.GAMEOBJECT_DOWN, (pointer, gameObject) => {
+        this.input.on(eventos.GAMEOBJECT_DOWN, (pointer, gameObject) => {
             if(gameObject.name == 'Salir'){
                 //this.scene.bringToTop('Bootloader');
                 this.scene.start('Bootloader');
@@ -42,8 +42,14 @@ class Scene_gameOver extends Phaser.Scene{
                 
                 this.scene.stop();
             }
+        });
+
+        this.salirButton.on(eventos.POINTER_OVER, function() {
+            this.setTint(0xa4effc);
             });
-          
+        this.salirButton.on(eventos.POINTER_OUT, function() {
+            this.clearTint();
+            });
     }
 
     update(time, delta) {

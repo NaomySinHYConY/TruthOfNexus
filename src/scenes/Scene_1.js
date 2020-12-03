@@ -357,6 +357,7 @@ class Scene_1 extends Phaser.Scene{
 
     recoger(nexus, dracmas)
     {
+        console.log("Emite moneda");
        dracmas.destroy();
        this.data.list.dracmas += 20;
        //console.log(this.score);
@@ -370,6 +371,7 @@ class Scene_1 extends Phaser.Scene{
 
     muere_nexus()
     {
+        console.log('Emite muerte');
         this.nexus.body.enable = false;
         this.data.list.vidas--;
         

@@ -43,12 +43,14 @@ class Scene_estado extends Phaser.Scene{
         // });
 
         this.registry.events.on('recogeMoneda', (valorMoneda) => {
+            console.log("Recibe moneda");
             this.data.list.score+=valorMoneda;
             this.scoreText.setText(this.data.list.score);
             //console.log('Se ha emitido el evento score = ', this.score);
         });
 
         this.registry.events.on('menosVida', () => {
+            console.log("Recibe muerte");
             this.data.list.vidas--;
             console.log(this.data.list.vidas);
             this.grupoV.getChildren()[this.data.list.vidas].destroy();
