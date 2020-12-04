@@ -89,8 +89,8 @@ class Shop extends Phaser.Scene{
 
         //Placas de las  armas
         this.load.image('paxe','/shop/armas/paxe.png');
-        this.load.image('paxe_doble','/shop/armas/paxeDoble.png');
-        this.load.image('mazo','/shop/armas/mazo.png');
+        this.load.image('paxeDoble','/shop/armas/paxeDoble.png');
+        this.load.image('mazo','/shop/armas/pmazo.png');
 
         this.load.image('btn_comprar','/shop/btn_comprar.png');
 

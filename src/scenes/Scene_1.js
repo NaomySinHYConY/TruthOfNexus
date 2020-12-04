@@ -147,6 +147,8 @@ class Scene_1 extends Phaser.Scene{
         this.physics.add.collider(this.nexus,this.chest, () => {
             this.chest.setVelocity(0);
             this.chest.setAcceleration(0);
+            this.chest.body.velocity.x = 0;
+            this.chest.body.velocity.y = 0;
         });
 
         this.physics.add.collider(this.nexus,this.plat1);
@@ -193,7 +195,7 @@ class Scene_1 extends Phaser.Scene{
         this.physics.add.collider(this.fuego_2,this.plat3);
         this.physics.add.collider(this.fuego_2,this.nexus);
 
-        //this.physics.add.collider(this.shadow,this.fondo);
+        this.physics.add.collider(this.chest,this.fondo,this.quemar,null,this);
 
         this.physics.add.overlap(this.nexus, this.fuego, this.muere_nexus, null, this);
         this.physics.add.overlap(this.nexus, this.fuego_2, this.muere_nexus, null, this);
@@ -242,7 +244,7 @@ class Scene_1 extends Phaser.Scene{
             this.chest.anims.play('abrir');
             let cofreOpen = this.sound.add("cofreOpen",{loop:false});
             cofreOpen.play();
-            
+            this.chest.destroy();
             this.grupod = this.physics.add.group({
                 key: 'dracmas',
                 repeat: 6,
@@ -432,6 +434,12 @@ class Scene_1 extends Phaser.Scene{
         this.shadow.destroy();
         let shadDie = this.sound.add("shadowDie",{loop:false});
         shadDie.play();
+    }
+
+    quemar(chest, fondo){
+        this.chest.destroy();
+        //let shadDie = this.sound.add("shadowDie",{loop:false});
+        //shadDie.play();
     }
 }
 export default Scene_1;
