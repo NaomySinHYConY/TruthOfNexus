@@ -457,7 +457,7 @@ class Scene_1 extends Phaser.Scene{
             //Agregar cámar o r something
             this.registry.events.emit('vidasRestantes', this.data.list.vidas);
             this.scene.stop();
-            this.scene.launch('Scene_puzzle1');
+            this.scene.launch('Scene_3');
         }
     }
 
