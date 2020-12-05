@@ -13,6 +13,15 @@ class Scene_puzzle1_caida extends Phaser.Scene{
         this.load.image(['fondoCaida', 'puerta']);
     }
     create() {
+        this.cameras.main.setViewport(0, 0, 1000, 640)
+        .fadeOut(2000)
+        .shake(2000, 0.01)
+        .setBackgroundColor('rgba(0, 0, 0, 0)')
+        .flash(2000);
+
+        this.cameras.main.on(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
+            this.cameras.main.fadeIn(2000);
+        });
         const keyCodes = Phaser.Input.Keyboard.KeyCodes;
         this.velocidadNexus = 300;
         this.musica();
