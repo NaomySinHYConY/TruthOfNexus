@@ -49,6 +49,15 @@ class Scene_estado extends Phaser.Scene{
             //console.log('Se ha emitido el evento score = ', this.score);
         });
 
+        this.registry.events.on('dame_datos', (datos) => {
+            this.registry.events.emit('setDracmas3', this.data.list.score);
+            this.scoreText.setText(this.data.list.score);
+            this.registry.events.emit('vidasRestantes3', this.data.list.vidas);
+            console.log('Se ha emitido el evento Get Data ');
+            console.log("");
+            console.log("");
+        });
+
         this.registry.events.on('menosVida', () => {
             console.log("Recibe muerte");
             this.data.list.vidas--;
@@ -61,7 +70,7 @@ class Scene_estado extends Phaser.Scene{
             // this.score+=valorMoneda;
             // this.scoreText.setText(this.score);
             //console.log('Se ha emitido el evento score = ', this.score);
-        });        
+        }); 
     }
     update(time, delta) {
 

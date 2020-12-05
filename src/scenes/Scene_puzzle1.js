@@ -31,7 +31,7 @@ class Scene_puzzle1 extends Phaser.Scene{
         this.registry.events.on('vidasRestantes', (vidas) => {
             this.data.set('vidas', vidas);
         });
-        
+
         //console.log(this.data.getAll());
 
         const keyCodes = Phaser.Input.Keyboard.KeyCodes;
@@ -47,7 +47,6 @@ class Scene_puzzle1 extends Phaser.Scene{
 
         this.salida = this.physics.add.image(496.5, 48.5, 'salida').setImmovable(true);
         this.salida.body.allowGravity = false;
-
 
         this.grupoMonstruos = this.physics.add.group();
         this.grupoMonstruos.create(500, 525, 'monstruo_fly');
@@ -250,6 +249,10 @@ class Scene_puzzle1 extends Phaser.Scene{
                 nexus.x = 30;
                 nexus.y = 600;
                 //nexus.alpha = 1;
+                this.scene.stop();
+                this.scene.launch('Scene_3');
+                this.registry.events.emit('dame_datos', 0);
+                
             }, 
         });
         this.salidaS.play(this.musicConf2);

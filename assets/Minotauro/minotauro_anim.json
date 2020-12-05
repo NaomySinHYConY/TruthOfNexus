@@ -1,0 +1,100 @@
+{
+    "anims": [
+        {
+            "key": "golpe",
+            "type": "frames",
+            "repeat": -1,
+            "frameRate": 12,
+            "frames": [
+                {
+                    "key": "minotauro",
+                    "frame": "minotauro_golpe_1"
+                },
+                {
+                    "key": "minotauro",
+                    "frame": "minotauro_golpe_2"
+                },
+                {
+                    "key": "minotauro",
+                    "frame": "minotauro_golpe_3"
+                },
+                {
+                    "key": "minotauro",
+                    "frame": "minotauro_golpe_4"
+                },
+                {
+                    "key": "minotauro",
+                    "frame": "minotauro_golpe_5"
+                },
+                {
+                    "key": "minotauro",
+                    "frame": "minotauro_golpe_6"
+                },
+                {
+                    "key": "minotauro",
+                    "frame": "minotauro_golpe_7"
+                }
+            ]
+        },
+        {
+            "key": "die",
+            "type": "frames",
+            "repeat": 0,
+            "frameRate": 3,
+            "frames": [
+                {
+                    "key": "minotauro",
+                    "frame": "minotauro_die_1"
+                },
+                {
+                    "key": "minotauro",
+                    "frame": "minotauro_die_2"
+                },
+                {
+                    "key": "minotauro",
+                    "frame": "minotauro_die_3"
+                }
+            ]
+        },
+        {
+            "key": "idle",
+            "type": "frames",
+            "repeat": -1,
+            "frameRate": 12,
+            "frames": [
+                {
+                    "key": "minotauro",
+                    "frame": "minotauro_idle_1"
+                },
+                {
+                    "key": "minotauro",
+                    "frame": "minotauro_idle_2"
+                },
+                {
+                    "key": "minotauro",
+                    "frame": "minotauro_idle_3"
+                },
+                {
+                    "key": "minotauro",
+                    "frame": "minotauro_idle_4"
+                },
+                {
+                    "key": "minotauro",
+                    "frame": "minotauro_idle_5"
+                },
+                {
+                    "key": "minotauro",
+                    "frame": "minotauro_idle_6"
+                },
+                {
+                    "key": "minotauro",
+                    "frame": "minotauro_idle_7"
+                },
+                {
+                    "key": "minotauro",
+                    "frame": "minotauro_idle_8"
+                }
+            ]
+        }
+    ]
+}
