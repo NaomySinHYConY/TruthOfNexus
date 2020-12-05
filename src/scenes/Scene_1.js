@@ -450,8 +450,10 @@ class Scene_1 extends Phaser.Scene{
     ganar(){
         //console.log('POs ya ganó xd');
         if(this.data.list.dracmas>=140){
-            let win = this.sound.add("impressive",{loop:false});
-            win.play();
+            if(this.data.list.vidas==4){
+                let win = this.sound.add("impressive",{loop:false});
+                win.play();        
+            }
             //Agregar cámar o r something
             this.registry.events.emit('vidasRestantes', this.data.list.vidas);
             this.scene.stop();

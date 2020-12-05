@@ -37,7 +37,7 @@
             ]
         },
         {
-            "key": "die",
+            "key": "die_mino",
             "type": "frames",
             "repeat": 0,
             "frameRate": 3,

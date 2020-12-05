@@ -78,8 +78,8 @@ class Scene_3 extends Phaser.Scene{
         this.piso_de_muerte1.body.setAllowGravity(false);
 
         //Sombras Enemigos
-        this.minotauro = this.physics.add.sprite(450,100, 'minotauro', 0).setInteractive();
-        this.minotauro.setScale(1);
+        this.minotauro = this.physics.add.sprite(580,100, 'minotauro', 0).setInteractive();
+        this.minotauro.setScale(1.7);
         this.minotauro.setName('Mino');
         this.minotauro.setOrigin(0.5);
         this.minotauro.body.setSize(50,85);
@@ -130,6 +130,7 @@ class Scene_3 extends Phaser.Scene{
             }
         });
 
+        this.data.set('vidas',3);
         //Escena de muerte
         this.physics.add.overlap(this.nexus, this.piso_de_muerte1, this.muere_nexus, null, this);
         this.physics.add.overlap(this.nexus, this.piso_de_muerte2, this.muere_nexus, null, this);
@@ -235,6 +236,8 @@ class Scene_3 extends Phaser.Scene{
     {
         console.log('Emite muerte');
         this.nexus.body.enable = false;
+        this.data.list.vidas--;
+        
         this.registry.events.emit('menosVida');
         this.tweenMuerte = this.add.tween({
             targets: [this.nexus],
@@ -282,7 +285,7 @@ class Scene_3 extends Phaser.Scene{
                     hit.play();
                 },
             });
-            this.minotauro.anims.play('die');
+            this.minotauro.anims.play('die_mino');
             
         }
         else{
