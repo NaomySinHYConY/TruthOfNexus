@@ -55,7 +55,10 @@ class Scene_3 extends Phaser.Scene{
         });
         this.fondo.anims.play('fondo_anim_3');
 
-        this.entrada = this.add.image(890, 550, 'entrada').setOrigin(0, 0.5).setScale(.25,.33);
+        this.entrada = this.add.image(890, 550, 'entrada').setInteractive().setOrigin(0, 0.5).setScale(.25,.33);
+        this.physics.add.existing(this.entrada, true);
+        this.entrada.body.setSize(50, 400);
+        this.entrada.body.setOffset(60, 0);
 
     //plataformas
         this.platforms = this.physics.add.staticGroup();
@@ -127,6 +130,8 @@ class Scene_3 extends Phaser.Scene{
         this.physics.add.collider(this.platforms, this.minotauro);
         this.data.set('vidas',4);
 
+    //CAmbio de escena
+        this.physics.add.collider(this.nexus, this.entrada, this.avanza_nivel, null, this);
     //Escena de muerte
         this.physics.add.overlap(this.nexus, this.piso_de_muerte1, this.muere_nexus, null, this);
         this.physics.add.overlap(this.nexus, this.piso_de_muerte2, this.muere_nexus, null, this);
@@ -428,6 +433,17 @@ class Scene_3 extends Phaser.Scene{
         this.muro7.destroy();
         this.muro8.destroy();
         this.muro9.destroy();
+    }
+
+    avanza_nivel(){
+        if(this.data.list.keys==2){
+            if(this.data.list.vidas==4){
+                let win = this.sound.add("impressive",{loop:false});
+                win.play();        
+            }
+            this.scene.stop();
+            this.scene.launch('Scene_gameOver');
+        }
     }
 }
 export default Scene_3;
