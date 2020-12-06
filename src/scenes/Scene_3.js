@@ -138,7 +138,10 @@ class Scene_3 extends Phaser.Scene{
 
     //Madrazos, man es que soy sanguinario  loco
         this.physics.add.overlap(this.nexus, this.minotauro, this.ataque, null, this);
-        
+
+    //PowerUps
+        this.shield = false;
+
     }
 
     update(){
@@ -233,13 +236,18 @@ class Scene_3 extends Phaser.Scene{
             this.nexus.body.velocity.x = 0;
             this.nexus.body.velocity.y = 0;
         }
+
+        if(this.shield==false){
+            this.nexus.clearTint();
+        }else if(this.shield==true){
+            this.nexus.setTint(Math.random() * 0xffffff);
+        }
     }
 
     muere_nexus()
     {
         console.log('Emite muerte');
         this.nexus.body.enable = false;
-        this.data.list.vidas--;
         
         this.registry.events.emit('menosVida');
         this.tweenMuerte = this.add.tween({
@@ -270,6 +278,13 @@ class Scene_3 extends Phaser.Scene{
                 }
             }
         });
+
+        if(this.shield==true){
+            this.shield=false;
+            this.registry.events.emit('shieldOff');
+        }else{
+            this.data.list.vidas--;
+        }
     }
 
     ataque(){
@@ -384,6 +399,8 @@ class Scene_3 extends Phaser.Scene{
     //y quitando la plataforma que no deja pasar
         if(this.data.list.keys==1){
             this.adios_muros(); 
+            this.shield=true;
+            this.registry.events.emit('shieldOn');
             this.minotauro.destroy();
             
     //Aqui agregamos los pinches villanos xD
@@ -394,14 +411,14 @@ class Scene_3 extends Phaser.Scene{
             this.shadows = this.physics.add.group({
                 key: 'shadow_all',
                 repeat: 2,
-                setXY: { x:220, y: 100, stepX: 100 }
+                setXY: { x:280, y: 100, stepX: 160 }
             });
 
-            this.shadows.children.iterate( (girar) => {
-                girar.setScale(1.5);
-                girar.setDepth(3);
+            this.shadows.children.iterate( (shadow) => {
+                shadow.setScale(1.5);
+                shadow.setDepth(3);
             });
-            
+            this.shadows.setVelocityX(-30, 0);
             this.shadows.playAnimation('shadow_stand');
 
             this.physics.add.collider(this.shadows, this.platforms);
@@ -413,9 +430,7 @@ class Scene_3 extends Phaser.Scene{
             this.physics.add.collider(this.nexus, this.piso_temp);
             this.physics.add.overlap(this.nexus, this.piso_temp, this.destruye_piso, null, this);
 
-        }
-            
-                
+        }                
     }
 
     destruye_piso(){
@@ -447,8 +462,6 @@ class Scene_3 extends Phaser.Scene{
     }
 }
 export default Scene_3;
-
-
 
 /*
     cuando te aparece un error de textura al cargar un sprite, "texture undefined"

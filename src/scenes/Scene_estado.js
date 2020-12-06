@@ -22,6 +22,9 @@ class Scene_estado extends Phaser.Scene{
         //Llaves que tiene de la tienda
         this.data.set('llaves', 0);
 
+        //Escudo
+        this.data.set('escudo',false);
+
         //console.log('Datos escena estado');
         //console.log(this.data.getAll());
         //this.score = 0;
@@ -60,17 +63,32 @@ class Scene_estado extends Phaser.Scene{
 
         this.registry.events.on('menosVida', () => {
             //console.log("Recibe muerte");
-            this.data.list.vidas--;
-            //console.log(this.data.list.vidas);
-            this.grupoV.getChildren()[this.data.list.vidas].destroy();
-            if(this.data.list.vidas <= 0){
-                this.scene.start('Scene_gameOver');
-                this.scene.stop();
+            //Comprobamos si hay escudo activo
+            if(this.data.list.escudo==false){
+                this.data.list.vidas--;
+                //console.log(this.data.list.vidas);
+                this.grupoV.getChildren()[this.data.list.vidas].destroy();
+                if(this.data.list.vidas <= 0){
+                    this.scene.start('Scene_gameOver');
+                    this.scene.stop();
+                }
             }
             // this.score+=valorMoneda;
             // this.scoreText.setText(this.score);
             //console.log('Se ha emitido el evento score = ', this.score);
         }); 
+
+        this.registry.events.on('shieldOn', () => {
+            //console.log("Recibe moneda");
+            this.data.list.escudo = true;
+            //Aqui activamos el que se vea el escudo xd
+            /*
+            
+            */
+        });
+        this.registry.events.on('shieldOff', ()=>{
+            this.data.list.escudo = false;
+        });
     }
     update(time, delta) {
 
