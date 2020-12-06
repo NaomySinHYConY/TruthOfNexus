@@ -32,6 +32,8 @@ class Scene_3 extends Phaser.Scene{
         this.load.atlas('key','key/key.png','key/key_atlas.json');
         this.load.animation('keyAnim','key/key_anim.json');
 
+        this.load.image('entrada','fondo/salida.png');
+
     }
 
     create(){
@@ -53,21 +55,23 @@ class Scene_3 extends Phaser.Scene{
         });
         this.fondo.anims.play('fondo_anim_3');
 
+        this.entrada = this.add.image(890, 550, 'entrada').setOrigin(0, 0.5).setScale(.25,.33);
+
     //plataformas
         this.platforms = this.physics.add.staticGroup();
-        this.platforms.create(0,   615, 'plataforma_3_gris').setScale(2,1.3).setOrigin(0).refreshBody();
-        this.platforms.create(180, 615, 'plataforma_3_gris').setScale(2,1.3).setOrigin(0).refreshBody();
-        this.platforms.create(360, 615, 'plataforma_3_gris').setScale(2,1.3).setOrigin(0).refreshBody();
-        this.platforms.create(890, 615, 'plataforma_3_gris').setScale(2,1.3).setOrigin(0).refreshBody();
+        this.platforms.create(  0, 635, 'plataforma_3_gris').setScale(2, 1).setOrigin(0).refreshBody();
+        this.platforms.create(180, 635, 'plataforma_3_gris').setScale(2, 1).setOrigin(0).refreshBody();
+        this.platforms.create(360, 635, 'plataforma_3_gris').setScale(2, 1).setOrigin(0).refreshBody();
+        this.platforms.create(880, 635, 'plataforma_3_gris').setScale(2, 1).setOrigin(0).refreshBody();
 
     //plataformas voladoras
-        this.platforms.create(150, 500, 'plataforma_3_gris').setScale(1.8,1.3).setOrigin(0).refreshBody();
-        this.platforms.create(320, 400, 'plataforma_3_gris').setScale(1.8,1.3).setOrigin(0).refreshBody();
-        this.platforms.create(438, 200, 'plataforma_3_gris').setScale(2.2,1.3).setOrigin(0).refreshBody();
+        this.platforms.create(150, 500, 'plataforma_3_gris').setScale(1.8, 0.3).setOrigin(0).refreshBody();
+        this.platforms.create(320, 400, 'plataforma_3_gris').setScale(1.8, 0.3).setOrigin(0).refreshBody();
+        this.platforms.create(438, 200, 'plataforma_3_gris').setScale(2.2, 0.3).setOrigin(0).refreshBody();
     
     //Piso de la muerte
-        this.piso_de_muerte1 = this.physics.add.image(540, 639, 'plataforma_3').setInteractive().setScale(2,1.3).setOrigin(0);
-        this.piso_de_muerte2 = this.physics.add.image(720, 639, 'plataforma_3').setInteractive().setScale(2,1.3).setOrigin(0);
+        this.piso_de_muerte1 = this.physics.add.image(540, 639, 'plataforma_3').setInteractive().setScale(2, 1.3).setOrigin(0);
+        this.piso_de_muerte2 = this.physics.add.image(720, 639, 'plataforma_3').setInteractive().setScale(2, 1.3).setOrigin(0);
         this.physics.add.existing(this.piso_de_muerte1, true);
         this.physics.add.existing(this.piso_de_muerte2, true);
         this.piso_de_muerte2.body.setAllowGravity(false);
@@ -121,7 +125,7 @@ class Scene_3 extends Phaser.Scene{
     //choque de personajes
         this.physics.add.collider(this.platforms, this.nexus);
         this.physics.add.collider(this.platforms, this.minotauro);
-        this.data.set('vidas',3);
+        this.data.set('vidas',4);
 
     //Escena de muerte
         this.physics.add.overlap(this.nexus, this.piso_de_muerte1, this.muere_nexus, null, this);
@@ -285,16 +289,17 @@ class Scene_3 extends Phaser.Scene{
                 this.minotauro.anims.play('die_mino');
         
         //NO se pase de listo compa
-                this.muro0 = this.physics.add.image(230, 180, 'plataforma_3', 0).setInteractive().setScale(2,1).setOrigin(0).setImmovable(true);
-                this.muro1 = this.physics.add.image(230, 160, 'plataforma_3', 0).setInteractive().setScale(2,1).setOrigin(0).setImmovable(true);
-                this.muro2 = this.physics.add.image(230, 140, 'plataforma_3', 0).setInteractive().setScale(2,1).setOrigin(0).setImmovable(true);
-                this.muro3 = this.physics.add.image(230, 120, 'plataforma_3', 0).setInteractive().setScale(2,1).setOrigin(0).setImmovable(true);
-                this.muro4 = this.physics.add.image(230, 100, 'plataforma_3', 0).setInteractive().setScale(2,1).setOrigin(0).setImmovable(true);
-                this.muro5 = this.physics.add.image(230,  80, 'plataforma_3', 0).setInteractive().setScale(2,1).setOrigin(0).setImmovable(true);
-                this.muro6 = this.physics.add.image(230,  60, 'plataforma_3', 0).setInteractive().setScale(2,1).setOrigin(0).setImmovable(true);
-                this.muro7 = this.physics.add.image(230,  40, 'plataforma_3', 0).setInteractive().setScale(2,1).setOrigin(0).setImmovable(true);
-                this.muro8 = this.physics.add.image(230,  20, 'plataforma_3', 0).setInteractive().setScale(2,1).setOrigin(0).setImmovable(true);
-                this.muro9 = this.physics.add.image(230,   0, 'plataforma_3', 0).setInteractive().setScale(2,1).setOrigin(0).setImmovable(true);
+                
+                this.muro0 = this.physics.add.image(630, 180, 'plataforma_3', 0).setInteractive().setScale(2,1).setOrigin(0).setImmovable(true);
+                this.muro1 = this.physics.add.image(630, 160, 'plataforma_3', 0).setInteractive().setScale(2,1).setOrigin(0).setImmovable(true);
+                this.muro2 = this.physics.add.image(630, 140, 'plataforma_3', 0).setInteractive().setScale(2,1).setOrigin(0).setImmovable(true);
+                this.muro3 = this.physics.add.image(630, 120, 'plataforma_3', 0).setInteractive().setScale(2,1).setOrigin(0).setImmovable(true);
+                this.muro4 = this.physics.add.image(630, 100, 'plataforma_3', 0).setInteractive().setScale(2,1).setOrigin(0).setImmovable(true);
+                this.muro5 = this.physics.add.image(630,  80, 'plataforma_3', 0).setInteractive().setScale(2,1).setOrigin(0).setImmovable(true);
+                this.muro6 = this.physics.add.image(630,  60, 'plataforma_3', 0).setInteractive().setScale(2,1).setOrigin(0).setImmovable(true);
+                this.muro7 = this.physics.add.image(630,  40, 'plataforma_3', 0).setInteractive().setScale(2,1).setOrigin(0).setImmovable(true);
+                this.muro8 = this.physics.add.image(630,  20, 'plataforma_3', 0).setInteractive().setScale(2,1).setOrigin(0).setImmovable(true);
+                this.muro9 = this.physics.add.image(630,   0, 'plataforma_3', 0).setInteractive().setScale(2,1).setOrigin(0).setImmovable(true);
             //Agregando a la fisica
                 this.physics.add.existing(this.muro0, true);
                 this.physics.add.existing(this.muro1, true);
@@ -335,7 +340,7 @@ class Scene_3 extends Phaser.Scene{
                 this.keys = this.physics.add.group({
                     key: 'key',
                     repeat: 1,
-                    setXY:{ x:70, y:100, stepX: 850}
+                    setXY:{ x:70, y:100, stepX: 820}
                 });
 
                 this.keys.playAnimation('key_roll');
@@ -358,7 +363,6 @@ class Scene_3 extends Phaser.Scene{
         else{
             this.muere_nexus();
         }
-        
     }
 
     toma_keys(nexus, keys){
@@ -385,7 +389,7 @@ class Scene_3 extends Phaser.Scene{
             this.shadows = this.physics.add.group({
                 key: 'shadow_all',
                 repeat: 2,
-                setXY: { x:200, y: 100, stepX: 160 }
+                setXY: { x:220, y: 100, stepX: 100 }
             });
 
             this.shadows.children.iterate( (girar) => {
@@ -398,7 +402,7 @@ class Scene_3 extends Phaser.Scene{
             this.physics.add.collider(this.shadows, this.platforms);
             this.physics.add.collider(this.shadows, this.platforms);
             this.physics.add.overlap(this.nexus, this.shadows, this.shadow_die, null, this);
-            this.piso_temp = this.physics.add.image(540,500,'plataforma_3').setInteractive().setScale(2,1.3).setOrigin(0);
+            this.piso_temp = this.physics.add.image(540,500,'plataforma_3').setInteractive().setScale(0.8,1.3).setOrigin(0);
             this.physics.add.existing(this.piso_temp, true);
             this.piso_temp.body.setAllowGravity(false);
             this.physics.add.collider(this.nexus, this.piso_temp);
