@@ -5,15 +5,31 @@ class Scene_puzzle1_caida extends Phaser.Scene{
         });
     }
 
-    init() {
+    init(hoyo) {
         console.log('Escena del primer puzzle, caida');
+        console.log(hoyo.y);
+        this.data.set('X', hoyo.x);
+        this.data.set('Y', hoyo.y);
     }
     preload(){
         this.load.path = './assets/puzzle1/';
         this.load.image(['fondoCaida', 'puerta']);
     }
     create() {
+        
+        this.cameras.main.setViewport(0, 0, 1000, 640)
+        .fadeOut(2000)
+        .shake(2000, 0.01)
+        .setBackgroundColor('rgba(0, 0, 0, 0)')
+        .flash(2000);
+
+        this.cameras.main.on(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
+            this.cameras.main.fadeIn(2000);
+        });
         const keyCodes = Phaser.Input.Keyboard.KeyCodes;
+
+
+
         this.velocidadNexus = 300;
         this.musica();
         this.fondo = this.add.image(500, 320, 'fondoCaida');
@@ -21,8 +37,10 @@ class Scene_puzzle1_caida extends Phaser.Scene{
         this.puerta = this.physics.add.image(496.5, 48.5, 'puerta').setImmovable(true);
         this.puerta.body.allowGravity = false;
 
-        this.nexus = this.physics.add.sprite(30, 600, 'nexus_head').setInteractive().setScale(1.3).setCollideWorldBounds(true);
+        this.nexus = this.physics.add.sprite(this.data.list.X, this.data.list.Y, 'nexus_head').setInteractive().setScale(1.3).setCollideWorldBounds(true);
         this.nexus.body.allowGravity = false;
+
+        
 
         this.physics.add.collider(this.puerta,this.nexus, this.subir, null, this);
 
@@ -35,7 +53,7 @@ class Scene_puzzle1_caida extends Phaser.Scene{
     musica(){
         this.fondopuzzle = this.sound.add("fondopuzzle");
         
-        this.golpe = this.sound.add("sPuzzle7");
+        this.golpe = this.sound.add("golpe");
         this.caer = this.sound.add("sPuzzle8");
         this.abajo = this.sound.add("sPuzzle15");
         this.subida = this.sound.add('salida');
@@ -67,7 +85,7 @@ class Scene_puzzle1_caida extends Phaser.Scene{
             },
             onComplete: () => {
                 nexus.body.enable = true;
-                this.scene.stop();
+                this.scene.pause();
                 this.scene.start('Scene_puzzle1');
                 //nexus.alpha = 1;
             }, 

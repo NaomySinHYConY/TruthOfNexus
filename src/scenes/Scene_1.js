@@ -41,6 +41,28 @@ class Scene_1 extends Phaser.Scene{
         this.load.audio('shadowDie', 'sounds/shadowDie.mp3');
     }
     create() {
+        this.time.delayedCall(2000, function(){   
+            this.cameras.main.setViewport(0, 0, 1000, 640)
+            .fadeOut(1000)
+            .shake(1000, 0.01)
+            .setBackgroundColor('rgba(0, 0, 0, 0)')
+            .flash(2000);
+
+            this.cameras.main.on(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
+                this.cameras.main.fadeIn(1000);
+            });
+        }, [], this);
+        this.events.on('transitionstart', function (fromScene, duration) {
+
+            this.cameras.main.setZoom(2);
+
+        }, this);
+
+        this.events.on('transitioncomplete', () => { 
+           this.cameras.main.setZoom(1);
+        });
+
+
         const eventos = Phaser.Input.Events;
         const keyCodes = Phaser.Input.Keyboard.KeyCodes;
         
@@ -225,6 +247,37 @@ class Scene_1 extends Phaser.Scene{
                 this.nexus.anims.play('walk');
             }
         });
+
+        
+
+        /*this.events.on('transitionstart', function (fromScene, duration) {
+
+            this.tweens.add({
+                targets: [this.fondo],
+                scaleX: 1.5,
+                scaleY: 1.5,
+                duration: duration
+            });
+
+        }, this);
+
+        this.events.on('transitioncomplete', () => { 
+            this.fondo.scaleX = 1;
+            this.fondo.scaleY = 1;
+        });
+
+        this.events.on('transitionout', function (toScene, duration) {
+
+            this.tweens.add({
+                targets: this.fondo,
+                scaleX: 1,
+                scaleY: 1,
+                duration: duration
+            });
+
+        }, this);*/
+
+
         
     }
 
@@ -357,7 +410,7 @@ class Scene_1 extends Phaser.Scene{
 
     recoger(nexus, dracmas)
     {
-        console.log("Emite moneda");
+    //console.log("Emite moneda");
        dracmas.destroy();
        this.data.list.dracmas += 20;
        //console.log(this.score);
@@ -457,7 +510,14 @@ class Scene_1 extends Phaser.Scene{
             //Agregar cámar o r something
             this.registry.events.emit('vidasRestantes', this.data.list.vidas);
             this.scene.stop();
-            this.scene.launch('Scene_3');
+            //this.scene.launch('Scene_puzzle1');
+            this.scene.transition({
+                target: 'Scene_puzzle1',
+                duration: 1000,
+                moveAbove: true,
+                onUpdate: this.transitionOut,
+                data: { x: 500, y: 320 }
+            });
         }
     }
 
@@ -465,6 +525,24 @@ class Scene_1 extends Phaser.Scene{
         this.shadow.destroy();
         let shadDie = this.sound.add("shadowDie",{loop:false});
         shadDie.play();
+    }
+
+    transitionOut(progress){
+        this.nexus.body.enable = false;
+        this.nexus.setVisible(false);
+        this.chest.setVisible(false);
+        this.plat2.setVisible(false);
+        this.plat1.setVisible(false);
+        this.aCueva.setVisible(false);
+        this.fondo.x = (640 * progress);
+        this.grupo = this.add.group();
+        this.grupo.add(this.plat3);
+        this.grupo.add(this.chest);
+        this.grupo.add(this.fuego);
+        this.grupo.add(this.fuego_2);
+        this.grupo.children.iterate( (elemento) => {
+             elemento.x = (1300 * progress);
+        });
     }
 }
 export default Scene_1;

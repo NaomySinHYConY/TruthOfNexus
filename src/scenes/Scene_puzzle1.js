@@ -19,7 +19,7 @@ class Scene_puzzle1 extends Phaser.Scene{
 
         this.load.audio("fondopuzzle", ["../sounds/puzzle.mp3"]);
         
-        this.load.audio("sPuzzle7", ["../sounds/sPuzzle7.mp3"]);
+        this.load.audio("golpe", ["../sounds/golpe.mp3"]);
         this.load.audio("sPuzzle8", ["../sounds/sPuzzle8.mp3"]);
         
         this.load.audio("sPuzzle15", ["../sounds/sPuzzle15.mp3"]);
@@ -28,11 +28,23 @@ class Scene_puzzle1 extends Phaser.Scene{
     }
 
     create() {
+        
+        //console.log(this.data.getAll());
+
+        this.cameras.main.setViewport(0, 0, 1000, 640)
+        .fadeOut(2000)
+        .shake(2000, 0.01)
+        .setBackgroundColor('rgba(0, 0, 0, 0)')
+        .flash(2000);
+
+        this.cameras.main.on(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
+            this.cameras.main.fadeIn(2000);
+        });
+        //console.log(this.data.getAll());
+
         this.registry.events.on('vidasRestantes', (vidas) => {
             this.data.set('vidas', vidas);
         });
-
-        //console.log(this.data.getAll());
 
         const keyCodes = Phaser.Input.Keyboard.KeyCodes;
         this.velocidadNexus = 300;
@@ -109,12 +121,14 @@ class Scene_puzzle1 extends Phaser.Scene{
             h.body.setSize(50,5);
         });
 
+        
         this.nexus = this.physics.add.sprite(30, 600, 'nexus_head').setInteractive().setScale(1.3).setCollideWorldBounds(true);
         this.nexus.body.allowGravity = false;
         this.nexus.body.setSize(20,15);
         this.nexus.body.setOffset(5,10);
         //this.nexus.anims.play('nexus_dead');
         //this.nexus.setFrame('head_6');
+
 
         this.physics.add.collider(this.paredes,this.grupoMonstruos, this.choquePared, null, this);
         this.physics.add.collider(this.fondoder, this.nexus);
@@ -188,7 +202,7 @@ class Scene_puzzle1 extends Phaser.Scene{
     musica(){
         this.fondopuzzle = this.sound.add("fondopuzzle");
         
-        this.golpe = this.sound.add("sPuzzle7");
+        this.golpe = this.sound.add("golpe");
         this.caer = this.sound.add("sPuzzle8");
         this.abajo = this.sound.add("sPuzzle15");
         this.salidaS = this.sound.add('salida');
@@ -225,10 +239,13 @@ class Scene_puzzle1 extends Phaser.Scene{
             onStart: () => {
                 this.caer.play(this.musicConf2);
                 nexus.anims.play('nexus_fall');
+                hoyo.alpha = 1;
             },
             onComplete: () => {
                 this.scene.pause();
-                this.scene.launch('Scene_puzzle1_caida');
+                this.scene.start('Scene_puzzle1_caida', hoyo);
+                //this.registry.events.emit('posCaida', 30, 300);
+                //console.log('evento caída 1');
             }, 
         });
     }
@@ -260,6 +277,12 @@ class Scene_puzzle1 extends Phaser.Scene{
     }
 
     update(time, delta) {
+
+        //Dejar esto en vez del choque y la velocidad para que sigan a nexus.
+        // this.grupoMonstruos.children.iterate( (mC) => {
+        //     this.physics.moveToObject(mC, this.nexus, 200);
+        // } );
+
         if(this.nexusWalkDer.isDown){
             this.nexus.setFrame('head_10');
             this.nexus.body.velocity.x = this.velocidadNexus;
