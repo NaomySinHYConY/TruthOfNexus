@@ -410,7 +410,7 @@ class Scene_1 extends Phaser.Scene{
 
     recoger(nexus, dracmas)
     {
-        console.log("Emite moneda");
+    //console.log("Emite moneda");
        dracmas.destroy();
        this.data.list.dracmas += 20;
        //console.log(this.score);
@@ -508,7 +508,7 @@ class Scene_1 extends Phaser.Scene{
             //Agregar cámar o r something
             this.registry.events.emit('vidasRestantes', this.data.list.vidas);
             this.scene.stop();
-            this.scene.launch('Scene_puzzle1');
+            //this.scene.launch('Scene_puzzle1');
             this.scene.transition({
                 target: 'Scene_puzzle1',
                 duration: 1000,
