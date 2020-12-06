@@ -179,6 +179,8 @@ class Scene_1 extends Phaser.Scene{
         this.physics.add.collider(this.nexus,this.chest, () => {
             this.chest.setVelocity(0);
             this.chest.setAcceleration(0);
+            this.chest.setVelocityX(0);
+            this.chest.setVelocityY(0);
         });
 
         this.physics.add.collider(this.nexus,this.plat1);
@@ -290,6 +292,7 @@ class Scene_1 extends Phaser.Scene{
             this.chest.anims.play('abrir');
             let cofreOpen = this.sound.add("cofreOpen",{loop:false});
             cofreOpen.play();
+            this.chest.destroy();
             
             this.grupod = this.physics.add.group({
                 key: 'dracmas',
