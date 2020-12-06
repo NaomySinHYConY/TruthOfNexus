@@ -1,7 +1,7 @@
 {
     "anims": [
         {
-            "key": "golpe",
+            "key": "golpe_mino",
             "type": "frames",
             "repeat": -1,
             "frameRate": 12,

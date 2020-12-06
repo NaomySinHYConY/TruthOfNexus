@@ -40,6 +40,7 @@ class Scene_3 extends Phaser.Scene{
     //DAtos
         this.data.set('Mvidas',3);
         this.data.set('keys',0);
+        this.mino_acata = false;
         const eventos = Phaser.Input.Events;
         const keyCodes = Phaser.Input.Keyboard.KeyCodes;
 
@@ -82,12 +83,12 @@ class Scene_3 extends Phaser.Scene{
 
     //Sombras Enemigos
         this.mino_vivo = true;
-        this.minotauro = this.physics.add.sprite(480,100, 'minotauro', 0).setInteractive();
+        this.minotauro = this.physics.add.sprite(500,80, 'minotauro', 0).setInteractive();
         this.minotauro.setScale(1.7);
         this.minotauro.setName('Mino');
         this.minotauro.setOrigin(0.5);
-        this.minotauro.body.setSize(50,85);
-        this.minotauro.body.setOffset(30,30);
+        this.minotauro.body.setSize(50,100);
+        this.minotauro.body.setOffset(30,40);
         this.minotauro.setCollideWorldBounds(true);
         this.minotauro.anims.play('idle');
 
@@ -289,6 +290,7 @@ class Scene_3 extends Phaser.Scene{
 
     ataque(){
         if(this.nexusAttack.isDown){
+            this.minotauro_ataca();
             this.data.list.Mvidas--;
             this.tweenMuerte = this.add.tween({
                 targets: [this.minotauro],
@@ -307,7 +309,6 @@ class Scene_3 extends Phaser.Scene{
             if(this.data.list.Mvidas <= 0 && this.mino_vivo == true){
                 this.mino_vivo = false;
                 this.minotauro.anims.play('die_mino');
-        
         //NO se pase de listo compa
                 
                 this.muro0 = this.physics.add.image(630, 180, 'plataforma_3', 0).setInteractive().setScale(2,1).setOrigin(0).setImmovable(true);
@@ -367,6 +368,8 @@ class Scene_3 extends Phaser.Scene{
                 this.physics.add.collider(this.keys, this.platforms);
                 this.physics.add.overlap(this.nexus, this.keys, this.toma_keys, null, this);
                 
+        
+                this.minotauro.body.setVelocityX(0);
             }
         }
         else{
@@ -460,6 +463,14 @@ class Scene_3 extends Phaser.Scene{
             this.scene.launch('Scene_gameOver');
         }
     }
+
+    minotauro_ataca(){
+        this.minotauro.setY(this.minotauro.y-30);
+        this.minotauro.body.setVelocityX(-20);
+        this.minotauro.anims.stop();
+        this.minotauro.anims.play('golpe_mino');
+    }
+
 }
 export default Scene_3;
 
