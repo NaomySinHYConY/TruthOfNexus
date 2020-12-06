@@ -1,3 +1,5 @@
+import Armas from "../scenes/Shop/Armas.js";
+
 class Shop extends Phaser.Scene{
     constructor(){
         super({
@@ -77,8 +79,8 @@ class Shop extends Phaser.Scene{
             spacing: 0
         });
         //Armas
-        this.load.image('axe','/shop/armas/axe2.png');
-        this.load.image('axeDoble','/shop/armas/axeDouble2.png');
+        this.load.image('axe','/shop/armas/axe.png');
+        this.load.image('axeDoble','/shop/armas/axeDoble.png');
         this.load.image('mazo','/shop/armas/hammer.png');
         //Placas de los items
         this.load.image('pvida','/shop/pvida2.png');
@@ -87,18 +89,13 @@ class Shop extends Phaser.Scene{
         this.load.image('phierro','/shop/pvida5.png');
         this.load.image('ppoder','/shop/ppoder.png');
 
-        //Placas de las  armas
-        this.load.image('paxe','/shop/armas/paxe.png');
-        this.load.image('paxeDoble','/shop/armas/paxeDoble.png');
-        this.load.image('mazo','/shop/armas/pmazo.png');
-
         this.load.image('btn_comprar','/shop/btn_comprar.png');
-
-        this.load.image('inventario','inventario.png');
 
         this.load.audio('moneda', 'sounds/moneda.mp3');
         this.load.audio('hit', 'sounds/hit.mp3');
         this.load.audio('laugh', 'sounds/laugh.mp3');
+
+        this.load.image('btn_armas','/shop/armas/btn_armas.png');
 
         this.score = this.dato;
         this.registry.events.emit('score',this.score);
@@ -107,6 +104,8 @@ class Shop extends Phaser.Scene{
     create() {
         const keyCodes = Phaser.Input.Keyboard.KeyCodes;
         const eventos = Phaser.Input.Events;
+
+        this.scene.add('Armas',Armas);
 
         //Fondo
         this.fondo = this.add.sprite(0, 0,'fondo',0).setOrigin(0);
@@ -240,7 +239,7 @@ class Shop extends Phaser.Scene{
         this.hierro.setDepth(2);
 
         //--->>Poder
-        this.poder = this.add.sprite(660, 300, 'poder', 0).setOrigin(0).setVisible(false).setScale(2);
+        this.poder = this.add.sprite(660, 200, 'poder', 0).setOrigin(0).setVisible(false).setScale(2);
         this.anims.create({
             key: 'poder_anim',
             frames: this.anims.generateFrameNumbers('poder', {
@@ -262,8 +261,9 @@ class Shop extends Phaser.Scene{
         this.registry.events.emit('score',this.score);
 
         //Botones para comprar
-        this.btn_comprar = this.add.image(730,550,'btn_comprar').setDepth(4).setInteractive().setScale(0.7);
-
+        this.btn_comprar = this.add.image(820,550,'btn_comprar').setDepth(4).setInteractive().setScale(0.7);
+        //Botón para pasar al intercambio de armas
+        this.btn_armas = this.add.image(630,550,'btn_armas').setDepth(4).setInteractive().setScale(0.7);
         //Colisión entre el vendedor y Nexus
         /*
         this.physics.add.collider(this.nexus,this.vendedor, () => {
@@ -493,6 +493,8 @@ class Shop extends Phaser.Scene{
 
                 this.comprar = this.sound.add("moneda",{loop:false});
                 this.comprar.play();
+            }else if(gameObject === this.btn_armas){
+                this.scene.start('Armas');
             }
 
             if(this.score === 0 || this.score <= 0 ){
