@@ -188,7 +188,7 @@ class Bootloader extends Phaser.Scene{
             //this.scene.start('Scene_1');
 
             this.scene.transition({
-                target: 'Scene_1',
+                target: 'Scene_nivel5', //cambiar a Scene_1
                 duration: 4000,
                 moveBelow: true,
                 onUpdate: this.transitionOut,
