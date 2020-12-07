@@ -322,7 +322,13 @@ class Scene_puzzle2 extends Phaser.Scene{
             }, 
         });
         this.salidaS.play(this.musicConf2);
-
+        this.scene.transition({
+            target: 'Scene_final',
+            duration: 1000,
+            moveAbove: true,
+            onUpdate: this.transitionOut,
+            data: { x: 500, y: 320 }
+        });
     }
 
     reiniciarAreasLimpias(){

@@ -509,11 +509,35 @@ class Scene_1 extends Phaser.Scene{
             }
             //Agregar cámar o r something
             
-            this.registry.events.emit('finalOn');
+            //this.registry.events.emit('finalOn');
             this.registry.events.emit('vidasRestantes', this.data.list.vidas);
             this.scene.stop();
-            this.scene.launch('Scene_final');
-            
+            this.scene.transition({
+                target: 'Scene_puzzle1',
+                duration: 1000,
+                moveAbove: true,
+                onUpdate: this.transitionOut,
+                data: { x: 500, y: 320 }
+            });
+//            this.scene.launch('Scene_final');
+            /*
+            en ganar() de escea nivel 1
+            this.scene.transition({
+                target: 'Scene_puzzle1',
+                duration: 1000,
+                moveAbove: true,
+                onUpdate: this.transitionOut,
+                data: { x: 500, y: 320 }
+            });
+            en salir de escena puzzle 1
+            this.scene.transition({
+                target: 'Scene_puzzle2',
+                duration: 1000,
+                moveAbove: true,
+                onUpdate: this.transitionOut,
+                data: { x: 500, y: 320 }
+            });
+            */
         }
     }
 
