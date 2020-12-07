@@ -340,7 +340,7 @@ class Scene_3 extends Phaser.Scene{
                 // this.boost = this.physics.add.group({
                 //     key: '',
                 //     repeat: 0,
-                //     setXY:{ x:70, y:100}
+                //     setXY:{ x:100, y:100}
                 // })
                 this.keys = this.physics.add.group({
                     key: 'key',
