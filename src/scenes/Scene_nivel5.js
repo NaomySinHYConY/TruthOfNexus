@@ -10,6 +10,10 @@ class Scene_nivel5 extends Phaser.Scene{
     preload(){
         this.load.path = './assets/nivel5/';
         this.load.image(['plat1', 'plat2', 'plat3', 'plat4', 'plat5', 'plat6', 'plat7', 'plat8', 'plat9', 'plat11']);
+        this.load.spritesheet('fondo', 'fondo1_3.png', {
+            frameWidth: 1000,
+            frameHeight: 640,
+        });
         this.load.atlas('nexus_all', '../Nexus/nexus_all.png','../Nexus/nexus_all_atlas.json');
         this.load.animation('nexusAnim', '../Nexus/nexus_all_anim.json');
         this.load.atlas('shadow_all', '../shadow/shadow_all.png','../shadow/shadow_all_atlas.json');
@@ -18,8 +22,8 @@ class Scene_nivel5 extends Phaser.Scene{
         this.load.animation('dracmasAnim','../dracma/dracma_anim.json');
         this.load.atlas('explosion','../explosion/explosion.png','../explosion/explosion_atlas.json');
         this.load.animation('explosionAnim','../explosion/explosion_anim.json');
-        this.load.atlas('shadow_all', 'shadow/shadow_all.png','shadow/shadow_all_atlas.json');
-        this.load.animation('shadowAnim', 'shadow/shadow_all_anim.json');
+        this.load.atlas('mono_all', '../mono/mono_all.png','../mono/mono_all_atlas.json');
+        this.load.animation('monoAnim', '../mono/mono_all_anim.json');
 
         this.load.audio('moneda', '../sounds/moneda.mp3');
         this.load.audio('laugh', '../sounds/laugh.mp3');
@@ -34,9 +38,23 @@ class Scene_nivel5 extends Phaser.Scene{
         this.giro_shadow1 = 631;
         this.giro_shadow2 = 221;
         this.giro_shadow3 = 541;
+        this.giro_mono = 721;
+        this.flag = false;
         this.registry.events.on('vidasRestantes', (vidas) => {
             this.data.set('vidas', vidas);
         });
+        this.fondo = this.add.sprite(0, 0, 'fondo', 1).setOrigin(0).setInteractive();
+        this.physics.add.existing(this.fondo, true);
+        this.anims.create({
+            key: 'fondo_anim',
+            frames: this.anims.generateFrameNumbers('fondo', {
+            start: 1,
+            end: 23
+            }),
+            repeat: -1,
+            frameRate: 23
+        });
+        this.fondo.anims.play('fondo_anim');
         this.scene.launch('Scene_estado');
         this.plataformas = this.physics.add.group();
         this.plataformas.create(45, 550, 'plat1').setName('plat1');
@@ -129,6 +147,15 @@ class Scene_nivel5 extends Phaser.Scene{
             }
         });
 
+        this.mono = this.physics.add.sprite(720,50, 'mono_all', 0).setInteractive();
+        //this.mono.setScale(0.55);
+        this.mono.setScale(0.4);
+        this.mono.setName('Mono');
+        this.mono.setCollideWorldBounds(true);
+        this.mono.body.setSize(65,85);
+        this.mono.body.setOffset(1,-10);
+        this.mono.anims.play('mono_eat');
+
         this.fuego = this.physics.add.sprite(140,700,'explosion').setInteractive();
         this.fuego.body.setCircle(35);
         this.fuego.body.setImmovable = true;
@@ -155,7 +182,7 @@ class Scene_nivel5 extends Phaser.Scene{
         this.physics.add.collider(this.dracmasIndv.getChildren().find(v => v.name == "dracmaIndv3"),this.plataformas.getChildren().find(v => v.name == "plat7"));
         this.physics.add.collider(this.dracmasGrupo1,this.plataformas);
         this.physics.add.collider(this.dracmasGrupo2,this.plataformas.getChildren().find(v => v.name == "plat11"));
-
+        this.physics.add.collider(this.mono,this.plataformas);
 
         this.physics.add.overlap(this.nexus, this.dracmasIndv, this.recoger, null, this);
         this.physics.add.overlap(this.nexus, this.dracmasGrupo1, this.recoger, null, this);
@@ -164,6 +191,7 @@ class Scene_nivel5 extends Phaser.Scene{
         this.physics.add.overlap(this.nexus, this.shadows, this.ataque, null, this);
         this.physics.add.overlap(this.nexus, this.fuego, this.muere_nexus, null, this);
         this.physics.add.overlap(this.nexus, this.fuego_2, this.muere_nexus, null, this);
+        this.physics.add.overlap(this.nexus, this.mono, this.ataque_mono, null, this);
 
         this.tweenFuego = this.add.tween({
             targets: [this.fuego, this.fuego_2],
@@ -240,6 +268,19 @@ class Scene_nivel5 extends Phaser.Scene{
                 }
             }
         });
+
+        if(this.flag == true){
+            if(this.mono.body.velocity.x > 0 && this.mono.x > this.giro_mono){
+                this.mono.body.velocity.x *= -1;
+                this.giro_mono = 590;
+                this.mono.flipX = false;
+            }
+            if(this.mono.body.velocity.x < 0 && this.mono.x < this.giro_mono){
+                this.mono.body.velocity.x *= -1;
+                this.giro_mono = 720;
+                this.mono.flipX = true;  
+            }
+        }
         
 
         if( Phaser.Input.Keyboard.JustDown(this.nexusWalkDer)){
@@ -304,23 +345,18 @@ class Scene_nivel5 extends Phaser.Scene{
                     this.nexus.anims.play('stand');
                     this.nexus.body.setSize(50,85);
                     this.nexus.setOffset(30,30);
-                    //this.nexus.setX(posInX);
-                    //this.nexus.setY(posInY);
                 }
             });
-
         }
 
         if( Phaser.Input.Keyboard.JustUp(this.nexusAttack) || Phaser.Input.Keyboard.JustUp(this.nexusWalkDer) || Phaser.Input.Keyboard.JustUp(this.nexusWalkIz) || Phaser.Input.Keyboard.JustUp(this.nexusDown)){
             this.nexus.anims.play('stand');
-            //this.nexus.setFlipX(true);
             this.nexus.clearTint();
             this.nexus.setScale(1.2);
             this.nexus.setAngle(0);
             this.nexus.body.velocity.x = 0;
             this.nexus.body.velocity.y = 0;
         }
-
     }
 
     recoger(nexus, dracmas)
@@ -350,7 +386,8 @@ class Scene_nivel5 extends Phaser.Scene{
                 let end = this.sound.add("laugh",{loop:false});
                 end.play();
                 this.nexus.anims.play('die');
-                //this.scene.restart();
+                this.nexus.body.enable = false;
+                this.input.keyboard.enabled = false;
             },
             onComplete: () => {
                 this.nexus.x= 30;
@@ -358,6 +395,7 @@ class Scene_nivel5 extends Phaser.Scene{
                 this.nexus.anims.play('stand');
                 if(this.data.list.vidas!=0){
                     this.nexus.body.enable = true;
+                    this.input.keyboard.enabled = true;
                 }
                 else{
                     this.scene.stop();
@@ -376,12 +414,41 @@ class Scene_nivel5 extends Phaser.Scene{
                     p.anims.play('shadow_die');
                     p.body.enable = false;
                     this.time.delayedCall(1000, function(){   
-                    p.setVisible(false);
-                }, [], this);
+                    p.destroy();
+                    }, [], this);
                 } 
             });
-            
         }
+        else{
+            this.muere_nexus();
+        }
+        //Si se destruyen las sombras, el mono se va enojando xD
+        //console.log(this.shadows.children.size);
+        if(this.shadows.children.size == 3){
+            this.mono.setScale(0.55);
+            this.mono.anims.play('mono_jump');
+        }else if(this.shadows.children.size == 2){
+            this.mono.anims.play('mono_walk');
+            this.mono.body.velocity.x = 100;
+            this.flag = true;
+        }
+        else if(this.shadows.children.size == 1){
+            //pintar al mono
+        }
+    }
+
+    ataque_mono(nexus, mono){
+        console.log(mono.name);
+        if(this.nexusAttack.isDown){
+            this.flag = false;
+            let hit = this.sound.add("hit",{loop:false});
+            hit.play();
+            mono.anims.play('mono_jump');
+            mono.body.enable = false;
+            this.time.delayedCall(1000, function(){   
+                mono.destroy();
+            }, [], this);
+        }   
         else{
             this.muere_nexus();
         }
