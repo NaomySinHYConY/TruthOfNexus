@@ -262,9 +262,21 @@ class Scene_puzzle1 extends Phaser.Scene{
                 this.salidaS.play(this.musicConf2);
             },
             onComplete: () => {
+                this.registry.events.emit('vidasRestantes', this.data.list.vidas);
+                this.salidaS.play(this.musicConf2);
+                this.scene.stop('Scene_puzzle1_caida');
+                this.scene.stop();
+                //this.scene.launch('Scene_puzzle1');
+                this.scene.transition({
+                    target: 'Scene_puzzle2',
+                    duration: 1000,
+                    moveAbove: true,
+                    onUpdate: this.transitionOut,
+                    data: { x: 500, y: 320 }
+                });
                 nexus.body.enable = true;
-                nexus.x = 30;
-                nexus.y = 600;
+                //nexus.x = 30;
+                //nexus.y = 600;
                 //nexus.alpha = 1;
                 this.scene.stop();
                 this.scene.launch('Scene_3');
@@ -272,8 +284,6 @@ class Scene_puzzle1 extends Phaser.Scene{
                 
             }, 
         });
-        this.salidaS.play(this.musicConf2);
-
     }
 
     update(time, delta) {

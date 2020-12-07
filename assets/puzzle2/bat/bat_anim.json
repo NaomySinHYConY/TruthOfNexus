@@ -1,0 +1,44 @@
+{
+    "anims": [
+        {
+            "key": "bat_fly",
+            "type": "frames",
+            "repeat": -1,
+            "frameRate": 12,
+            "frames": [
+                {
+                    "key": "bat",
+                    "frame": "bat_fly_1"
+                },
+                {
+                    "key": "bat",
+                    "frame": "bat_fly_2"
+                },
+                {
+                    "key": "bat",
+                    "frame": "bat_fly_3"
+                },
+                {
+                    "key": "bat",
+                    "frame": "bat_fly_4"
+                },
+                {
+                    "key": "bat",
+                    "frame": "bat_fly_5"
+                },
+                {
+                    "key": "bat",
+                    "frame": "bat_fly_6"
+                },
+                {
+                    "key": "bat",
+                    "frame": "bat_fly_7"
+                },
+                {
+                    "key": "bat",
+                    "frame": "bat_fly_8"
+                }
+            ]
+        }
+    ]
+}

@@ -41,6 +41,8 @@ class Scene_gameOver extends Phaser.Scene{
                 this.scene.stop('Scene_puzzle1_caida');
                 this.scene.stop('Scene_3');
                 this.scene.stop();
+
+                location.reload();
             }
         });
 
