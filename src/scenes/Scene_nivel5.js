@@ -10,7 +10,7 @@ class Scene_nivel5 extends Phaser.Scene{
     preload(){
         this.load.path = './assets/nivel5/';
         this.load.image(['plat1', 'plat2', 'plat3', 'plat4', 'salidaArco', 'piso3']);
-        this.load.spritesheet('fondo', 'fondo1_3.png', {
+        this.load.spritesheet('fondo1_3', 'fondo1_3.png', {
             frameWidth: 1000,
             frameHeight: 640,
         });
@@ -57,21 +57,20 @@ class Scene_nivel5 extends Phaser.Scene{
         this.registry.events.on('vidasRestantes', (vidas) => {
             this.data.set('vidas', vidas);
         });
-        this.fondo = this.add.sprite(0, 0, 'fondo', 1).setOrigin(0).setInteractive();
+        this.fondo = this.add.sprite(0, 0, 'fondo1_3', 1).setOrigin(0).setInteractive();
         this.physics.add.existing(this.fondo, true);
         this.anims.create({
-            key: 'fondo_anim',
-            frames: this.anims.generateFrameNumbers('fondo', {
+            key: 'fondo1_3_anim',
+            frames: this.anims.generateFrameNumbers('fondo1_3', {
             start: 0,
             end: 23
             }),
             repeat: -1,
             frameRate: 23
         });
-        this.fondo.anims.play('fondo_anim');
+        this.fondo.anims.play('fondo1_3_anim');
         this.fondo.body.setSize(1000, 10);
         this.fondo.body.setOffset(0, 630);
-        this.scene.launch('Scene_estado');
         this.plataformas = this.physics.add.group();
         this.plataformas.create(45, 550, 'plat1').setName('plat1');
         this.plataformas.create(250, 550, 'plat1').setName('plat2');

@@ -26,7 +26,7 @@ const config = {
     //     autoCenter: Phaser.Scale.CENTER_BOTH
     //     },
     backgroundColor: "#34495e", 	//Color de fondo del canvas ()
-    scene: [Scene_nivel5, Scene_1, Scene_puzzle1, Scene_puzzle1_caida,    Scene_tienda, Scene_estado, Scene_gameOver],    //Aquí irá la lista de scenas del juego
+    scene: [Bootloader, Scene_1, Scene_puzzle1, Scene_puzzle1_caida, Scene_nivel5, Scene_tienda, Scene_estado, Scene_gameOver],    //Aquí irá la lista de scenas del juego
     banner:{
         hidePhaser: true,
         text: "#fff00f",
