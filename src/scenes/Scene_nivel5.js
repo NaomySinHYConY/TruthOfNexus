@@ -9,10 +9,14 @@ class Scene_nivel5 extends Phaser.Scene{
     }
     preload(){
         this.load.path = './assets/nivel5/';
-        this.load.image(['plat1', 'plat2', 'plat3', 'plat4', 'plat5', 'plat6', 'plat7', 'plat8', 'plat9', 'plat11']);
-        this.load.spritesheet('fondo', 'fondo1_3.png', {
+        this.load.image(['plat1', 'plat2', 'plat3', 'plat4', 'plat5', 'plat6', 'plat7', 'plat8', 'plat9', 'plat11', 'salida', 'piso3']);
+        this.load.spritesheet('fondo', 'fondo1_6.png', {
             frameWidth: 1000,
             frameHeight: 640,
+        });
+        this.load.spritesheet('ball', 'SpikeBall.png', {
+            frameWidth: 60,
+            frameHeight: 60,
         });
         this.load.atlas('nexus_all', '../Nexus/nexus_all.png','../Nexus/nexus_all_atlas.json');
         this.load.animation('nexusAnim', '../Nexus/nexus_all_anim.json');
@@ -48,13 +52,15 @@ class Scene_nivel5 extends Phaser.Scene{
         this.anims.create({
             key: 'fondo_anim',
             frames: this.anims.generateFrameNumbers('fondo', {
-            start: 1,
-            end: 23
+            start: 0,
+            end: 15
             }),
             repeat: -1,
-            frameRate: 23
+            frameRate: 15 
         });
         this.fondo.anims.play('fondo_anim');
+        this.fondo.body.setSize(1000, 10);
+        this.fondo.body.setOffset(0, 630);
         this.scene.launch('Scene_estado');
         this.plataformas = this.physics.add.group();
         this.plataformas.create(45, 550, 'plat1').setName('plat1');
@@ -71,6 +77,10 @@ class Scene_nivel5 extends Phaser.Scene{
             p.body.allowGravity = false;   
         });
 
+        this.salida = this.add.image(930, 170, 'salida', 0).setInteractive().setScale(1.5);
+        this.physics.add.existing(this.salida, true);
+        this.salida.body.setSize(10, 110);
+        this.salida.body.setOffset(45, 0);
         this.nexus = this.physics.add.sprite(30,370, 'nexus_all', 0).setInteractive();
         this.nexus.setScale(1.2);
         this.nexus.setName('Nexus');
@@ -156,7 +166,7 @@ class Scene_nivel5 extends Phaser.Scene{
         this.mono.body.setOffset(1,-10);
         this.mono.anims.play('mono_eat');
 
-        this.fuego = this.physics.add.sprite(140,700,'explosion').setInteractive();
+        /*this.fuego = this.physics.add.sprite(140,700,'explosion').setInteractive();
         this.fuego.body.setCircle(35);
         this.fuego.body.setImmovable = true;
         this.fuego.body.setOffset(27,50);
@@ -164,7 +174,39 @@ class Scene_nivel5 extends Phaser.Scene{
         this.fuego_2 = this.physics.add.sprite(815,700,'explosion').setInteractive();
         this.fuego_2.body.setCircle(35);
         this.fuego_2.body.setOffset(27,50);
-        this.fuego_2.anims.play('explotar');
+        this.fuego_2.anims.play('explotar');*/
+
+        this.ball_1 = this.physics.add.sprite(140, 700, 'ball').setInteractive();
+        this.ball_1.body.setCircle(35);
+        this.ball_1.body.setImmovable = true;
+        this.ball_1.body.setOffset(-5,-5);
+        this.anims.create({
+            key: 'ball_1_anim',
+            frames: this.anims.generateFrameNumbers('ball', {
+            start: 0,
+            end: 4
+            }),
+            repeat: -1,
+            frameRate: 4 
+        });
+        this.ball_1.anims.play('ball_1_anim');
+
+        this.ball_2 = this.physics.add.sprite(815, 700, 'ball').setInteractive();
+        this.ball_2.body.setCircle(35);
+        this.ball_2.body.setImmovable = true;
+        this.ball_2.body.setOffset(-5,-5);
+        this.anims.create({
+            key: 'ball_1_anim',
+            frames: this.anims.generateFrameNumbers('ball', {
+            start: 0,
+            end: 4
+            }),
+            repeat: -1,
+            frameRate: 4 
+        });
+        this.ball_2.anims.play('ball_1_anim');
+
+        this.piso = this.add.image(500, 615, 'piso3'); //605 = piso1 620 = piso2
 
         //Controles:
         this.nexusWalkIz = this.input.keyboard.addKey(keyCodes.LEFT);
@@ -176,6 +218,9 @@ class Scene_nivel5 extends Phaser.Scene{
 
         //Colisiones
         this.physics.add.collider(this.nexus,this.plataformas);
+        this.physics.add.collider(this.nexus, this.fondo, () =>{
+            this.muere_nexus();
+        });
         this.physics.add.collider(this.shadows,this.plataformas);
         this.physics.add.collider(this.dracmasIndv.getChildren().find(v => v.name == "dracmaIndv1"),this.plataformas.getChildren().find(v => v.name == "plat2"));
         this.physics.add.collider(this.dracmasIndv,this.plataformas.getChildren().find(v => v.name == "plat6"));
@@ -189,14 +234,29 @@ class Scene_nivel5 extends Phaser.Scene{
         this.physics.add.overlap(this.nexus, this.dracmasGrupo2, this.recoger, null, this);
         this.physics.add.overlap(this.nexus, this.dracmasGrupo3, this.recoger, null, this);
         this.physics.add.overlap(this.nexus, this.shadows, this.ataque, null, this);
-        this.physics.add.overlap(this.nexus, this.fuego, this.muere_nexus, null, this);
-        this.physics.add.overlap(this.nexus, this.fuego_2, this.muere_nexus, null, this);
+        /*this.physics.add.overlap(this.nexus, this.fuego, this.muere_nexus, null, this);
+        this.physics.add.overlap(this.nexus, this.fuego_2, this.muere_nexus, null, this);*/
+        this.physics.add.overlap(this.nexus, this.ball_1, this.muere_nexus, null, this);
+        this.physics.add.overlap(this.nexus, this.ball_2, this.muere_nexus, null, this);
         this.physics.add.overlap(this.nexus, this.mono, this.ataque_mono, null, this);
+        this.physics.add.collider(this.nexus, this.salida, this.ganar, null, this);
 
-        this.tweenFuego = this.add.tween({
+       /* this.tweenFuego = this.add.tween({
             targets: [this.fuego, this.fuego_2],
             ease: 'Power2',
             //y:posInY+50,
+            y:{
+                value: -100,
+                duration: 2000
+            },
+            repeat: -1,
+            yoyo: true,
+            delay: 1000
+        });*/
+
+        this.tweenBall = this.add.tween({
+            targets: [this.ball_1, this.ball_2],
+            ease: 'Power2',
             y:{
                 value: -100,
                 duration: 2000
@@ -387,15 +447,15 @@ class Scene_nivel5 extends Phaser.Scene{
                 end.play();
                 this.nexus.anims.play('die');
                 this.nexus.body.enable = false;
-                this.input.keyboard.enabled = false;
+                //this.input.keyboard.enabled = false;
             },
             onComplete: () => {
                 this.nexus.x= 30;
                 this.nexus.y = 370;
                 this.nexus.anims.play('stand');
                 if(this.data.list.vidas!=0){
+                    //this.input.keyboard.enabled = true;
                     this.nexus.body.enable = true;
-                    this.input.keyboard.enabled = true;
                 }
                 else{
                     this.scene.stop();
@@ -452,6 +512,42 @@ class Scene_nivel5 extends Phaser.Scene{
         else{
             this.muere_nexus();
         }
+    }
+
+    ganar(){
+        this.input.keyboard.enabled = false;
+        let win = this.sound.add("impressive",{loop:false});
+        win.play();
+        this.registry.events.emit('vidasRestantes', this.data.list.vidas);
+        this.scene.stop();
+        this.scene.transition({
+            target: 'Scene_puzzle1',
+            duration: 1000,
+            moveAbove: true,
+            onUpdate: this.transitionOut,
+            data: { x: 500, y: 320 }
+        });     
+    }
+
+    
+    transitionOut(progress){
+        this.nexus.destroy();
+        this.shadows.destroy();
+        this.mono.destroy();
+        this.plataformas.destroy();
+        this.dracmasGrupo1.destroy();
+        this.dracmasGrupo2.destroy();
+        this.dracmasGrupo3.destroy();
+        this.dracmasIndv.destroy();
+        this.fondo.x = (640 * progress);
+        /*this.grupo = this.add.group();
+        this.grupo.add(this.plat3);
+        this.grupo.add(this.chest);
+        this.grupo.add(this.fuego);
+        this.grupo.add(this.fuego_2);
+        this.grupo.children.iterate( (elemento) => {
+             elemento.x = (1300 * progress);
+        });*/
     }
 
 }
