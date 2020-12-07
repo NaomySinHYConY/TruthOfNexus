@@ -254,8 +254,7 @@ class Scene_3 extends Phaser.Scene{
         this.tweenMuerte = this.add.tween({
             targets: [this.nexus],
             ease: 'Power2',
-            duration:3000,
-            //y:posInY+50,
+            duration:2000,
             x:{
                 value: this.nexus.x-=1,
                 duration: 1000
@@ -265,7 +264,6 @@ class Scene_3 extends Phaser.Scene{
                 let end = this.sound.add("laugh",{loop:false});
                 end.play();
                 this.nexus.anims.play('die');
-                //this.scene.restart();
             },
             onComplete: () => {
                 this.nexus.x= 20;
@@ -295,7 +293,6 @@ class Scene_3 extends Phaser.Scene{
             this.tweenMuerte = this.add.tween({
                 targets: [this.minotauro],
                 ease: 'Power2',
-                //y:posInY+50,
                 x:{
                     value: this.minotauro.x+=90,
                     duration: 1000
@@ -309,8 +306,8 @@ class Scene_3 extends Phaser.Scene{
             if(this.data.list.Mvidas <= 0 && this.mino_vivo == true){
                 this.mino_vivo = false;
                 this.minotauro.anims.play('die_mino');
+
         //NO se pase de listo compa
-                
                 this.muro0 = this.physics.add.image(630, 180, 'plataforma_3', 0).setInteractive().setScale(2,1).setOrigin(0).setImmovable(true);
                 this.muro1 = this.physics.add.image(630, 160, 'plataforma_3', 0).setInteractive().setScale(2,1).setOrigin(0).setImmovable(true);
                 this.muro2 = this.physics.add.image(630, 140, 'plataforma_3', 0).setInteractive().setScale(2,1).setOrigin(0).setImmovable(true);
@@ -356,8 +353,13 @@ class Scene_3 extends Phaser.Scene{
                 this.physics.add.collider(this.nexus, this.muro0);
                 
                 /*
-            Aparicion de la llave
+            Aparicion de la llave y de lo que deberia ser el pinche booster
                 */
+                // this.boost = this.physics.add.group({
+                //     key: '',
+                //     repeat: 0,
+                //     setXY:{ x:70, y:100}
+                // })
                 this.keys = this.physics.add.group({
                     key: 'key',
                     repeat: 1,
@@ -367,6 +369,10 @@ class Scene_3 extends Phaser.Scene{
                 this.keys.playAnimation('key_roll');
                 this.physics.add.collider(this.keys, this.platforms);
                 this.physics.add.overlap(this.nexus, this.keys, this.toma_keys, null, this);
+            //ACtivar boost
+                //this.physics.add.collider(this.boost, this.platforms);
+                //this.physics.add.overlap(this.nexus, this.keys, this.booster, null, this);
+                
                 
         
                 this.minotauro.body.setVelocityX(0);
@@ -401,7 +407,8 @@ class Scene_3 extends Phaser.Scene{
     //Matando al minotauro y generando villanos
     //y quitando la plataforma que no deja pasar
         if(this.data.list.keys==1){
-            this.adios_muros(); 
+            this.adios_muros();
+//COMENTAR LA SIGUIENTES 2 SI YA HAY BOOST 
             this.shield=true;
             this.registry.events.emit('shieldOn');
             this.minotauro.destroy();
@@ -460,7 +467,10 @@ class Scene_3 extends Phaser.Scene{
                 win.play();        
             }
             this.scene.stop();
-            this.scene.launch('Scene_gameOver');
+/**
+ * Escena que sigue
+ */
+            //            this.scene.launch('Scene_final');
         }
     }
 
@@ -469,6 +479,11 @@ class Scene_3 extends Phaser.Scene{
         this.minotauro.body.setVelocityX(-20);
         this.minotauro.anims.stop();
         this.minotauro.anims.play('golpe_mino');
+    }
+
+    booster(){
+        this.shield=true;
+        this.registry.events.emit('shieldOn');
     }
 
 }
