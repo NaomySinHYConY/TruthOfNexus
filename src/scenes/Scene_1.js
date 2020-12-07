@@ -88,9 +88,6 @@ class Scene_1 extends Phaser.Scene{
         this.fondo.body.setSize(1000, 40);
         this.fondo.body.setOffset(0, 570);
         
-        // this.titleDracmas = this.add.image(860, 45, 'cantDracmas').setScale(0.9);
-        // this.score = 0;
-        // this.scoreText = this.add.text(940, 30, '0', { fontSize: '32px', fill: '#fff' });
         this.aCueva = this.add.image(920, 330, 'aCueva').setInteractive().setOrigin(0).setScale(0.15);
         this.physics.add.existing(this.aCueva, true);
         this.aCueva.body.setSize(50, 400);
@@ -515,7 +512,7 @@ class Scene_1 extends Phaser.Scene{
             this.scene.stop();
             //this.scene.launch('Scene_puzzle1');
             this.scene.transition({
-                target: 'Scene_puzzle1',
+                target:'Scene_puzzle1',
                 duration: 1000,
                 moveAbove: true,
                 onUpdate: this.transitionOut,

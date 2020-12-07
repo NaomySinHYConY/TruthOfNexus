@@ -34,6 +34,8 @@ class Scene_3 extends Phaser.Scene{
 
         this.load.image('entrada','fondo/salida.png');
 
+        //Para cargar el botón de la tienda
+        this.load.image('btn_tienda','estado/btn_tienda.png');
     }
 
     create(){
@@ -138,7 +140,17 @@ class Scene_3 extends Phaser.Scene{
 
     //Madrazos, man es que soy sanguinario  loco
         this.physics.add.overlap(this.nexus, this.minotauro, this.ataque, null, this);
-        
+
+        //Mostrar la tienda con el botón
+        this.btn_tienda = this.add.image(830,90,'btn_tienda').setScale(0.25).setInteractive().setDepth(4);
+        this.input.on(eventos.GAMEOBJECT_UP,(pointer,gameObject) =>{
+            if(gameObject === this.btn_tienda){
+                //this.scene.stop();
+                this.scene.stop();
+                this.scene.launch('Scene_tienda');
+                this.registry.events.emit('dame_datos', 0);
+            }
+        });
     }
 
     update(){
@@ -443,6 +455,9 @@ class Scene_3 extends Phaser.Scene{
             }
             this.scene.stop();
             this.scene.launch('Scene_gameOver');
+        }else if(this.data.list.keys === 1){
+            //this.btn_tienda.setVisible(true);
+            //->Aqui tiene que ir por primera vez la entrada a la tienda
         }
     }
 }
