@@ -9,7 +9,7 @@ class Scene_nivel5 extends Phaser.Scene{
     }
     preload(){
         this.load.path = './assets/nivel5/';
-        this.load.image(['plat1', 'plat2', 'plat3', 'plat4', 'salida', 'piso3']);
+        this.load.image(['plat1', 'plat2', 'plat3', 'plat4', 'salidaArco', 'piso3']);
         this.load.spritesheet('fondo', 'fondo1_3.png', {
             frameWidth: 1000,
             frameHeight: 640,
@@ -42,6 +42,7 @@ class Scene_nivel5 extends Phaser.Scene{
         this.giro_shadow3 = 541;
         this.giro_mono = 721;
         this.flag = false;
+        this.flagUpdate = true;
         this.registry.events.on('vidasRestantes', (vidas) => {
             this.data.set('vidas', vidas);
         });
@@ -75,10 +76,10 @@ class Scene_nivel5 extends Phaser.Scene{
             p.body.allowGravity = false;   
         });
 
-        this.salida = this.add.image(930, 170, 'salida', 0).setInteractive().setScale(1.5);
-        this.physics.add.existing(this.salida, true);
-        this.salida.body.setSize(10, 110);
-        this.salida.body.setOffset(70, 0);
+        this.salidaArco = this.add.image(930, 170, 'salidaArco', 0).setInteractive().setScale(1.5);
+        this.physics.add.existing(this.salidaArco, true);
+        this.salidaArco.body.setSize(10, 110);
+        this.salidaArco.body.setOffset(70, 0);
         this.nexus = this.physics.add.sprite(30,370, 'nexus_all', 0).setInteractive();
         this.nexus.setScale(1.2);
         this.nexus.setName('Nexus');
@@ -221,7 +222,7 @@ class Scene_nivel5 extends Phaser.Scene{
         this.physics.add.overlap(this.nexus, this.ball_1, this.muere_nexus, null, this);
         this.physics.add.overlap(this.nexus, this.ball_2, this.muere_nexus, null, this);
         this.physics.add.overlap(this.nexus, this.mono, this.ataque_mono, null, this);
-        this.physics.add.collider(this.nexus, this.salida, this.ganar, null, this);
+        this.physics.add.collider(this.nexus, this.salidaArco, this.ganar, null, this);
 
         this.tweenBall = this.add.tween({
             targets: [this.ball_1, this.ball_2],
@@ -255,137 +256,141 @@ class Scene_nivel5 extends Phaser.Scene{
 
     }
     update(time, delta) {
-        var posInX =  this.nexus.x;
-        var posInY =  this.nexus.y;
+
+        if(this.flagUpdate == true){
+            var posInX =  this.nexus.x;
+            var posInY =  this.nexus.y;
 
 
 
-        //Movimiento de las sombras
-        this.shadows.children.iterate( (p) => {  
-            if(p.name == "shadow1"){
-                if(p.body.velocity.x > 0 && p.x > this.giro_shadow1){
-                    p.body.velocity.x *= -1;
-                    this.giro_shadow1 = 360;
-                    p.flipX = false;
+            //Movimiento de las sombras
+            this.shadows.children.iterate( (p) => {  
+                if(p.name == "shadow1"){
+                    if(p.body.velocity.x > 0 && p.x > this.giro_shadow1){
+                        p.body.velocity.x *= -1;
+                        this.giro_shadow1 = 360;
+                        p.flipX = false;
+                    }
+                    if(p.body.velocity.x < 0 && p.x < this.giro_shadow1){
+                        p.body.velocity.x *= -1;
+                        this.giro_shadow1 = 630;
+                        p.flipX = true;  
+                    }
+                }else if(p.name == "shadow2"){
+                    if(p.body.velocity.x > 0 && p.x > this.giro_shadow2){
+                        p.body.velocity.x *= -1;
+                        this.giro_shadow2 = 220;
+                        p.flipX = false;
+                    }
+                    if(p.body.velocity.x < 0 && p.x < this.giro_shadow2){
+                        p.body.velocity.x *= -1;
+                        this.giro_shadow2 = 480;
+                        p.flipX = true;  
+                    }
+                }else if(p.name == "shadow3"){
+                    if(p.body.velocity.x > 0 && p.x > this.giro_shadow3){
+                        p.body.velocity.x *= -1;
+                        this.giro_shadow3 = 540;
+                        p.flipX = false;
+                    }
+                    if(p.body.velocity.x < 0 && p.x < this.giro_shadow3){
+                        p.body.velocity.x *= -1;
+                        this.giro_shadow3 = 750;
+                        p.flipX = true;  
+                    }
                 }
-                if(p.body.velocity.x < 0 && p.x < this.giro_shadow1){
-                    p.body.velocity.x *= -1;
-                    this.giro_shadow1 = 630;
-                    p.flipX = true;  
+            });
+
+            if(this.flag == true){
+                if(this.mono.body.velocity.x > 0 && this.mono.x > this.giro_mono){
+                    this.mono.body.velocity.x *= -1;
+                    this.giro_mono = 590;
+                    this.mono.flipX = false;
                 }
-            }else if(p.name == "shadow2"){
-                if(p.body.velocity.x > 0 && p.x > this.giro_shadow2){
-                    p.body.velocity.x *= -1;
-                    this.giro_shadow2 = 220;
-                    p.flipX = false;
-                }
-                if(p.body.velocity.x < 0 && p.x < this.giro_shadow2){
-                    p.body.velocity.x *= -1;
-                    this.giro_shadow2 = 480;
-                    p.flipX = true;  
-                }
-            }else if(p.name == "shadow3"){
-                if(p.body.velocity.x > 0 && p.x > this.giro_shadow3){
-                    p.body.velocity.x *= -1;
-                    this.giro_shadow3 = 540;
-                    p.flipX = false;
-                }
-                if(p.body.velocity.x < 0 && p.x < this.giro_shadow3){
-                    p.body.velocity.x *= -1;
-                    this.giro_shadow3 = 750;
-                    p.flipX = true;  
+                if(this.mono.body.velocity.x < 0 && this.mono.x < this.giro_mono){
+                    this.mono.body.velocity.x *= -1;
+                    this.giro_mono = 720;
+                    this.mono.flipX = true;  
                 }
             }
-        });
+            
 
-        if(this.flag == true){
-            if(this.mono.body.velocity.x > 0 && this.mono.x > this.giro_mono){
-                this.mono.body.velocity.x *= -1;
-                this.giro_mono = 590;
-                this.mono.flipX = false;
+            if( Phaser.Input.Keyboard.JustDown(this.nexusWalkDer)){
+                this.nexus.setFlipX(true);
+                this.nexus.body.setOffset(30,30);
+                this.nexus.body.velocity.x = 160;
+                this.nexus.anims.play('walk');
+            }else if(Phaser.Input.Keyboard.JustDown(this.nexusWalkIz)){
+                this.nexus.setFlipX(false);
+                this.nexus.body.velocity.x = -160;
+                this.nexus.body.setOffset(20,30);
+                this.nexus.anims.play('walk');
             }
-            if(this.mono.body.velocity.x < 0 && this.mono.x < this.giro_mono){
-                this.mono.body.velocity.x *= -1;
-                this.giro_mono = 720;
-                this.mono.flipX = true;  
+            else if(Phaser.Input.Keyboard.JustDown(this.nexusDown)){
+                this.nexus.body.velocity.y = 160;
+                this.nexus.anims.play('jump');
+                this.tweensAtaque = this.add.tween({
+                    targets: [this.nexus],
+                    ease: 'Power2',
+                    y:{
+                        value: this.nexus.y++,
+                        duration: 500
+                    },
+                    repeat: 0,
+                    onComplete: () => {
+                        this.nexus.anims.play('stand');
+                    }
+                });
+            }
+
+            if(Phaser.Input.Keyboard.JustDown(this.nexusAttack)){
+                //this.nexus.anims.play('attack');
+                this.tweensAtaque = this.add.tween({
+                    targets: [this.nexus],
+                    ease: 'Power2',
+                    //y:posInY+50,
+                    x:{
+                        //delay: 100,
+                        value: posInX+10,
+                        ease: 'Circ',
+                        duration: 600
+                    },
+                    y:{
+                        //delay: 100,
+                        value: posInY--,
+                        duration: 600,
+                        offset: true
+                    },
+                    repeat: 0,
+                    onStart: () =>{
+                        this.nexus.anims.play('attack');
+                        if(this.nexus.flipX){
+                            this.nexus.body.setSize(70,85);
+                            this.nexus.body.setOffset(40, 30);
+                        }
+                        else{
+                            this.nexus.body.setSize(70,85);
+                            this.nexus.body.setOffset(0, 30);
+                        }
+                    },
+                    onComplete: () => {
+                        this.nexus.anims.play('stand');
+                        this.nexus.body.setSize(50,85);
+                        this.nexus.setOffset(30,30);
+                    }
+                });
+            }
+
+            if( Phaser.Input.Keyboard.JustUp(this.nexusAttack) || Phaser.Input.Keyboard.JustUp(this.nexusWalkDer) || Phaser.Input.Keyboard.JustUp(this.nexusWalkIz) || Phaser.Input.Keyboard.JustUp(this.nexusDown)){
+                this.nexus.anims.play('stand');
+                this.nexus.clearTint();
+                this.nexus.setScale(1.2);
+                this.nexus.setAngle(0);
+                this.nexus.body.velocity.x = 0;
+                this.nexus.body.velocity.y = 0;
             }
         }
         
-
-        if( Phaser.Input.Keyboard.JustDown(this.nexusWalkDer)){
-            this.nexus.setFlipX(true);
-            this.nexus.body.setOffset(30,30);
-            this.nexus.body.velocity.x = 160;
-            this.nexus.anims.play('walk');
-        }else if(Phaser.Input.Keyboard.JustDown(this.nexusWalkIz)){
-            this.nexus.setFlipX(false);
-            this.nexus.body.velocity.x = -160;
-            this.nexus.body.setOffset(20,30);
-            this.nexus.anims.play('walk');
-        }
-        else if(Phaser.Input.Keyboard.JustDown(this.nexusDown)){
-            this.nexus.body.velocity.y = 160;
-            this.nexus.anims.play('jump');
-            this.tweensAtaque = this.add.tween({
-                targets: [this.nexus],
-                ease: 'Power2',
-                y:{
-                    value: this.nexus.y++,
-                    duration: 500
-                },
-                repeat: 0,
-                onComplete: () => {
-                    this.nexus.anims.play('stand');
-                }
-            });
-        }
-
-        if(Phaser.Input.Keyboard.JustDown(this.nexusAttack)){
-            //this.nexus.anims.play('attack');
-            this.tweensAtaque = this.add.tween({
-                targets: [this.nexus],
-                ease: 'Power2',
-                //y:posInY+50,
-                x:{
-                    //delay: 100,
-                    value: posInX+10,
-                    ease: 'Circ',
-                    duration: 600
-                },
-                y:{
-                    //delay: 100,
-                    value: posInY--,
-                    duration: 600,
-                    offset: true
-                },
-                repeat: 0,
-                onStart: () =>{
-                    this.nexus.anims.play('attack');
-                    if(this.nexus.flipX){
-                        this.nexus.body.setSize(70,85);
-                        this.nexus.body.setOffset(40, 30);
-                    }
-                    else{
-                        this.nexus.body.setSize(70,85);
-                        this.nexus.body.setOffset(0, 30);
-                    }
-                },
-                onComplete: () => {
-                    this.nexus.anims.play('stand');
-                    this.nexus.body.setSize(50,85);
-                    this.nexus.setOffset(30,30);
-                }
-            });
-        }
-
-        if( Phaser.Input.Keyboard.JustUp(this.nexusAttack) || Phaser.Input.Keyboard.JustUp(this.nexusWalkDer) || Phaser.Input.Keyboard.JustUp(this.nexusWalkIz) || Phaser.Input.Keyboard.JustUp(this.nexusDown)){
-            this.nexus.anims.play('stand');
-            this.nexus.clearTint();
-            this.nexus.setScale(1.2);
-            this.nexus.setAngle(0);
-            this.nexus.body.velocity.x = 0;
-            this.nexus.body.velocity.y = 0;
-        }
     }
 
     recoger(nexus, dracmas)
@@ -484,16 +489,18 @@ class Scene_nivel5 extends Phaser.Scene{
     }
 
     ganar(){
+        this.flagUpdate = false;
         this.input.keyboard.enabled = false;
         let win = this.sound.add("impressive",{loop:false});
         win.play();
         this.registry.events.emit('vidasRestantes', this.data.list.vidas);
         this.scene.stop();
+        this.scene.launch('Secene_puzzle1');
         this.scene.transition({
             target: 'Scene_puzzle1',
-            duration: 1000,
+            duration: 2000,
             moveAbove: true,
-            //onUpdate: this.transitionOut,
+            onUpdate: this.transitionOut,
             data: { x: 500, y: 320 }
         });     
     }
@@ -501,22 +508,17 @@ class Scene_nivel5 extends Phaser.Scene{
     
     transitionOut(progress){
         this.nexus.destroy();
-        this.shadows.destroy();
-        this.mono.destroy();
-        this.plataformas.destroy();
-        this.dracmasGrupo1.destroy();
-        this.dracmasGrupo2.destroy();
-        this.dracmasGrupo3.destroy();
-        this.dracmasIndv.destroy();
-        this.fondo.x = (640 * progress);
-        /*this.grupo = this.add.group();
-        this.grupo.add(this.plat3);
-        this.grupo.add(this.chest);
-        this.grupo.add(this.fuego);
-        this.grupo.add(this.fuego_2);
-        this.grupo.children.iterate( (elemento) => {
-             elemento.x = (1300 * progress);
-        });*/
+        this.salidaArco.x = (500 * progress);
+        this.piso.x = (500 * progress);
+        this.shadows.children.iterate( (p) => {
+            p.x = (500 * progress);
+        });
+        this.plataformas.children.iterate( (p) => {
+            p.x = (500 * progress);
+        });
+        this.ball_1.destroy();
+        this.ball_2.destroy();
+        this.fondo.x = (-640 * progress);
     }
 
 }
