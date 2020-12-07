@@ -142,7 +142,7 @@ class Scene_3 extends Phaser.Scene{
         this.physics.add.overlap(this.nexus, this.minotauro, this.ataque, null, this);
 
         //Mostrar la tienda con el botón
-        this.btn_tienda = this.add.image(830,90,'btn_tienda').setScale(0.25).setInteractive().setDepth(4);
+        this.btn_tienda = this.add.image(830,90,'btn_tienda').setScale(0.25).setInteractive().setDepth(4).setVisible(false);
         this.input.on(eventos.GAMEOBJECT_UP,(pointer,gameObject) =>{
             if(gameObject === this.btn_tienda){
                 //this.scene.stop();
@@ -397,6 +397,7 @@ class Scene_3 extends Phaser.Scene{
         if(this.data.list.keys==1){
             this.adios_muros(); 
             this.minotauro.destroy();
+            this.btn_tienda.setVisible(true);
             
     //Aqui agregamos los pinches villanos xD
             /*
@@ -455,9 +456,7 @@ class Scene_3 extends Phaser.Scene{
             }
             this.scene.stop();
             this.scene.launch('Scene_gameOver');
-        }else if(this.data.list.keys === 1){
-            //this.btn_tienda.setVisible(true);
-            //->Aqui tiene que ir por primera vez la entrada a la tienda
+            
         }
     }
 }

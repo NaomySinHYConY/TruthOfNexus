@@ -9,6 +9,7 @@ class Scene_estado extends Phaser.Scene{
         console.log('Escena de estado');
     }
     preload(){
+        this.load.audio('moneda', './assets/sounds/moneda.mp3');
         this.load.path = './assets/estado/';      
         this.load.image(['barraVida','cantDracmas', 'montoVida','btn_tienda']);
     } 
@@ -73,7 +74,8 @@ class Scene_estado extends Phaser.Scene{
             }else if(this.data.list.score >= cantidad){
                 this.data.list.score -= cantidad;
                 this.scoreText.setText(this.data.list.score);
-                return true;
+                this.comprar = this.sound.add("moneda",{loop:false});
+                this.comprar.play();
             }
             
         });

@@ -280,6 +280,7 @@ class Scene_tienda extends Phaser.Scene{
         var contador = 0;
         var contItem = 1;
         var precio = 0;
+        var item = "";
         this.input.on(eventos.GAMEOBJECT_UP,(pointer,gameObject) =>{
             console.log(contItem);
             if(gameObject === this.vendedor){
@@ -312,6 +313,8 @@ class Scene_tienda extends Phaser.Scene{
                     this.llave.setVisible(false);
                     this.cerveza.setVisible(false);
 
+                    item = "diamante";
+
                     //Mover placas
                     this.placaVida.setVisible(false);
                     this.placaDiamante.setVisible(true);
@@ -320,6 +323,7 @@ class Scene_tienda extends Phaser.Scene{
                     this.placaLlave.setVisible(false);
                     this.placaCerveza.setVisible(false);
                     precio = 200;
+
                 }else if(contItem === 3 || contItem === 0){           //Talisman
                     this.diamante.setVisible(false);
                     this.vida.setVisible(false);
@@ -327,6 +331,8 @@ class Scene_tienda extends Phaser.Scene{
                     this.hierro.setVisible(false);
                     this.llave.setVisible(false);
                     this.cerveza.setVisible(false);
+
+                    item = "talisman";
 
                     //Mover placa
                     this.placaVida.setVisible(false);
@@ -379,6 +385,8 @@ class Scene_tienda extends Phaser.Scene{
                     this.llave.setVisible(false);
                     this.cerveza.setVisible(false);
 
+                    item = "vida";
+
                     //Mover placa
                     this.placaVida.setVisible(true);
                     this.placaDiamante.setVisible(false);
@@ -399,6 +407,8 @@ class Scene_tienda extends Phaser.Scene{
                     this.llave.setVisible(false);
                     this.cerveza.setVisible(false);
 
+                    item = "diamante";
+
                     //Mover placa
                     this.placaVida.setVisible(false);
                     this.placaDiamante.setVisible(true);
@@ -407,6 +417,7 @@ class Scene_tienda extends Phaser.Scene{
                     this.placaLlave.setVisible(false);
                     this.placaCerveza.setVisible(false);
                     precio = 200;
+                     
                 }else if(contItem === 3 || contItem === 0){ //Talisman
                     this.diamante.setVisible(false);
                     this.vida.setVisible(false);
@@ -414,6 +425,7 @@ class Scene_tienda extends Phaser.Scene{
                     this.hierro.setVisible(false);
                     this.llave.setVisible(false);
                     this.cerveza.setVisible(false);
+                    item = "talisman";
                      //Mover placa
                      this.placaVida.setVisible(false);
                      this.placaDiamante.setVisible(false);
@@ -450,6 +462,7 @@ class Scene_tienda extends Phaser.Scene{
                     this.llave.setVisible(true);
                     this.cerveza.setVisible(false);
 
+                    item = "llave";
                     //Mover placa
                     this.placaVida.setVisible(false);
                     this.placaDiamante.setVisible(false);
@@ -468,6 +481,8 @@ class Scene_tienda extends Phaser.Scene{
                     this.llave.setVisible(false);
                     this.cerveza.setVisible(true);
 
+                    item = "cerveza";
+
                     //Mover placa
                     this.placaVida.setVisible(false);
                     this.placaDiamante.setVisible(false);
@@ -480,24 +495,16 @@ class Scene_tienda extends Phaser.Scene{
                    
                 }
             }else if(gameObject === this.btn_comprar){
-                /*
-                console.log(precio);
-                this.registry.events.on('cobrar', (precio) => {
-                    if(this.data.list.score < precio){
-                        console.log("No te alcanza->tienda");
-                    }else if(this.data.list.score <= 0){
-                        this.scoreText.setText(0);
-                        console.log("No tienes dracmas");
-                    }else if(this.data.list.score >= precio){
-                        this.data.list.score -= precio;
-                        this.scoreText.setText(this.data.list.score);
-                        return true;
-                    }
-                    
-                });*/
-        
                 this.registry.events.emit('cobrar', precio);
-                //console.log(this.data.list.score);
+                if(item === "diamante"){
+                    this.registry.events.emit('diamantes', 1);
+                }else if(item === "talisman"){
+                    this.registry.events.emit('talismanes',1);
+                }else if(item === "llave"){
+                    this.registry.events.emit('llaves', 1);
+                }else if(item === "vida"){
+                    this.registry.events.emit('vidas',1);
+                }
                 /*
                 if(this.data.list.score >= precio){
                     this.comprar = this.sound.add("moneda",{loop:false});
