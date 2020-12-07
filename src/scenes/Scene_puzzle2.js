@@ -69,6 +69,7 @@ class Scene_puzzle2 extends Phaser.Scene{
         this.grupoMonstruos2.create(45, 181.5, 'slime');
         this.grupoMonstruos2.create(477, 94.5, 'slime');
         this.grupoMonstruos2.create(960, 218.5, 'slime');
+        this.grupoMonstruos2.create(45, 330.5, 'slime');
         this.grupoMonstruos2.children.iterate( (mS) => {
             mS.setInteractive().setScale(1);
             mS.body.allowGravity = false;
@@ -76,7 +77,7 @@ class Scene_puzzle2 extends Phaser.Scene{
             mS.setImmovable = true;
             //mS.setCollideWorldBounds(true);
         } );
-        this.grupoMonstruos2.playAnimation('walk');
+        this.grupoMonstruos2.playAnimation('slime_walk');
 
         this.grupoPiedras = this.physics.add.group();
         this.grupoPiedras.create(50.5, 470.5, 'piedras');
@@ -154,7 +155,8 @@ class Scene_puzzle2 extends Phaser.Scene{
         this.physics.add.collider(this.paredes,this.nexus, this.nexusPared, null, this);
         this.physics.add.collider(this.grupoPiedrasParo,this.nexus, this.nexusPared, null, this);
         this.physics.add.overlap(this.nexus,this.zonaInicial);
-        //this.physics.add.overlap(this.nexus, this.hoyos, this.caida, null, this);
+        this.physics.add.overlap(this.nexus, this.hoyos2, this.caida, null, this);
+        this.physics.add.overlap(this.grupoMonstruos2,this.nexus, this.choqueNexus, null, this);
         // this.physics.add.overlap(this.nexus, this.salida, this.salir, null, this);
 
         //Controles
@@ -234,10 +236,13 @@ class Scene_puzzle2 extends Phaser.Scene{
             },
             onComplete: () => {
                 //nexus.body.enable = true;
-                nexus.x = 30;
-                nexus.y = 600;
+                nexus.x = 40;
+                nexus.y = 531;
+                nexus.setVelocity(0);
                 nexus.alpha = 1;
                 nexus.setFrame(0);
+                this.input.keyboard.enabled = true;
+
                 if(this.data.list.vidas!=0){
                     this.nexus.body.enable = true;
                 }
@@ -276,10 +281,6 @@ class Scene_puzzle2 extends Phaser.Scene{
     caida(nexus, hoyo){
         hoyo.body.enable = false;
         nexus.body.enable = false;
-        // setTimeout(() => {
-        //     this.caer.play(this.musicConf2);
-        //     nexus.anims.play('nexus_fall');
-        // }, 2000);
         this.tweens = this.add.tween({
             targets: [this.nexus],
             ease: 'Linear',
@@ -293,8 +294,9 @@ class Scene_puzzle2 extends Phaser.Scene{
                 hoyo.alpha = 1;
             },
             onComplete: () => {
+                this.input.keyboard.enabled = true;
                 this.scene.pause();
-                this.scene.start('Scene_puzzle1_caida', hoyo);
+                this.scene.start('Scene_puzzle2_caida', hoyo);
                 //this.registry.events.emit('posCaida', 30, 300);
                 //console.log('evento caída 1');
             }, 
@@ -330,7 +332,7 @@ class Scene_puzzle2 extends Phaser.Scene{
     }
 
     update(time, delta) {
-        console.log(this.input.keyboard.enabled);
+        //console.log(this.input.keyboard.enabled);
         //Dejar esto en vez del choque y la velocidad para que sigan a nexus.
         // this.grupoMonstruos.children.iterate( (mC) => {
         //     this.physics.moveToObject(mC, this.nexus, 200);
@@ -346,7 +348,7 @@ class Scene_puzzle2 extends Phaser.Scene{
         // }
 
         if( Phaser.Input.Keyboard.JustDown(this.nexusWalkDer)){
-            console.log("derecha");
+            //console.log("derecha");
             //band = true;
             // if(this.estaEnPiedra){
             //     this.grupoPiedras.children.iterate( (p) => {
@@ -360,7 +362,7 @@ class Scene_puzzle2 extends Phaser.Scene{
             this.input.keyboard.enabled = false;
         }        
         else if(Phaser.Input.Keyboard.JustDown(this.nexusWalkIz)){
-            console.log("izquierda");
+            //console.log("izquierda");
             this.nexus.setFrame('head_2');
             this.nexus.body.velocity.x = this.velocidadNexus*-1;
             this.nexus.body.velocity.y = 0;
@@ -369,7 +371,7 @@ class Scene_puzzle2 extends Phaser.Scene{
             //this.nexus.body.setVelocity(-100,0);
         }
         else if(Phaser.Input.Keyboard.JustDown(this.nexusUp)){
-            console.log("arriba");
+            //console.log("arriba");
             this.nexus.setFrame('head_6');
             this.nexus.body.velocity.y = this.velocidadNexus*-1;
             this.nexus.body.velocity.x = 0;
@@ -377,7 +379,7 @@ class Scene_puzzle2 extends Phaser.Scene{
             this.input.keyboard.enabled = false;
         }
         else if(Phaser.Input.Keyboard.JustDown(this.nexusDown)){
-            console.log("abajo");
+            //console.log("abajo");
             this.nexus.setFrame('head_1');
             this.nexus.body.velocity.y = this.velocidadNexus;
             this.nexus.body.velocity.x = 0;

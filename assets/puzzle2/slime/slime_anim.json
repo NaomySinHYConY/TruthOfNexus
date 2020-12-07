@@ -1,7 +1,7 @@
 {
     "anims": [
         {
-            "key": "walk",
+            "key": "slime_walk",
             "type": "frames",
             "repeat": -1,
             "frameRate": 10,
