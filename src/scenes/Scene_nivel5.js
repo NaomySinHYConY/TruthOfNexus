@@ -26,6 +26,8 @@ class Scene_nivel5 extends Phaser.Scene{
         this.load.animation('dracmasAnim','../dracma/dracma_anim.json');
         this.load.atlas('mono_all', '../mono/mono_all.png','../mono/mono_all_atlas.json');
         this.load.animation('monoAnim', '../mono/mono_all_anim.json');
+        this.load.atlas('key', 'key/key.png','key/key_atlas.json');
+        this.load.animation('keyAnim', 'key/key_anim.json');
 
         this.load.audio('moneda', '../sounds/moneda.mp3');
         this.load.audio('laugh', '../sounds/laugh.mp3');
@@ -43,6 +45,15 @@ class Scene_nivel5 extends Phaser.Scene{
         this.giro_mono = 721;
         this.flag = false;
         this.flagUpdate = true;
+        this.cameras.main.setViewport(0, 0, 1000, 640)
+        .fadeOut(2000)
+        .shake(2000, 0.01)
+        .setBackgroundColor('rgba(0, 0, 0, 0)')
+        .flash(2000);
+
+        this.cameras.main.on(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
+            this.cameras.main.fadeIn(2000);
+        });
         this.registry.events.on('vidasRestantes', (vidas) => {
             this.data.set('vidas', vidas);
         });
@@ -138,6 +149,9 @@ class Scene_nivel5 extends Phaser.Scene{
             p.body.allowGravity = false; 
         });
 
+        this.key = this.physics.add.sprite(960,400, 'key', 0).setInteractive();
+        this.key.anims.play('key_roll');
+
         this.shadows = this.physics.add.group();
         this.shadows.create(630, 300, 'shadow_all', 0).setInteractive().setName('shadow1');
         this.shadows.create(220, 200, 'shadow_all', 0).setInteractive().setName('shadow2');
@@ -214,6 +228,8 @@ class Scene_nivel5 extends Phaser.Scene{
         this.physics.add.collider(this.dracmasGrupo1,this.plataformas);
         this.physics.add.collider(this.dracmasGrupo2,this.plataformas.getChildren().find(v => v.name == "plat4"));
         this.physics.add.collider(this.mono,this.plataformas);
+        this.physics.add.collider(this.nexus, this.salidaArco, this.ganar, null, this);
+        this.physics.add.collider(this.key, this.plataformas.getChildren().find(v => v.name == "plat8"));
 
         this.physics.add.overlap(this.nexus, this.dracmasIndv, this.recoger, null, this);
         this.physics.add.overlap(this.nexus, this.dracmasGrupo1, this.recoger, null, this);
@@ -223,7 +239,7 @@ class Scene_nivel5 extends Phaser.Scene{
         this.physics.add.overlap(this.nexus, this.ball_1, this.muere_nexus, null, this);
         this.physics.add.overlap(this.nexus, this.ball_2, this.muere_nexus, null, this);
         this.physics.add.overlap(this.nexus, this.mono, this.ataque_mono, null, this);
-        this.physics.add.collider(this.nexus, this.salidaArco, this.ganar, null, this);
+        this.physics.add.overlap(this.nexus, this.key, this.recoger_llave, null, this);
 
         this.tweenBall = this.add.tween({
             targets: [this.ball_1, this.ball_2],
@@ -409,6 +425,14 @@ class Scene_nivel5 extends Phaser.Scene{
        this.recoge.play();
     }
 
+    recoger_llave(nexus, key){
+        key.destroy();
+        this.data.list.keys += 1;
+        //this.registry.events.emit('recogeKey', 20);
+        let recoge = this.sound.add("moneda",{loop:false});
+        recoge.play();
+    }
+
     muere_nexus()
     {
         this.nexus.body.enable = false;
@@ -479,16 +503,42 @@ class Scene_nivel5 extends Phaser.Scene{
     }
 
     ataque_mono(nexus, mono){
-        console.log(mono.name);
+       /* this.physics.world.colliders.getActive().find(function(i){
+            return i.name == 'ColliderPlatMono'
+        }).destroy();*/    
+        //console.log(mono.name);
         if(this.nexusAttack.isDown){
-            this.flag = false;
+            /*this.flag = false;
+            mono.clearTint();
+            mono.x = 100;
             let hit = this.sound.add("hit",{loop:false});
             hit.play();
             mono.anims.play('mono_jump');
             mono.body.enable = false;
             this.time.delayedCall(1000, function(){   
                 mono.destroy();
-            }, [], this);
+            }, [], this);*/
+            this.tweenMuerteMono = this.add.tween({
+                targets: [this.mono],
+                ease: 'Power2',
+                //y:posInY+50,
+                x:{
+                    value: this.mono.x+=70,
+                    duration: 1000
+                },
+                repeat: 0,
+                onStart: () => {
+                    this.flag = false;
+                    mono.clearTint();
+                    let hit = this.sound.add("hit",{loop:false});
+                    hit.play();
+                    mono.body.enable = false;
+                    this.time.delayedCall(1000, function(){   
+                        mono.destroy();
+                    }, [], this);
+                },
+            });
+            mono.anims.play('mono_jump');
         }   
         else{
             this.muere_nexus();
@@ -525,6 +575,20 @@ class Scene_nivel5 extends Phaser.Scene{
         });
         this.ball_1.destroy();
         this.ball_2.destroy();
+        this.dracmasGrupo1.children.iterate( (p) => {
+            p.setVisible(false);
+        });
+        this.dracmasGrupo2.children.iterate( (p) => {
+            p.setVisible(false);
+        });
+        this.dracmasIndv.children.iterate( (p) => {
+            p.setVisible(false);
+        });
+        this.dracmasGrupo3.children.iterate( (p) => {
+            p.setVisible(false);
+        });
+        
+        this.key.setVisible(false);
         this.fondo.x = (-640 * progress);
     }
 

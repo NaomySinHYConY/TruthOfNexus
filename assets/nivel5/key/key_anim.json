@@ -1,0 +1,44 @@
+{
+    "anims": [
+        {
+            "key": "key_roll",
+            "type": "frames",
+            "repeat": -1,
+            "frameRate": 10,
+            "frames": [
+                {
+                    "key": "key",
+                    "frame": "key_1"
+                },
+                {
+                    "key": "key",
+                    "frame": "key_2"
+                },
+                {
+                    "key": "key",
+                    "frame": "key_3"
+                },
+                {
+                    "key": "key",
+                    "frame": "key_4"
+                },
+                {
+                    "key": "key",
+                    "frame": "key_5"
+                },
+                {
+                    "key": "key",
+                    "frame": "key_6"
+                },
+                {
+                    "key": "key",
+                    "frame": "key_7"
+                },
+                {
+                    "key": "key",
+                    "frame": "key_8"
+                }
+            ]
+        }
+    ]
+}
