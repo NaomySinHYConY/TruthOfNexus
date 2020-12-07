@@ -65,7 +65,6 @@ class Scene_final extends Phaser.Scene{
            this.cameras.main.setZoom(1);
         });
 
-
         const eventos = Phaser.Input.Events;
         const keyCodes = Phaser.Input.Keyboard.KeyCodes;
         
@@ -106,7 +105,6 @@ class Scene_final extends Phaser.Scene{
         this.plat5 = this.add.image(470, 520, 'piso1').setInteractive().setOrigin(0).setScale(1, 1.1);
         this.physics.add.existing(this.plat5, true);
         this.physics.add.existing(this.plat4, true);
-        
 
         this.fuego = this.physics.add.sprite(180,600,'explosion').setInteractive();
         this.fuego.body.setCircle(35);
@@ -177,6 +175,7 @@ class Scene_final extends Phaser.Scene{
         this.physics.add.overlap(this.nexus, this.fuego_2, this.muere_nexus, null, this);
         this.physics.add.overlap(this.nexus, this.diablo, this.ataque, null, this);
         this.physics.add.collider(this.nexus, this.aCueva, this.ganar, null, this);
+        this.physics.add.overlap(this.diablo, this.fuego_2, this.bossDie, null, this);
         //this.physics.add.overlap(this.diablo, this.fondo, this.shadDi, null, this);
 
         this.tweenFuego = this.add.tween({
@@ -382,7 +381,7 @@ class Scene_final extends Phaser.Scene{
                 this.diablo.anims.stop();
                 this.diablo.anims.play('diablo_ataca');
                 console.log('ya te chingaste we');
-            }else if(this.data.list.VidasWilson==2){
+            }else if(this.data.list.VidasWilson==1){
                 this.diablo.body.setVelocityX(-20);
                 this.diablo.anims.stop();
                 this.diablo.anims.play('diablo_golpeado');
@@ -427,7 +426,12 @@ class Scene_final extends Phaser.Scene{
     }
 
     bossDie(diablo, fondo){
-        this.diablo.anims('diablo_muere');
+        this.diablo.body.enable = false;
+        this.diablo.body.setVelocityX(0);
+        this.diablo.anims.stop();
+        this.diablo.x-=30,
+        this.diablo.anims.play('diablo_muere');
+        console.log('ya me chingaste we');
         let DDie = this.sound.add("shadowDie",{loop:false});
         DDie.play();
     }
