@@ -1,18 +1,16 @@
-//Escena dummie de la p10 o algo así, nivel creado por Dama y Lluvia.
-
-class Scene_1 extends Phaser.Scene{
+class Scene_final extends Phaser.Scene{
     constructor(){
         super({
-            key: 'Scene_1'
+            key: 'Scene_final'
         });
     }
 
     init() {
-        console.log('Primera escena');
+        console.log('Final - STAGE');
     }
     preload() {
         this.load.path = './assets/';      
-        this.load.image(['pl1', 'pl2', 'pl3', 'aCueva', 'aviso', 'aviso_1', 'aviso_2']);
+        this.load.image(['aCueva', 'aviso', 'aviso_1', 'aviso_2', 'piso1', 'piso2']);
         this.load.spritesheet('fondo', 'fondo/fondoAnim.png', {
             frameWidth: 2000,
             frameHeight: 640,
@@ -21,8 +19,9 @@ class Scene_1 extends Phaser.Scene{
         });
         this.load.atlas('nexus_all', 'Nexus/nexus_all.png','Nexus/nexus_all_atlas.json');
         this.load.animation('nexusAnim', 'Nexus/nexus_all_anim.json');
-        this.load.atlas('shadow_all', 'shadow/shadow_all.png','shadow/shadow_all_atlas.json');
-        this.load.animation('shadowAnim', 'shadow/shadow_all_anim.json');
+
+        this.load.atlas('diablo', 'Diablo/diablo.png','Diablo/diablo_atlas.json');
+        this.load.animation('diabloAnim', 'Diablo/diablo_anim.json');
 
         this.load.atlas('chest','cofre/chest.png','cofre/chest_atlas.json');
         this.load.animation('chestAnim','cofre/chest_anim.json');
@@ -41,6 +40,10 @@ class Scene_1 extends Phaser.Scene{
         this.load.audio('shadowDie', 'sounds/shadowDie.mp3');
     }
     create() {
+
+        this.data.set('VidasWilson',4);
+        this.data.set('golpes',0);
+        
         this.time.delayedCall(2000, function(){   
             this.cameras.main.setViewport(0, 0, 1000, 640)
             .fadeOut(1000)
@@ -70,7 +73,6 @@ class Scene_1 extends Phaser.Scene{
         this.data.set('monedas', 0);
         this.data.set('vidas', 4);
 
-        //console.log(this.data.getAll());
         this.scene.launch('Scene_estado');
 
         this.fondo = this.add.sprite(0, 0, 'fondo', 1).setOrigin(0).setInteractive();
@@ -87,49 +89,24 @@ class Scene_1 extends Phaser.Scene{
         this.fondo.anims.play('fondo_anim');
         this.fondo.body.setSize(1000, 40);
         this.fondo.body.setOffset(0, 570);
-        
-        // this.titleDracmas = this.add.image(860, 45, 'cantDracmas').setScale(0.9);
-        // this.score = 0;
-        // this.scoreText = this.add.text(940, 30, '0', { fontSize: '32px', fill: '#fff' });
+
         this.aCueva = this.add.image(920, 330, 'aCueva').setInteractive().setOrigin(0).setScale(0.15);
         this.physics.add.existing(this.aCueva, true);
         this.aCueva.body.setSize(50, 400);
         this.aCueva.body.setOffset(60, 0);
 
-        this.control = this.add.image(260,40,'aviso').setScale(0.3).setAlpha(0);
-        this.control_2 = this.add.image(450,40,'aviso_1').setScale(0.3).setAlpha(0);
-        this.control_3 = this.add.image(650,40,'aviso_2').setScale(0.3).setAlpha(0);
-
-        this.add.tween({
-            targets: [this.control, this.control_2, this.control_3],
-            y:{
-                value: 110,
-                duration: 5000,
-            },
-            alpha:{
-                value: 1
-            },
-            duration: 5000,
-            yoyo: true,
-            repeat: 0,
-            
-            easy: 'Expo',
-            onComplete: () => {
-                this.control.setAlpha(0);
-                this.control_2.setAlpha(0);
-                this.control_3.setAlpha(0);
-            }
-        });
-        //let cofreOpen = this.sound.add("cofreOpen",{loop:false});
         //Plataformas
-        this.plat1 = this.add.image(0, 510, 'pl1').setInteractive().setOrigin(0).setScale(1.1);
+        this.plat1 = this.add.image(0, 520, 'piso2').setInteractive().setOrigin(0).setScale(1);
         this.physics.add.existing(this.plat1, true);
-        this.plat2 = this.add.image(895, 515, 'pl2').setInteractive().setOrigin(0).setScale(1.1);
+        this.plat2 = this.add.image(895, 515, 'piso2').setInteractive().setOrigin(0).setScale(1);
         this.physics.add.existing(this.plat2, true);
-        this.plat3 = this.add.image(500, 300, 'pl3').setInteractive();
-        this.physics.add.existing(this.plat3, true);
-        this.plat3.body.setSize(470, 70);
-        this.plat3.body.setOffset(0, 250);
+
+        //Pataformas bajo la puerta
+        this.plat4 = this.add.image(200, 520, 'piso1').setInteractive().setOrigin(0).setScale(1, 1.1);
+        this.plat5 = this.add.image(470, 520, 'piso1').setInteractive().setOrigin(0).setScale(1, 1.1);
+        this.physics.add.existing(this.plat5, true);
+        this.physics.add.existing(this.plat4, true);
+        
 
         this.fuego = this.physics.add.sprite(180,600,'explosion').setInteractive();
         this.fuego.body.setCircle(35);
@@ -142,11 +119,11 @@ class Scene_1 extends Phaser.Scene{
         this.fuego_2.anims.play('explotar');
 
         //Enemigos
-        this.shadow = this.physics.add.sprite(500, 300, 'shadow_all', 0).setInteractive().setScale(1.3);
-        this.shadow.setName('Shadow');
-        this.shadow.body.setSize(50, 120);
-        this.shadow.setOffset(10, -20);
-        this.shadow.anims.play('shadow_stand');
+        this.diablo = this.physics.add.sprite(500, 100, 'diablo', 0).setOrigin(0.5).setInteractive().setScale(1.3);
+        this.diablo.body.setSize(50, 120);
+        // this.diablo.setOffset(10, -20);
+        //this.diablo.body.setCircle(60);
+        this.diablo.anims.play('diablo_camina');
 
         //Nexus
         this.nexus = this.physics.add.sprite(20,370, 'nexus_all', 0).setInteractive();
@@ -159,11 +136,6 @@ class Scene_1 extends Phaser.Scene{
         this.nexus.body.setOffset(30,30);
         this.nexus.setCollideWorldBounds(true);
         this.nexus.anims.play('stand');
-
-        this.chest = this.physics.add.sprite(500,300,'chest').setInteractive();
-        this.chest.setDepth(2);
-        //this.chest.body.setMass(2);
-        this.chest.setCollideWorldBounds(true);
         
         //Controles:
         //this.nexusWalkA = this.input.keyboard.addKey(keyCodes.U);
@@ -173,50 +145,39 @@ class Scene_1 extends Phaser.Scene{
         this.nexusDown = this.input.keyboard.addKey(keyCodes.DOWN);
         this.nexusAttack = this.input.keyboard.addKey(keyCodes.O);
         //this.nexusJump = this.input.keyboard.addKey(keyCodes.SPACE);
-        this.abrir = this.input.keyboard.addKey(keyCodes.ENTER);
-
-        //Colisiones
-        this.physics.add.collider(this.nexus,this.chest, () => {
-            this.chest.setVelocity(0);
-            this.chest.setAcceleration(0);
-        });
 
         this.physics.add.collider(this.nexus,this.plat1);
         //this.physics.add.collider(this.nexus,this.aCueva);
         this.physics.add.collider(this.nexus,this.plat2);
-        this.physics.add.collider(this.nexus,this.plat3);
-        this.physics.add.collider(this.shadow,this.plat3);
-        //this.physics.add.collider(this.shadow,this.fondo);
+        this.physics.add.collider(this.diablo,this.plat2);
+        this.physics.add.collider(this.diablo,this.plat1);
+        this.physics.add.collider(this.diablo,this.plat4);
+        this.physics.add.collider(this.nexus,this.plat4);
+        this.physics.add.collider(this.diablo,this.plat5);
+        this.physics.add.collider(this.nexus,this.plat5);
+        //this.physics.add.collider(this.diablo,this.fondo);
         this.physics.add.collider(this.nexus,this.fondo, () =>{
             this.muere_nexus();
             //this.nexus.anims.play('die');
         });
         
-
-        this.physics.add.collider(this.chest,this.plat1);
-        this.physics.add.collider(this.chest,this.plat2);
-        this.physics.add.collider(this.chest,this.fondo);
-        this.physics.add.collider(this.chest,this.plat3);
-
         this.physics.add.collider(this.fuego,this.plat1);
         this.physics.add.collider(this.fuego,this.plat2);
         this.physics.add.collider(this.fuego,this.fondo);
-        this.physics.add.collider(this.fuego,this.plat3);
         this.physics.add.collider(this.fuego,this.nexus);
 
         this.physics.add.collider(this.fuego_2,this.plat1);
         this.physics.add.collider(this.fuego_2,this.plat2);
         this.physics.add.collider(this.fuego_2,this.fondo);
-        this.physics.add.collider(this.fuego_2,this.plat3);
         this.physics.add.collider(this.fuego_2,this.nexus);
 
-        //this.physics.add.collider(this.shadow,this.fondo);
+        //this.physics.add.collider(this.diablo,this.fondo);
 
         this.physics.add.overlap(this.nexus, this.fuego, this.muere_nexus, null, this);
         this.physics.add.overlap(this.nexus, this.fuego_2, this.muere_nexus, null, this);
-        this.physics.add.overlap(this.nexus, this.shadow, this.ataque, null, this);
+        this.physics.add.overlap(this.nexus, this.diablo, this.ataque, null, this);
         this.physics.add.collider(this.nexus, this.aCueva, this.ganar, null, this);
-        this.physics.add.overlap(this.shadow, this.fondo, this.shadDi, null, this);
+        //this.physics.add.overlap(this.diablo, this.fondo, this.shadDi, null, this);
 
         this.tweenFuego = this.add.tween({
             targets: [this.fuego, this.fuego_2],
@@ -249,68 +210,11 @@ class Scene_1 extends Phaser.Scene{
         });
 
         
-
-        /*this.events.on('transitionstart', function (fromScene, duration) {
-
-            this.tweens.add({
-                targets: [this.fondo],
-                scaleX: 1.5,
-                scaleY: 1.5,
-                duration: duration
-            });
-
-        }, this);
-
-        this.events.on('transitioncomplete', () => { 
-            this.fondo.scaleX = 1;
-            this.fondo.scaleY = 1;
-        });
-
-        this.events.on('transitionout', function (toScene, duration) {
-
-            this.tweens.add({
-                targets: this.fondo,
-                scaleX: 1,
-                scaleY: 1,
-                duration: duration
-            });
-
-        }, this);*/
-
-
-        
     }
 
     update(time, delta) {
         var posInX =  this.nexus.x;
         var posInY =  this.nexus.y;
-        
-
-        if(Phaser.Input.Keyboard.JustDown(this.abrir) && this.data.list.dracmas<140 && this.data.list.monedas<12){
-            this.chest.anims.play('abrir');
-            let cofreOpen = this.sound.add("cofreOpen",{loop:false});
-            cofreOpen.play();
-            
-            this.grupod = this.physics.add.group({
-                key: 'dracmas',
-                repeat: 6,
-                setXY: { x:300, y: 300, stepX: 70 }
-            });
-            
-            this.grupod.children.iterate( (girar) => {
-                girar.setScale(1.5);
-                girar.setDepth(3);
-                girar.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
-            });
-    
-            this.grupod.playAnimation('dracma');
-            this.physics.add.collider(this.grupod,this.plat1);
-            this.physics.add.collider(this.grupod,this.plat2);
-            this.physics.add.collider(this.grupod,this.fondo);
-            this.physics.add.collider(this.grupod,this.plat3);
-            this.physics.add.overlap(this.nexus, this.grupod, this.recoger, null, this);
-            this.data.list.monedas+=6;
-        }
 
         if( Phaser.Input.Keyboard.JustDown(this.nexusWalkDer)){
             //band = true;
@@ -400,12 +304,6 @@ class Scene_1 extends Phaser.Scene{
             this.nexus.body.velocity.x = 0;
             this.nexus.body.velocity.y = 0;
         }
-/*
-        if (this.cursors.up.isDown && this.nexus.body.touching.down)
-        {
-            this.nexus.setVelocityY(-330);
-        }*/
-
     }
 
     recoger(nexus, dracmas)
@@ -462,11 +360,11 @@ class Scene_1 extends Phaser.Scene{
     ataque(){
         if(this.nexusAttack.isDown){
             this.tweenMuerte = this.add.tween({
-                targets: [this.shadow],
+                targets: [this.diablo],
                 ease: 'Power2',
                 //y:posInY+50,
                 x:{
-                    value: this.shadow.x+=110,
+                    value: this.diablo.x+=100,
                     duration: 1000
                 },
                 repeat: 0,
@@ -477,26 +375,31 @@ class Scene_1 extends Phaser.Scene{
                     //this.scene.restart();
                 },
             });
-            this.shadow.anims.play('shadow_die');
+            this.registry.events.emit('Wilson_golpeado');
+            this.data.list.VidasWilson = this.data.list.VidasWilson-1;
+            if(this.data.list.VidasWilson==3){
+                this.diablo.body.setVelocityX(-20);
+                this.diablo.anims.stop();
+                this.diablo.anims.play('diablo_ataca');
+                console.log('ya te chingaste we');
+            }else if(this.data.list.VidasWilson==2){
+                this.diablo.body.setVelocityX(-20);
+                this.diablo.anims.stop();
+                this.diablo.anims.play('diablo_golpeado');
+                console.log('ya te chingaste we');
+                this.data.list.VidasWilson = this.data.list.VidasWilson-1;
+                this.registry.events.emit('Wilson_golpeado');
+            }else if(this.data.list.VidasWilson==0){
+                this.diablo.body.setVelocityX(0);
+                this.diablo.anims.stop();
+                this.diablo.anims.play('diablo_muere');
+                console.log('ya me chingaste we');
+            }
+            
         }
         else{
             this.muere_nexus();
-            // this.tweenMuerte = this.add.tween({
-            //     targets: [this.nexus],
-            //     ease: 'Power2',
-            //     //y:posInY+50,
-            //     y:{
-            //         value: this.nexus.y-=110,
-            //         duration: 1000
-            //     },
-            //     repeat: 0,
-            //     onStart: () => {
-            //         let end = this.sound.add("laugh",{loop:false});
-            //         end.play();
-            //         //this.nexus.anims.play('die');
-            //         this.scene.restart();
-            //     },
-            // });
+
         }
     }
 
@@ -508,19 +411,23 @@ class Scene_1 extends Phaser.Scene{
                 win.play();        
             }
             //Agregar cámar o r something
-            
-            this.registry.events.emit('finalOn');
             this.registry.events.emit('vidasRestantes', this.data.list.vidas);
             this.scene.stop();
-            this.scene.launch('Scene_final');
-            
+            //this.scene.launch('Scene_puzzle1');
+            this.scene.transition({
+                target: 'Scene_3',
+                duration: 1000,
+                moveAbove: true,
+                onUpdate: this.transitionOut,
+                data: { x: 500, y: 320 }
+            });
         }
     }
 
-    shadDi(shadow, fondo){
-        this.shadow.destroy();
-        let shadDie = this.sound.add("shadowDie",{loop:false});
-        shadDie.play();
+    bossDie(diablo, fondo){
+        this.diablo.anims('diablo_muere');
+        let DDie = this.sound.add("shadowDie",{loop:false});
+        DDie.play();
     }
 
     transitionOut(progress){
@@ -541,4 +448,4 @@ class Scene_1 extends Phaser.Scene{
         });
     }
 }
-export default Scene_1;
+export default Scene_final;

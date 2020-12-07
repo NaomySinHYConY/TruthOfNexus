@@ -1,0 +1,216 @@
+{
+    "anims": [
+        {
+            "key": "diablo_muere",
+            "type": "frames",
+            "repeat": -1,
+            "frameRate": 10,
+            "frames": [
+                {
+                    "key": "diablo",
+                    "frame": "muerte_diablo_1"
+                },
+                {
+                    "key": "diablo",
+                    "frame": "muerte_diablo_2"
+                },
+                {
+                    "key": "diablo",
+                    "frame": "muerte_diablo_3"
+                },
+                {
+                    "key": "diablo",
+                    "frame": "muerte_diablo_4"
+                },
+                {
+                    "key": "diablo",
+                    "frame": "muerte_diablo_5"
+                },
+                {
+                    "key": "diablo",
+                    "frame": "muerte_diablo_6"
+                },
+                {
+                    "key": "diablo",
+                    "frame": "muerte_diablo_7"
+                },
+                {
+                    "key": "diablo",
+                    "frame": "muerte_diablo_8"
+                },
+                {
+                    "key": "diablo",
+                    "frame": "muerte_diablo_9"
+                },
+                {
+                    "key": "diablo",
+                    "frame": "muerte_diablo_10"
+                },
+                {
+                    "key": "diablo",
+                    "frame": "muerte_diablo_11"
+                },
+                {
+                    "key": "diablo",
+                    "frame": "muerte_diablo_12"
+                },
+                {
+                    "key": "diablo",
+                    "frame": "muerte_diablo_13"
+                },
+                {
+                    "key": "diablo",
+                    "frame": "muerte_diablo_14"
+                },
+                {
+                    "key": "diablo",
+                    "frame": "muerte_diablo_15"
+                },
+                {
+                    "key": "diablo",
+                    "frame": "muerte_diablo_16"
+                }
+            ]
+        },
+        {
+            "key": "diablo_golpeado",
+            "type": "frames",
+            "repeat": -1,
+            "frameRate": 12,
+            "frames": [
+                {
+                    "key": "diablo",
+                    "frame": "golpeado_diablo_1"
+                },
+                {
+                    "key": "diablo",
+                    "frame": "golpeado_diablo_2"
+                },
+                {
+                    "key": "diablo",
+                    "frame": "golpeado_diablo_3"
+                },
+                {
+                    "key": "diablo",
+                    "frame": "golpeado_diablo_4"
+                },
+                {
+                    "key": "diablo",
+                    "frame": "golpeado_diablo_5"
+                },
+                {
+                    "key": "diablo",
+                    "frame": "golpeado_diablo_6"
+                }
+            ]
+        },
+        {
+            "key": "diablo_camina",
+            "type": "frames",
+            "repeat": -1,
+            "frameRate": 12,
+            "frames": [
+                {
+                    "key": "diablo",
+                    "frame": "camina_diablo_1"
+                },
+                {
+                    "key": "diablo",
+                    "frame": "camina_diablo_2"
+                },
+                {
+                    "key": "diablo",
+                    "frame": "camina_diablo_3"
+                },
+                {
+                    "key": "diablo",
+                    "frame": "camina_diablo_4"
+                },
+                {
+                    "key": "diablo",
+                    "frame": "camina_diablo_5"
+                },
+                {
+                    "key": "diablo",
+                    "frame": "camina_diablo_6"
+                }
+            ]
+        },
+        {
+            "key": "diablo_ataca",
+            "type": "frames",
+            "repeat": -1,
+            "frameRate": 12,
+            "frames": [
+                {
+                    "key": "diablo",
+                    "frame": "ataqued_1"
+                },
+                {
+                    "key": "diablo",
+                    "frame": "ataqued_2"
+                },
+                {
+                    "key": "diablo",
+                    "frame": "ataqued_3"
+                },
+                {
+                    "key": "diablo",
+                    "frame": "ataqued_4"
+                },
+                {
+                    "key": "diablo",
+                    "frame": "ataqued_5"
+                },
+                {
+                    "key": "diablo",
+                    "frame": "ataqued_6"
+                },
+                {
+                    "key": "diablo",
+                    "frame": "ataqued_7"
+                },
+                {
+                    "key": "diablo",
+                    "frame": "ataqued_8"
+                },
+                {
+                    "key": "diablo",
+                    "frame": "ataqued_9"
+                },
+                {
+                    "key": "diablo",
+                    "frame": "ataqued_10"
+                },
+                {
+                    "key": "diablo",
+                    "frame": "ataqued_11"
+                },
+                {
+                    "key": "diablo",
+                    "frame": "ataqued_12"
+                },
+                {
+                    "key": "diablo",
+                    "frame": "ataqued_13"
+                },
+                {
+                    "key": "diablo",
+                    "frame": "ataqued_14"
+                },
+                {
+                    "key": "diablo",
+                    "frame": "ataqued_15"
+                },
+                {
+                    "key": "diablo",
+                    "frame": "ataqued_16"
+                },
+                {
+                    "key": "diablo",
+                    "frame": "ataqued_17"
+                }
+            ]
+        }
+    ]
+}

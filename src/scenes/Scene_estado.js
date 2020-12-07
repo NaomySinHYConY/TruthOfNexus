@@ -10,7 +10,7 @@ class Scene_estado extends Phaser.Scene{
     }
     preload(){
         this.load.path = './assets/estado/';      
-        this.load.image(['barraVida','cantDracmas', 'montoVida']);
+        this.load.image(['barraVida','cantDracmas', 'montoVida','barraVida_enemigo','montoVida_enemigo']);
     } 
     create() {
         //Cantidad de dracmas
@@ -25,6 +25,9 @@ class Scene_estado extends Phaser.Scene{
         //Escudo
         this.data.set('escudo',false);
 
+        //Final
+        this.data.set('final',false);
+
         //console.log('Datos escena estado');
         //console.log(this.data.getAll());
         //this.score = 0;
@@ -38,27 +41,12 @@ class Scene_estado extends Phaser.Scene{
             repeat: 3,
             setXY: { x:68, y: 57, stepX: 35 }
         });
-        
-        // this.grupod.children.iterate( (girar) => {
-        //     girar.setScale(1.5);
-        //     girar.setDepth(3);
-        //     girar.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
-        // });
 
         this.registry.events.on('recogeMoneda', (valorMoneda) => {
             //console.log("Recibe moneda");
             this.data.list.score+=valorMoneda;
             this.scoreText.setText(this.data.list.score);
             //console.log('Se ha emitido el evento score = ', this.score);
-        });
-
-        this.registry.events.on('dame_datos', (datos) => {
-            this.registry.events.emit('setDracmas3', this.data.list.score);
-            this.scoreText.setText(this.data.list.score);
-            this.registry.events.emit('vidasRestantes3', this.data.list.vidas);
-            console.log('Se ha emitido el evento Get Data ');
-            console.log("");
-            console.log("");
         });
 
         this.registry.events.on('menosVida', () => {
@@ -86,9 +74,23 @@ class Scene_estado extends Phaser.Scene{
             
             */
         });
+        
         this.registry.events.on('shieldOff', ()=>{
             this.data.list.escudo = false;
         });
+
+        this.registry.events.on('finalOn', ()=>{
+            this.data.list.final = true;
+            console.log('barraVillano');
+            this.barra_enemigo = this.add.image(480, 100, 'barraVida_enemigo');
+            this.grupoE = this.add.group({
+                key: 'montoVida_enemigo',
+                repeat: 3,
+                setXY: { x:429, y: 93, stepX: 35 },
+            });
+            console.log('la pinche barra ya se deberia ver');
+        });
+        
     }
     update(time, delta) {
 

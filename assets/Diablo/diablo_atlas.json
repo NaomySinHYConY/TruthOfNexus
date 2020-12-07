@@ -1,0 +1,593 @@
+{
+    "frames": [
+        {
+            "filename": "ataqued_1",
+            "frame": {
+                "w": 160,
+                "h": 154,
+                "x": 0,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "ataqued_2",
+            "frame": {
+                "w": 160,
+                "h": 154,
+                "x": 160,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "ataqued_3",
+            "frame": {
+                "w": 160,
+                "h": 154,
+                "x": 320,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "ataqued_4",
+            "frame": {
+                "w": 160,
+                "h": 154,
+                "x": 480,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "ataqued_5",
+            "frame": {
+                "w": 160,
+                "h": 154,
+                "x": 640,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "ataqued_6",
+            "frame": {
+                "w": 160,
+                "h": 154,
+                "x": 800,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "ataqued_7",
+            "frame": {
+                "w": 160,
+                "h": 154,
+                "x": 960,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "ataqued_8",
+            "frame": {
+                "w": 160,
+                "h": 154,
+                "x": 1120,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "ataqued_9",
+            "frame": {
+                "w": 160,
+                "h": 154,
+                "x": 1280,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "ataqued_10",
+            "frame": {
+                "w": 160,
+                "h": 154,
+                "x": 1440,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "ataqued_11",
+            "frame": {
+                "w": 160,
+                "h": 154,
+                "x": 1600,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "ataqued_12",
+            "frame": {
+                "w": 160,
+                "h": 154,
+                "x": 1760,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "ataqued_13",
+            "frame": {
+                "w": 160,
+                "h": 154,
+                "x": 1920,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "ataqued_14",
+            "frame": {
+                "w": 160,
+                "h": 154,
+                "x": 2080,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "ataqued_15",
+            "frame": {
+                "w": 160,
+                "h": 154,
+                "x": 2240,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "ataqued_16",
+            "frame": {
+                "w": 160,
+                "h": 154,
+                "x": 2400,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "ataqued_17",
+            "frame": {
+                "w": 160,
+                "h": 154,
+                "x": 2560,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "camina_diablo_1",
+            "frame": {
+                "w": 162,
+                "h": 159,
+                "x": 2720,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "camina_diablo_2",
+            "frame": {
+                "w": 163,
+                "h": 160,
+                "x": 2882,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "camina_diablo_3",
+            "frame": {
+                "w": 163,
+                "h": 160,
+                "x": 3045,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "camina_diablo_4",
+            "frame": {
+                "w": 163,
+                "h": 160,
+                "x": 3208,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "camina_diablo_5",
+            "frame": {
+                "w": 163,
+                "h": 160,
+                "x": 3371,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "camina_diablo_6",
+            "frame": {
+                "w": 163,
+                "h": 160,
+                "x": 3534,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "golpeado_diablo_1",
+            "frame": {
+                "w": 163,
+                "h": 160,
+                "x": 3697,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "golpeado_diablo_2",
+            "frame": {
+                "w": 163,
+                "h": 160,
+                "x": 3860,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "golpeado_diablo_3",
+            "frame": {
+                "w": 163,
+                "h": 160,
+                "x": 4023,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "golpeado_diablo_4",
+            "frame": {
+                "w": 163,
+                "h": 160,
+                "x": 4186,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "golpeado_diablo_5",
+            "frame": {
+                "w": 164,
+                "h": 160,
+                "x": 4349,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "golpeado_diablo_6",
+            "frame": {
+                "w": 163,
+                "h": 160,
+                "x": 4513,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "muerte_diablo_1",
+            "frame": {
+                "w": 160,
+                "h": 157,
+                "x": 4676,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "muerte_diablo_2",
+            "frame": {
+                "w": 161,
+                "h": 158,
+                "x": 4836,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "muerte_diablo_3",
+            "frame": {
+                "w": 160,
+                "h": 157,
+                "x": 4997,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "muerte_diablo_4",
+            "frame": {
+                "w": 160,
+                "h": 157,
+                "x": 5157,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "muerte_diablo_5",
+            "frame": {
+                "w": 160,
+                "h": 157,
+                "x": 5317,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "muerte_diablo_6",
+            "frame": {
+                "w": 160,
+                "h": 157,
+                "x": 5477,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "muerte_diablo_7",
+            "frame": {
+                "w": 160,
+                "h": 157,
+                "x": 5637,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "muerte_diablo_8",
+            "frame": {
+                "w": 160,
+                "h": 157,
+                "x": 5797,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "muerte_diablo_9",
+            "frame": {
+                "w": 160,
+                "h": 157,
+                "x": 5957,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "muerte_diablo_10",
+            "frame": {
+                "w": 160,
+                "h": 157,
+                "x": 6117,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "muerte_diablo_11",
+            "frame": {
+                "w": 160,
+                "h": 157,
+                "x": 6277,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "muerte_diablo_12",
+            "frame": {
+                "w": 160,
+                "h": 157,
+                "x": 6437,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "muerte_diablo_13",
+            "frame": {
+                "w": 160,
+                "h": 157,
+                "x": 6597,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "muerte_diablo_14",
+            "frame": {
+                "w": 160,
+                "h": 157,
+                "x": 6757,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "muerte_diablo_15",
+            "frame": {
+                "w": 160,
+                "h": 157,
+                "x": 6917,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "muerte_diablo_16",
+            "frame": {
+                "w": 160,
+                "h": 157,
+                "x": 7077,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        }
+    ],
+    "meta": {
+        "description": "Atlas generado con Atlas Packer Gamma V2",
+        "web": "https://gammafp.github.io/atlas-packer-phaser/"
+    }
+}
