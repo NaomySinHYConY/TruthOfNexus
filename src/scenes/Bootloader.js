@@ -185,15 +185,15 @@ class Bootloader extends Phaser.Scene{
         this.comenzar.on(eventos.POINTER_DOWN, () => {
             //Escena dummie
             this.scene.stop(this);
-            //this.scene.start('Scene_1');
+            this.scene.start('Scene_puzzle2');
 
-            this.scene.transition({
-                target: 'Scene_1',
-                duration: 4000,
-                moveBelow: true,
-                onUpdate: this.transitionOut,
-                data: { x: 500, y: 320 }
-            });
+            // this.scene.transition({
+            //     target: 'Scene_puzzle2',
+            //     duration: 4000,
+            //     moveBelow: true,
+            //     onUpdate: this.transitionOut,
+            //     data: { x: 500, y: 320 }
+            // });
             //this.scene.launch('Scene_estado');
         });
         this.cerrar.on(eventos.POINTER_DOWN, () => {

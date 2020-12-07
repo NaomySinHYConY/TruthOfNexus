@@ -1,0 +1,52 @@
+{
+    "anims": [
+        {
+            "key": "walk",
+            "type": "frames",
+            "repeat": -1,
+            "frameRate": 10,
+            "frames": [
+                {
+                    "key": "slime",
+                    "frame": "walk_1"
+                },
+                {
+                    "key": "slime",
+                    "frame": "walk_2"
+                },
+                {
+                    "key": "slime",
+                    "frame": "walk_3"
+                },
+                {
+                    "key": "slime",
+                    "frame": "walk_4"
+                },
+                {
+                    "key": "slime",
+                    "frame": "walk_5"
+                },
+                {
+                    "key": "slime",
+                    "frame": "walk_6"
+                },
+                {
+                    "key": "slime",
+                    "frame": "walk_7"
+                },
+                {
+                    "key": "slime",
+                    "frame": "walk_8"
+                },
+                {
+                    "key": "slime",
+                    "frame": "walk_9"
+                },
+                {
+                    "key": "slime",
+                    "frame": "walk_10"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,47 @@
+{
+    "frames": [
+        {
+            "filename": "piedras1",
+            "frame": {
+                "w": 82,
+                "h": 61,
+                "x": 1,
+                "y": 1
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "piedras2",
+            "frame": {
+                "w": 82,
+                "h": 61,
+                "x": 85,
+                "y": 1
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "piedras3",
+            "frame": {
+                "w": 82,
+                "h": 61,
+                "x": 169,
+                "y": 1
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        }
+    ],
+    "meta": {
+        "description": "Atlas generado con Atlas Packer Gamma V2",
+        "web": "https://gammafp.github.io/atlas-packer-phaser/"
+    }
+}
