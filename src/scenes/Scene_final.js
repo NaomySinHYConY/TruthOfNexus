@@ -72,7 +72,7 @@ class Scene_final extends Phaser.Scene{
         this.data.set('monedas', 0);
         this.data.set('vidas', 4);
 
-        this.scene.launch('Scene_estado');
+        //this.scene.launch('Scene_estado');
 
         this.fondo = this.add.sprite(0, 0, 'fondo', 1).setOrigin(0).setInteractive();
         this.physics.add.existing(this.fondo, true);

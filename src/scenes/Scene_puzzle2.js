@@ -157,7 +157,7 @@ class Scene_puzzle2 extends Phaser.Scene{
         this.physics.add.overlap(this.nexus,this.zonaInicial);
         this.physics.add.overlap(this.nexus, this.hoyos2, this.caida, null, this);
         this.physics.add.overlap(this.grupoMonstruos2,this.nexus, this.choqueNexus, null, this);
-        // this.physics.add.overlap(this.nexus, this.salida, this.salir, null, this);
+        this.physics.add.overlap(this.nexus, this.salida2, this.salir, null, this);
 
         //Controles
         //this.nexusWalkA = this.input.keyboard.addKey(keyCodes.U);
