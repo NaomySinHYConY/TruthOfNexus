@@ -153,13 +153,14 @@ class Scene_nivel5 extends Phaser.Scene{
         });
 
         this.mono = this.physics.add.sprite(720,50, 'mono_all', 0).setInteractive();
-        //this.mono.setScale(0.55);
-        this.mono.setScale(0.4);
+        this.mono.setScale(0.55);
+        //this.mono.setScale(0.4);
         this.mono.setName('Mono');
         this.mono.setCollideWorldBounds(true);
         this.mono.body.setSize(65,85);
         this.mono.body.setOffset(1,-10);
-        this.mono.anims.play('mono_eat');
+        this.mono.setVisible(false);
+        //this.mono.anims.play('mono_eat');
 
         this.ball_1 = this.physics.add.sprite(140, 700, 'ball').setInteractive();
         this.ball_1.body.setCircle(35);
@@ -312,6 +313,12 @@ class Scene_nivel5 extends Phaser.Scene{
                     this.giro_mono = 720;
                     this.mono.flipX = true;  
                 }
+               /* this.mono.tint = 0xff0000;
+                this.time.delayedCall(300, function(){  
+                    console.log('entraaaaa');
+                    this.mono.tint = 0x0000ff;
+                }, [], this);*/
+                this.mono.setTint(Math.random() * 0xffffff);
             }
             
 
@@ -459,15 +466,15 @@ class Scene_nivel5 extends Phaser.Scene{
         //Si se destruyen las sombras, el mono se va enojando xD
         //console.log(this.shadows.children.size);
         if(this.shadows.children.size == 3){
-            this.mono.setScale(0.55);
-            this.mono.anims.play('mono_jump');
+            this.mono.setVisible(true);
+            this.mono.anims.play('mono_eat');
         }else if(this.shadows.children.size == 2){
-            this.mono.anims.play('mono_walk');
-            this.mono.body.velocity.x = 100;
             this.flag = true;
+            this.mono.anims.play('mono_jump');
         }
         else if(this.shadows.children.size == 1){
-            //pintar al mono
+            this.mono.anims.play('mono_walk');
+            this.mono.body.velocity.x = 100;
         }
     }
 
