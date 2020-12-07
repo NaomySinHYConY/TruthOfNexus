@@ -120,7 +120,7 @@ class Scene_final extends Phaser.Scene{
 
         //Enemigos
         this.diablo = this.physics.add.sprite(500, 100, 'diablo', 0).setOrigin(0.5).setInteractive().setScale(1.3);
-        this.diablo.body.setSize(50, 120);
+        this.diablo.body.setSize(80, 120);
         // this.diablo.setOffset(10, -20);
         //this.diablo.body.setCircle(60);
         this.diablo.anims.play('diablo_camina');
@@ -364,7 +364,7 @@ class Scene_final extends Phaser.Scene{
                 ease: 'Power2',
                 //y:posInY+50,
                 x:{
-                    value: this.diablo.x+=100,
+                    value: this.diablo.x+=70,
                     duration: 1000
                 },
                 repeat: 0,
@@ -390,8 +390,10 @@ class Scene_final extends Phaser.Scene{
                 this.data.list.VidasWilson = this.data.list.VidasWilson-1;
                 this.registry.events.emit('Wilson_golpeado');
             }else if(this.data.list.VidasWilson==0){
+                this.diablo.body.enable = false;
                 this.diablo.body.setVelocityX(0);
                 this.diablo.anims.stop();
+                this.diablo.x-=30,
                 this.diablo.anims.play('diablo_muere');
                 console.log('ya me chingaste we');
             }
