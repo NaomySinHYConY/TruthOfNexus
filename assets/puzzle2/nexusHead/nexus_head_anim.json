@@ -1,0 +1,92 @@
+{
+    "anims": [
+        {
+            "key": "nexus_dead",
+            "type": "frames",
+            "repeat": 0,
+            "frameRate": 8,
+            "frames": [
+                {
+                    "key": "nexus_head",
+                    "frame": "dead_1"
+                },
+                {
+                    "key": "nexus_head",
+                    "frame": "dead_2"
+                },
+                {
+                    "key": "nexus_head",
+                    "frame": "dead_3"
+                },
+                {
+                    "key": "nexus_head",
+                    "frame": "dead_4"
+                },
+                {
+                    "key": "nexus_head",
+                    "frame": "dead_5"
+                },
+                {
+                    "key": "nexus_head",
+                    "frame": "dead_6"
+                },
+                {
+                    "key": "nexus_head",
+                    "frame": "dead_5"
+                }
+            ]
+        },
+        {
+            "key": "nexus_fall",
+            "type": "frames",
+            "repeat": -1,
+            "frameRate": 12,
+            "frames": [
+                {
+                    "key": "nexus_head",
+                    "frame": "head_1"
+                },
+                {
+                    "key": "nexus_head",
+                    "frame": "head_2"
+                },
+                {
+                    "key": "nexus_head",
+                    "frame": "head_3"
+                },
+                {
+                    "key": "nexus_head",
+                    "frame": "head_4"
+                },
+                {
+                    "key": "nexus_head",
+                    "frame": "head_5"
+                },
+                {
+                    "key": "nexus_head",
+                    "frame": "head_6"
+                },
+                {
+                    "key": "nexus_head",
+                    "frame": "head_7"
+                },
+                {
+                    "key": "nexus_head",
+                    "frame": "head_8"
+                },
+                {
+                    "key": "nexus_head",
+                    "frame": "head_9"
+                },
+                {
+                    "key": "nexus_head",
+                    "frame": "head_10"
+                },
+                {
+                    "key": "nexus_head",
+                    "frame": "head_11"
+                }
+            ]
+        }
+    ]
+}
