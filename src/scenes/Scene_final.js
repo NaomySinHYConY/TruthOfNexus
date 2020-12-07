@@ -434,6 +434,27 @@ class Scene_final extends Phaser.Scene{
         console.log('ya me chingaste we');
         let DDie = this.sound.add("shadowDie",{loop:false});
         DDie.play();
+
+        this.tweens = this.add.tween({
+            targets: [this.diablo],
+            ease: 'Linear',
+            alpha: 0.5,
+            duration: 4000,
+            onStart: () => {
+                diablo.body.enable = false;
+                                
+                //nexus.anims.play('nexus_dead');
+            },
+            onComplete: () => {
+                //nexus.body.enable = true;
+                diablo.x = 500;
+                diablo.y = 231;
+                diablo.setVelocity(0);
+                diablo.alpha = 1;
+                diablo.setFrame(0);
+                this.input.keyboard.enabled = true;
+            }, 
+        });
     }
 
     transitionOut(progress){
