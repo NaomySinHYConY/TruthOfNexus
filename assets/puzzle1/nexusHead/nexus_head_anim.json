@@ -39,7 +39,7 @@
         {
             "key": "nexus_fall",
             "type": "frames",
-            "repeat": -1,
+            "repeat": 3,
             "frameRate": 12,
             "frames": [
                 {

@@ -69,7 +69,7 @@ class Scene_3 extends Phaser.Scene{
         this.platforms.create(880, 635, 'plataforma_3_gris').setScale(2, 1).setOrigin(0).refreshBody();
 
     //plataformas voladoras
-        this.platforms.create(150, 500, 'plataforma_3_gris').setScale(1.8, 0.3).setOrigin(0).refreshBody();
+        this.platforms.create(150, 500, 'plataforma_3_gris').setScale(1.8, 0.9).setOrigin(0).refreshBody();
         this.platforms.create(320, 400, 'plataforma_3_gris').setScale(1.8, 0.3).setOrigin(0).refreshBody();
         this.platforms.create(438, 200, 'plataforma_3_gris').setScale(2.2, 0.3).setOrigin(0).refreshBody();
     
@@ -83,12 +83,12 @@ class Scene_3 extends Phaser.Scene{
 
     //Sombras Enemigos
         this.mino_vivo = true;
-        this.minotauro = this.physics.add.sprite(500,80, 'minotauro', 0).setInteractive();
-        this.minotauro.setScale(1.7);
+        this.minotauro = this.physics.add.sprite(550,80, 'minotauro', 0).setInteractive();
+        this.minotauro.setScale(1.4);
         this.minotauro.setName('Mino');
         this.minotauro.setOrigin(0.5);
         this.minotauro.body.setSize(50,100);
-        this.minotauro.body.setOffset(30,40);
+        this.minotauro.body.setOffset(30,50);
         this.minotauro.setCollideWorldBounds(true);
         this.minotauro.anims.play('idle');
 
@@ -448,7 +448,9 @@ class Scene_3 extends Phaser.Scene{
                 let win = this.sound.add("impressive",{loop:false});
                 win.play();        
             }
+            this.registry.events.emit('vidasRestantes', this.data.list.vidas);
             this.scene.stop();
+            this.scene.start('Scene_puzzle1');
 /**
  * Escena que sigue
  */

@@ -131,15 +131,15 @@ class Scene_1 extends Phaser.Scene{
         this.plat3.body.setSize(470, 70);
         this.plat3.body.setOffset(0, 250);
 
-        this.fuego = this.physics.add.sprite(180,600,'explosion').setInteractive();
-        this.fuego.body.setCircle(35);
-        this.fuego.body.setImmovable = true;
-        this.fuego.body.setOffset(27,50);
-        this.fuego.anims.play('explotar');
-        this.fuego_2 = this.physics.add.sprite(800,600,'explosion').setInteractive();
-        this.fuego_2.body.setCircle(35);
-        this.fuego_2.body.setOffset(27,50);
-        this.fuego_2.anims.play('explotar');
+        // this.fuego = this.physics.add.sprite(180,600,'explosion').setInteractive();
+        // this.fuego.body.setCircle(35);
+        // this.fuego.body.setImmovable = true;
+        // this.fuego.body.setOffset(27,50);
+        // this.fuego.anims.play('explotar');
+        // this.fuego_2 = this.physics.add.sprite(800,600,'explosion').setInteractive();
+        // this.fuego_2.body.setCircle(35);
+        // this.fuego_2.body.setOffset(27,50);
+        // this.fuego_2.anims.play('explotar');
 
         //Enemigos
         this.shadow = this.physics.add.sprite(500, 300, 'shadow_all', 0).setInteractive().setScale(1.3);
@@ -198,38 +198,38 @@ class Scene_1 extends Phaser.Scene{
         this.physics.add.collider(this.chest,this.fondo);
         this.physics.add.collider(this.chest,this.plat3);
 
-        this.physics.add.collider(this.fuego,this.plat1);
-        this.physics.add.collider(this.fuego,this.plat2);
-        this.physics.add.collider(this.fuego,this.fondo);
-        this.physics.add.collider(this.fuego,this.plat3);
-        this.physics.add.collider(this.fuego,this.nexus);
+        // this.physics.add.collider(this.fuego,this.plat1);
+        // this.physics.add.collider(this.fuego,this.plat2);
+        // this.physics.add.collider(this.fuego,this.fondo);
+        // this.physics.add.collider(this.fuego,this.plat3);
+        // this.physics.add.collider(this.fuego,this.nexus);
 
-        this.physics.add.collider(this.fuego_2,this.plat1);
-        this.physics.add.collider(this.fuego_2,this.plat2);
-        this.physics.add.collider(this.fuego_2,this.fondo);
-        this.physics.add.collider(this.fuego_2,this.plat3);
-        this.physics.add.collider(this.fuego_2,this.nexus);
+        // this.physics.add.collider(this.fuego_2,this.plat1);
+        // this.physics.add.collider(this.fuego_2,this.plat2);
+        // this.physics.add.collider(this.fuego_2,this.fondo);
+        // this.physics.add.collider(this.fuego_2,this.plat3);
+        // this.physics.add.collider(this.fuego_2,this.nexus);
 
         //this.physics.add.collider(this.shadow,this.fondo);
 
-        this.physics.add.overlap(this.nexus, this.fuego, this.muere_nexus, null, this);
-        this.physics.add.overlap(this.nexus, this.fuego_2, this.muere_nexus, null, this);
+        //this.physics.add.overlap(this.nexus, this.fuego, this.muere_nexus, null, this);
+        //this.physics.add.overlap(this.nexus, this.fuego_2, this.muere_nexus, null, this);
         this.physics.add.overlap(this.nexus, this.shadow, this.ataque, null, this);
         this.physics.add.collider(this.nexus, this.aCueva, this.ganar, null, this);
         this.physics.add.overlap(this.shadow, this.fondo, this.shadDi, null, this);
 
-        this.tweenFuego = this.add.tween({
-            targets: [this.fuego, this.fuego_2],
-            ease: 'Power2',
-            //y:posInY+50,
-            y:{
-                value: 10,
-                duration: 2000
-            },
-            repeat: -1,
-            yoyo: true,
-            delay: 1000
-        });
+        // this.tweenFuego = this.add.tween({
+        //     targets: [this.fuego, this.fuego_2],
+        //     ease: 'Power2',
+        //     //y:posInY+50,
+        //     y:{
+        //         value: 10,
+        //         duration: 2000
+        //     },
+        //     repeat: -1,
+        //     yoyo: true,
+        //     delay: 1000
+        // });
 
         this.nexusUp.on('down', () => {
             if(this.nexus.body.touching.down){
@@ -511,15 +511,16 @@ class Scene_1 extends Phaser.Scene{
             
             //this.registry.events.emit('finalOn');
             this.registry.events.emit('vidasRestantes', this.data.list.vidas);
+            this.scene.start('Scene_puzzle0');
             this.scene.stop();
-            this.scene.transition({
-                target: 'Scene_puzzle1',
-                duration: 1000,
-                moveAbove: true,
-                onUpdate: this.transitionOut,
-                data: { x: 500, y: 320 }
-            });
-//            this.scene.launch('Scene_final');
+            // this.scene.transition({
+            //     target: 'Scene_puzzle0',
+            //     duration: 1000,
+            //     moveAbove: true,
+            //     onUpdate: this.transitionOut,
+            //     data: { x: 500, y: 320 }
+            // });
+            
             /*
             en ganar() de escea nivel 1
             this.scene.transition({

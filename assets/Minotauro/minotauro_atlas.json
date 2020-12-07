@@ -1,12 +1,12 @@
 {
     "frames": [
         {
-            "filename": "minotauro_idle_1",
+            "filename": "die_1",
             "frame": {
-                "w": 135,
-                "h": 141,
-                "x": 0,
-                "y": 0
+                "w": 219,
+                "h": 194,
+                "x": 1,
+                "y": 1
             },
             "anchor": {
                 "x": 0.5,
@@ -14,12 +14,12 @@
             }
         },
         {
-            "filename": "minotauro_idle_2",
+            "filename": "die_2",
             "frame": {
-                "w": 139,
-                "h": 140,
-                "x": 135,
-                "y": 0
+                "w": 219,
+                "h": 194,
+                "x": 222,
+                "y": 1
             },
             "anchor": {
                 "x": 0.5,
@@ -27,12 +27,12 @@
             }
         },
         {
-            "filename": "minotauro_idle_3",
+            "filename": "die_3",
             "frame": {
-                "w": 132,
-                "h": 141,
-                "x": 274,
-                "y": 0
+                "w": 219,
+                "h": 194,
+                "x": 443,
+                "y": 1
             },
             "anchor": {
                 "x": 0.5,
@@ -40,12 +40,12 @@
             }
         },
         {
-            "filename": "minotauro_idle_4",
+            "filename": "die_4",
             "frame": {
-                "w": 122,
-                "h": 141,
-                "x": 406,
-                "y": 0
+                "w": 219,
+                "h": 194,
+                "x": 664,
+                "y": 1
             },
             "anchor": {
                 "x": 0.5,
@@ -53,12 +53,12 @@
             }
         },
         {
-            "filename": "minotauro_idle_5",
+            "filename": "die_5",
             "frame": {
-                "w": 105,
-                "h": 141,
-                "x": 528,
-                "y": 0
+                "w": 219,
+                "h": 194,
+                "x": 885,
+                "y": 1
             },
             "anchor": {
                 "x": 0.5,
@@ -66,12 +66,12 @@
             }
         },
         {
-            "filename": "minotauro_idle_6",
+            "filename": "die_6",
             "frame": {
-                "w": 102,
-                "h": 141,
-                "x": 633,
-                "y": 0
+                "w": 219,
+                "h": 194,
+                "x": 1106,
+                "y": 1
             },
             "anchor": {
                 "x": 0.5,
@@ -79,12 +79,12 @@
             }
         },
         {
-            "filename": "minotauro_idle_7",
+            "filename": "die_7",
             "frame": {
-                "w": 116,
-                "h": 141,
-                "x": 735,
-                "y": 0
+                "w": 219,
+                "h": 194,
+                "x": 1327,
+                "y": 1
             },
             "anchor": {
                 "x": 0.5,
@@ -92,12 +92,12 @@
             }
         },
         {
-            "filename": "minotauro_idle_8",
+            "filename": "golpe_7",
             "frame": {
-                "w": 125,
-                "h": 141,
-                "x": 851,
-                "y": 0
+                "w": 219,
+                "h": 194,
+                "x": 1548,
+                "y": 1
             },
             "anchor": {
                 "x": 0.5,
@@ -105,12 +105,12 @@
             }
         },
         {
-            "filename": "minotauro_die_1",
+            "filename": "golpe_1",
             "frame": {
-                "w": 127,
-                "h": 170,
-                "x": 976,
-                "y": 0
+                "w": 219,
+                "h": 194,
+                "x": 1769,
+                "y": 1
             },
             "anchor": {
                 "x": 0.5,
@@ -118,12 +118,12 @@
             }
         },
         {
-            "filename": "minotauro_die_2",
+            "filename": "golpe_2",
             "frame": {
-                "w": 139,
-                "h": 170,
-                "x": 1103,
-                "y": 0
+                "w": 219,
+                "h": 194,
+                "x": 1990,
+                "y": 1
             },
             "anchor": {
                 "x": 0.5,
@@ -131,12 +131,12 @@
             }
         },
         {
-            "filename": "minotauro_die_3",
+            "filename": "golpe_3",
             "frame": {
-                "w": 236,
-                "h": 170,
-                "x": 1242,
-                "y": 0
+                "w": 219,
+                "h": 194,
+                "x": 2211,
+                "y": 1
             },
             "anchor": {
                 "x": 0.5,
@@ -144,12 +144,12 @@
             }
         },
         {
-            "filename": "minotauro_golpe_1",
+            "filename": "golpe_4",
             "frame": {
-                "w": 102,
-                "h": 170,
-                "x": 1478,
-                "y": 0
+                "w": 219,
+                "h": 194,
+                "x": 2432,
+                "y": 1
             },
             "anchor": {
                 "x": 0.5,
@@ -157,12 +157,12 @@
             }
         },
         {
-            "filename": "minotauro_golpe_2",
+            "filename": "golpe_5",
             "frame": {
-                "w": 92,
-                "h": 170,
-                "x": 1580,
-                "y": 0
+                "w": 219,
+                "h": 194,
+                "x": 2653,
+                "y": 1
             },
             "anchor": {
                 "x": 0.5,
@@ -170,12 +170,12 @@
             }
         },
         {
-            "filename": "minotauro_golpe_3",
+            "filename": "golpe_6",
             "frame": {
-                "w": 85,
-                "h": 170,
-                "x": 1672,
-                "y": 0
+                "w": 219,
+                "h": 194,
+                "x": 2874,
+                "y": 1
             },
             "anchor": {
                 "x": 0.5,
@@ -183,12 +183,12 @@
             }
         },
         {
-            "filename": "minotauro_golpe_4",
+            "filename": "idle_1",
             "frame": {
-                "w": 85,
-                "h": 170,
-                "x": 1757,
-                "y": 0
+                "w": 219,
+                "h": 194,
+                "x": 3095,
+                "y": 1
             },
             "anchor": {
                 "x": 0.5,
@@ -196,12 +196,12 @@
             }
         },
         {
-            "filename": "minotauro_golpe_5",
+            "filename": "idle_2",
             "frame": {
-                "w": 100,
-                "h": 170,
-                "x": 1842,
-                "y": 0
+                "w": 219,
+                "h": 194,
+                "x": 3316,
+                "y": 1
             },
             "anchor": {
                 "x": 0.5,
@@ -209,12 +209,12 @@
             }
         },
         {
-            "filename": "minotauro_golpe_6",
+            "filename": "idle_3",
             "frame": {
-                "w": 101,
-                "h": 170,
-                "x": 1942,
-                "y": 0
+                "w": 219,
+                "h": 194,
+                "x": 3537,
+                "y": 1
             },
             "anchor": {
                 "x": 0.5,
@@ -222,12 +222,64 @@
             }
         },
         {
-            "filename": "minotauro_golpe_7",
+            "filename": "idle_4",
             "frame": {
-                "w": 107,
-                "h": 170,
-                "x": 2043,
-                "y": 0
+                "w": 219,
+                "h": 194,
+                "x": 3758,
+                "y": 1
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "idle_5",
+            "frame": {
+                "w": 219,
+                "h": 194,
+                "x": 3979,
+                "y": 1
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "idle_6",
+            "frame": {
+                "w": 219,
+                "h": 194,
+                "x": 4200,
+                "y": 1
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "idle_7",
+            "frame": {
+                "w": 219,
+                "h": 194,
+                "x": 4421,
+                "y": 1
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "idle_8",
+            "frame": {
+                "w": 219,
+                "h": 194,
+                "x": 4642,
+                "y": 1
             },
             "anchor": {
                 "x": 0.5,
