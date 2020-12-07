@@ -150,29 +150,22 @@ class Scene_3 extends Phaser.Scene{
         var posInY =  this.nexus.y;
 
         if( Phaser.Input.Keyboard.JustDown(this.nexusWalkDer)){
-            //band = true;
             this.nexus.setFlipX(true);
-            //this.nexus.body.setSize(50,85);
             this.nexus.body.setOffset(30,30);
             this.nexus.body.velocity.x = 160;
             this.nexus.anims.play('walk');
         }else if(Phaser.Input.Keyboard.JustDown(this.nexusWalkIz)){
-            //band = false;
             this.nexus.setFlipX(false);
             this.nexus.body.velocity.x = -160;
-            //this.nexus.body.setSize(50,85);
             this.nexus.body.setOffset(20,30);
             this.nexus.anims.play('walk');
         }
         else if(Phaser.Input.Keyboard.JustDown(this.nexusDown)){
             this.nexus.body.velocity.y = 160;
             this.nexus.anims.play('jump');
-            //this.nexus.setScale(1.5);
-            //this.nexus.body.setSize(50, 50);
             this.tweensAtaque = this.add.tween({
                 targets: [this.nexus],
                 ease: 'Power2',
-                //y:posInY+50,
                 y:{
                     value: this.nexus.y++,
                     duration: 500
@@ -180,28 +173,20 @@ class Scene_3 extends Phaser.Scene{
                 repeat: 0,
                 onComplete: () => {
                     this.nexus.anims.play('stand');
-                    //this.nexus.body.setOffset(0,0);
-                    //this.nexus.body.setSize(50, 85);
-                    //this.nexus.setX(posInX);
-                    //this.nexus.setY(posInY);
                 }
             });
         }
 
         if(Phaser.Input.Keyboard.JustDown(this.nexusAttack)){
-            //this.nexus.anims.play('attack');
             this.tweensAtaque = this.add.tween({
                 targets: [this.nexus],
                 ease: 'Power2',
-                //y:posInY+50,
                 x:{
-                    //delay: 100,
                     value: posInX+10,
                     ease: 'Circ',
                     duration: 600
                 },
                 y:{
-                    //delay: 100,
                     value: posInY--,
                     duration: 600,
                     offset: true
@@ -222,15 +207,12 @@ class Scene_3 extends Phaser.Scene{
                     this.nexus.anims.play('stand');
                     this.nexus.body.setSize(50,85);
                     this.nexus.setOffset(30,30);
-                    //this.nexus.setX(posInX);
-                    //this.nexus.setY(posInY);
                 }
             });
         }
 
         if( Phaser.Input.Keyboard.JustUp(this.nexusAttack) || Phaser.Input.Keyboard.JustUp(this.nexusWalkDer) || Phaser.Input.Keyboard.JustUp(this.nexusWalkIz) || Phaser.Input.Keyboard.JustUp(this.nexusDown)){
             this.nexus.anims.play('stand');
-            //this.nexus.setFlipX(true);
             this.nexus.clearTint();
             this.nexus.setScale(1.7);
             this.nexus.setAngle(0);
