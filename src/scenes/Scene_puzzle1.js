@@ -18,8 +18,6 @@ class Scene_puzzle1 extends Phaser.Scene{
         this.load.image('ayuda2_3','./assets/consejos/dKarin2_3.png');
         this.load.image('ayuda2_4','./assets/consejos/dKarin2_4.png');
         this.load.image('ayuda2_5','./assets/consejos/dKarin2_5.png');
-        this.load.image('ayuda2_6','./assets/consejos/dKarin2_6.png');
-        this.load.image('ayuda2_7','./assets/consejos/dKarin2_7.png');
 
         this.load.path = './assets/puzzle1/';
         this.load.image(['fondoP', 'fondo-izq', 'fondo-der', 'p1', 'p2', 'p3', 'p4', 'p5', 'p6', 'p7', 'p8', 'p9', 'p10', 'p11', 'p12', 'p13', 'p14', 'p15', 'p16', 'p17', 'p18', 'p19', 'p20', 'p21', 'p22', 'hoyo', 'salida']);

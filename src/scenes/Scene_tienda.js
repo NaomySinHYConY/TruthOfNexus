@@ -5,8 +5,10 @@ class Scene_tienda extends Phaser.Scene{
         });
     }
 
-    init() {
+    init(cantdracmas) {
         console.log('Escena de la tienda');
+        console.log("Tienes: " + cantdracmas);
+        this.data.set('score', cantdracmas);
     }
 
     preload(){
@@ -27,7 +29,7 @@ class Scene_tienda extends Phaser.Scene{
         this.load.image('flechaDER','/shop/flechaDER.png');
         this.load.image('flechaIZ','/shop/flechaIZ.png');
         //Fondo
-        this.load.spritesheet('fondo', 'shop/fondo.png', {
+        this.load.spritesheet('fondoShop', 'shop/fondo.png', {
             frameWidth: 828,
             frameHeight: 358,
             margin: 0,
@@ -104,21 +106,24 @@ class Scene_tienda extends Phaser.Scene{
     }
 
     create() {
+        //this.data.set('score',0);
+        //this.data.set('keys',0);
         const keyCodes = Phaser.Input.Keyboard.KeyCodes;
         const eventos = Phaser.Input.Events;
+
         //Fondo
-        this.fondo = this.add.sprite(0, 0,'fondo',0).setOrigin(0).setDepth(2);
+        this.fondoShop = this.add.sprite(0, 0,'fondoShop',0).setOrigin(0).setDepth(2);
         this.anims.create({
-            key: 'fondo_anim',
-            frames: this.anims.generateFrameNumbers('fondo', {
+            key: 'fondoShop_anim',
+            frames: this.anims.generateFrameNumbers('fondoShop', {
             start: 0,
             end: 11
             }),
             repeat: -1,
             frameRate: 8
         });
-        this.fondo.anims.play('fondo_anim');
-        this.fondo.setScale(1.8);
+        this.fondoShop.anims.play('fondoShop_anim');
+        this.fondoShop.setScale(1.8);
 
         //Piso
         this.piso = this.physics.add.image(0,600,'piso').setOrigin(0).setDepth(3);
@@ -163,15 +168,15 @@ class Scene_tienda extends Phaser.Scene{
         this.vendedor.setDepth(3);
         this.vendedor.setCollideWorldBounds(true);
         //Diálogos del vendedor
-        this.dialogo1 = this.add.image(270,270,'dialogo1').setScale(0.21).setOrigin(0).setDepth(4);
-        this.dialogo2 = this.add.image(270,270,'dialogo2').setScale(0.21).setOrigin(0).setDepth(4).setVisible(false);
-        this.dialogo3 = this.add.image(270,270,'dialogo3').setScale(0.21).setOrigin(0).setDepth(4).setVisible(false);
-        this.dialogo4 = this.add.image(270,270,'dialogo4').setScale(0.21).setOrigin(0).setDepth(4).setVisible(false);
-        this.dialogo5 = this.add.image(270,270,'dialogo5').setScale(0.21).setOrigin(0).setDepth(4).setVisible(false);
-        this.dialogo6 = this.add.image(270,270,'dialogo6').setScale(0.21).setOrigin(0).setDepth(4).setVisible(false);
-        this.dialogo7 = this.add.image(270,270,'dialogo7').setScale(0.21).setOrigin(0).setDepth(4).setVisible(false);
-        this.dialogo8 = this.add.sprite(270,270,'dialogo8').setScale(0.21).setOrigin(0).setDepth(4).setVisible(false).setInteractive();
-        this.dialogo10 = this.add.image(270,270,'dialogo10').setScale(0.21).setOrigin(0).setDepth(4).setVisible(false);
+        this.dialogo1 = this.add.image(270,270,'dialogo1').setScale(0.21).setOrigin(0).setDepth(5).setInteractive();
+        this.dialogo2 = this.add.image(270,270,'dialogo2').setScale(0.21).setOrigin(0).setDepth(5).setVisible(false).setInteractive();
+        this.dialogo3 = this.add.image(270,270,'dialogo3').setScale(0.21).setOrigin(0).setDepth(5).setVisible(false).setInteractive();
+        this.dialogo4 = this.add.image(270,270,'dialogo4').setScale(0.21).setOrigin(0).setDepth(5).setVisible(false).setInteractive();
+        this.dialogo5 = this.add.image(270,270,'dialogo5').setScale(0.21).setOrigin(0).setDepth(5).setAlpha(0).setInteractive();
+        this.d6 = this.add.image(270,270,'dialogo6').setScale(0.21).setOrigin(0).setDepth(5).setAlpha(0).setInteractive();
+        this.dialogo7 = this.add.image(270,270,'dialogo7').setScale(0.21).setOrigin(0).setDepth(5).setVisible(false).setInteractive();
+        this.dialogo8 = this.add.sprite(270,270,'dialogo8').setScale(0.21).setOrigin(0).setDepth(5).setVisible(false).setInteractive();
+        this.d10 = this.add.image(270,270,'dialogo10').setScale(0.21).setOrigin(0).setDepth(5).setAlpha(0).setInteractive();
         //Placas de items
         this.placaVida      = this.add.image(580,70,'pvida').setOrigin(0).setScale(0.8).setDepth(3);
         this.placaDiamante  = this.add.image(580,70,'pdiamante').setOrigin(0).setScale(0.8).setDepth(3).setVisible(false);
@@ -184,7 +189,7 @@ class Scene_tienda extends Phaser.Scene{
         this.flechaD = this.add.image(880,350,'flechaDER').setScale(0.5).setInteractive().setDepth(4);
         //Cargar items
         //--->>Cerveza
-        this.cerveza = this.add.sprite(730,500,'beer',0).setOrigin(0).setScale(0.35).setDepth(4).setInteractive().setVisible(false);
+        this.cerveza = this.add.sprite(730,300,'beer',0).setOrigin(0).setScale(0.35).setDepth(4).setInteractive().setVisible(false);
         this.cerveza.anims.play('beer_idle');
         //--->>Vida
         this.vida = this.add.sprite(680, 300, 'vida', 0).setOrigin(0).setScale(1.5);
@@ -275,6 +280,55 @@ class Scene_tienda extends Phaser.Scene{
         this.physics.add.collider(this.vendedor,this.piso);
 
         this.physics.add.overlap(this.nexus, this.vendedor, this.ataque, null, this);
+
+        this.registry.events.on('cobrarTienda', (cantidad) => {
+            if(this.data.list.score < cantidad){
+                console.log("No te alcanza->Tienda");
+                this.tweensTalk= this.add.tween({
+                    targets: [this.d10],
+                    ease:'Bounce',
+                    y:265,
+                    duration:5000,
+                    repeat: 0,
+                    
+                    onStart: () => {
+                        console.log('Inicia el tween');
+                        this.dialogo1.setAlpha(0);
+                        this.d10.setAlpha(1);
+                    },
+                    onComplete: () => {
+                        this.d10.setAlpha(0);
+                        this.dialogo1.setAlpha(1);
+                    }
+                });
+            }else if(this.data.list.score <= 0){
+                console.log("No tienes dracmas->Tienda");
+                this.tweensTalk= this.add.tween({
+                    targets: [this.d6],
+                    ease:'Bounce',
+                    y:265,
+                    duration:5000,
+                    repeat: 0,
+                    onStart: () => {
+                        console.log('Inicia el tween');
+                        this.d6.setAlpha(1);
+                    },
+                    onComplete: () => {
+                        this.d6.setAlpha(0);
+                    }
+                });
+            }else if(this.data.list.score >= cantidad){
+                console.log("COMPRADO");
+                this.data.list.score -= cantidad;
+                this.comprar = this.sound.add("moneda",{loop:false});
+                this.comprar.play();
+            }
+        });
+
+        this.registry.events.on('robarTienda',() => {
+            this.data.set('score',0);
+            console.log("Te ha robado!");
+        });
 
         //Control para los diálogos
         var contador = 0;
@@ -495,107 +549,34 @@ class Scene_tienda extends Phaser.Scene{
                    
                 }
             }else if(gameObject === this.btn_comprar){
+                console.log("Estamos en el evento de la tienda, tienes: ");
+                console.log(this.data.get('score'));
+
                 this.registry.events.emit('cobrar', precio);
+                this.registry.events.emit('cobrarTienda', precio);
+
+                console.log("Te quedaste con: "+this.data.get('score'));
+
                 if(item === "diamante"){
                     this.registry.events.emit('diamantes', 1);
+                    console.log("Pediste un diamante");
                 }else if(item === "talisman"){
                     this.registry.events.emit('talismanes',1);
+                    console.log("Pediste un talisman");
                 }else if(item === "llave"){
                     this.registry.events.emit('llaves', 1);
+                    console.log("Pediste una llave");
                 }else if(item === "vida"){
                     this.registry.events.emit('vidas',1);
+                    console.log("Pediste una vida");
                 }
-                /*
-                if(this.data.list.score >= precio){
-                    this.comprar = this.sound.add("moneda",{loop:false});
-                    this.comprar.play();
-                }*/
-                
-                /*
-                console.log(this.registry.events.emit('cantidadDracmas'));
-                console.log(precio);
-                if(this.data.list.score >= precio){
-                    this.registry.events.emit('cobrar', precio);
-                    this.comprar = this.sound.add("moneda",{loop:false});
-                    this.comprar.play();
-                }*/
                 
             }else if(gameObject === this.btn_armas){
                 this.scene.start('Scene_armas');
-            }/*else if(gameObject === this.btn_comprar && this.data.list.score <= 0){
-                this.dialogo6.setVisible(true);
-                this.tweensTalk= this.add.tween({
-                    targets: [this.dialogo6],
-                    duration:5000,
-                    repeat: 0,
-                    onStart: () => {
-                        //console.log('Inicia el tween');
-                        this.dialogo6.setAlpha(1);
-                    },
-                    onComplete: () => {
-                        this.dialogo6.setAlpha(0);
-                    }
-                });
-            }else if(gameObject === this.btn_comprar && this.data.list.score < precio){
-                this.dialogo10.setVisible(true);
-                this.tweensTalk= this.add.tween({
-                    targets: [this.dialogo10],
-                    duration:5000,
-                    repeat: 0,
-                    onStart: () => {
-                        //console.log('Inicia el tween');
-                        this.dialogo10.setAlpha(1);
-                    },
-                    onComplete: () => {
-                        this.dialogo10.setAlpha(0);
-                    }
-                });
-            }*/
-
-            if(this.score === 0 || this.score <= 0 ){
-                //this.dialogo5.setVisible(true);
-                this.tweenSinDinero1 = this.add.tween({
-                    targets: [this.dialogo5],
-                    ease: 'Expo',
-                    y:{
-                        value: -2,
-                        duration: 1500
-                    },
-                    repeat: 0,
-                    onStart: () => {
-                        this.vendedor.setScale(1.9);
-                        this.dialogo5.setVisible(true);
-                    },
-                    onComplete: () => {
-                        //this.dialogo6.setAlpha(1);
-                        this.dialogo5.setAlpha(0);
-                        //this.dialogo5.setDepth(5);
-                    }
-                });
-                this.tweenSinDinero = this.add.tween({
-                    targets: [this.dialogo6],
-                    ease: 'Expo',
-                    y:{
-                        value: -8,
-                        duration: 1200
-                    },
-                    repeat: 0,
-                    onStart: () => {
-                        this.vendedor.setScale(2.2);
-                        this.dialogo6.setVisible(true);
-                    },
-                    onComplete: () => {
-                        this.dialogo6.setAlpha(0);
-                        //this.dialogo5.setAlpha(0);
-                        //this.dialogo5.setDepth(5);
-                    }
-                });
             }
-        });
 
-        //En caso de que Nexus no tenga dracmas
-    
-        //Falta el boton o puerta para salir
+            
+        });
        
     }
 
@@ -695,10 +676,9 @@ class Scene_tienda extends Phaser.Scene{
                 }
             });
 
-            //this.score = 0;
-            //this.scoreText.setText(this.score);
-            //this.registry.events.emit('score',this.score);
             this.registry.events.emit('robarDracmas');
+            this.registry.events.emit('robarTienda');
+            
             let end = this.sound.add("laugh",{loop:false});
             end.play();
         }

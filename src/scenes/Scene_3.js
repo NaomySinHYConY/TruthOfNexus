@@ -36,6 +36,15 @@ class Scene_3 extends Phaser.Scene{
 
         //Para cargar el botón de la tienda
         this.load.image('btn_tienda','estado/btn_tienda.png');
+
+        //Karin mono
+        this.load.atlas('mono_all','mono/mono_all.png','mono/mono_all_atlas.json');
+        this.load.animation('monoAnim','mono/mono_all_anim.json');
+
+        this.load.image('ayuda2_6','consejos/dKarin2_6.png');
+        this.load.image('ayuda2_7','consejos/dKarin2_7.png');
+
+        this.load.audio('open_door', 'sounds/open_door.mp3');
     }
 
     create(){
@@ -61,6 +70,28 @@ class Scene_3 extends Phaser.Scene{
         this.physics.add.existing(this.entrada, true);
         this.entrada.body.setSize(50, 400);
         this.entrada.body.setOffset(60, 0);
+
+        //Karin  mono
+        this.mono = this.add.sprite(200, 565, 'mono_all').setInteractive().setScale(0.7);
+        this.mono.anims.play('mono_jump');
+        //Consejos
+
+        this.consejo2_6 = this.add.image(240,450,'ayuda2_6').setDepth(3).setScale(0.17).setInteractive();
+        this.consejo2_7 = this.add.image(240,450,'ayuda2_7').setDepth(3).setScale(0.17).setVisible(false).setInteractive();
+
+        var num = 1;
+
+        this.input.on(eventos.GAMEOBJECT_UP,(pointer,gameObject) =>{
+            num = num+1;
+            if(num === 2){
+                this.consejo2_6.setVisible(false);
+                this.consejo2_7.setVisible(true);
+            }else if(num === 3){
+                this.consejo2_7.setVisible(false);
+                this.mono.destroy();
+            }
+        });
+
 
     //plataformas
         this.platforms = this.physics.add.staticGroup();
@@ -147,7 +178,9 @@ class Scene_3 extends Phaser.Scene{
             if(gameObject === this.btn_tienda){
                 //this.scene.stop();
                 this.scene.stop();
-                this.scene.launch('Scene_tienda');
+                this.scene.launch('Scene_tienda',140);
+                let open_door = this.sound.add("open_door",{loop:false});
+                open_door.play();
                 this.registry.events.emit('dame_datos', 0);
             }
         });
