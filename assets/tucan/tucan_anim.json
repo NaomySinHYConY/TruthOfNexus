@@ -1,0 +1,32 @@
+{
+    "anims": [
+        {
+            "key": "tucan_fly",
+            "type": "frames",
+            "repeat": -1,
+            "frameRate": 7,
+            "frames": [
+                {
+                    "key": "tucan",
+                    "frame": "tuc_1"
+                },
+                {
+                    "key": "tucan",
+                    "frame": "tuc_2"
+                },
+                {
+                    "key": "tucan",
+                    "frame": "tuc_3"
+                },
+                {
+                    "key": "tucan",
+                    "frame": "tuc_4"
+                },
+                {
+                    "key": "tucan",
+                    "frame": "tuc_5"
+                }
+            ]
+        }
+    ]
+}
