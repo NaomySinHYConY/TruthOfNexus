@@ -279,7 +279,7 @@ class Scene_puzzle1 extends Phaser.Scene{
                 //nexus.y = 600;
                 //nexus.alpha = 1;
                 this.scene.stop();
-                this.scene.start('Scene_puzzle2');
+                this.scene.start('Scene_5');
                 this.registry.events.emit('dame_datos', 0);
                 
             }, 
