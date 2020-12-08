@@ -14,8 +14,17 @@ class Scene_puzzle1_caida extends Phaser.Scene{
     preload(){
         this.load.path = './assets/puzzle1/';
         this.load.image(['fondoCaida', 'puerta']);
+        this.load.atlas('chest','cofre/chest.png','cofre/chest_atlas.json');
+        this.load.animation('chestAnim','cofre/chest_anim.json');
+        
+        this.load.atlas('dracmas','dracma/dracmas.png','dracma/dracma_atlas.json');
+        this.load.animation('dracmasAnim','dracma/dracma_anim.json');
+
     }
     create() {
+        this.data.set('monedas', 0);
+        
+        this.data.set('dracmas', 0);
         
         this.cameras.main.setViewport(0, 0, 1000, 640)
         .fadeOut(2000)
@@ -28,8 +37,6 @@ class Scene_puzzle1_caida extends Phaser.Scene{
         });
         const keyCodes = Phaser.Input.Keyboard.KeyCodes;
 
-
-
         this.velocidadNexus = 300;
         this.musica();
         this.fondo = this.add.image(500, 320, 'fondoCaida');
@@ -40,7 +47,12 @@ class Scene_puzzle1_caida extends Phaser.Scene{
         this.nexus = this.physics.add.sprite(this.data.list.X, this.data.list.Y, 'nexus_head').setInteractive().setScale(1.3).setCollideWorldBounds(true);
         this.nexus.body.allowGravity = false;
 
-        
+        this.chest = this.physics.add.sprite(500,320,'chest').setInteractive().setScale(0.6);
+        this.chest.setDepth(2);
+        this.chest.setImmovable(true);
+        //this.chest.body.setMass(2);
+        this.chest.body.allowGravity = false;
+        //this.chest.setCollideWorldBounds(true);
 
         this.physics.add.collider(this.puerta,this.nexus, this.subir, null, this);
 
@@ -48,6 +60,21 @@ class Scene_puzzle1_caida extends Phaser.Scene{
         this.nexusWalkDer = this.input.keyboard.addKey(keyCodes.RIGHT);
         this.nexusUp = this.input.keyboard.addKey(keyCodes.UP);
         this.nexusDown = this.input.keyboard.addKey(keyCodes.DOWN);
+        this.abrir = this.input.keyboard.addKey(keyCodes.ENTER);
+    }
+
+    recoger(nexus, dracmas)
+    {
+    //console.log("Emite moneda");
+       dracmas.destroy();
+       this.data.list.dracmas += 20;
+       //console.log(this.score);
+       this.registry.events.emit('recogeMoneda', 20);
+       //this.scene.launch('Scene_estado');
+    //    this.score += 20;
+       this.recoge = this.sound.add("moneda",{loop:false});
+       this.recoge.play();
+    //    this.scoreText.setText(this.score);
     }
 
     musica(){
@@ -119,6 +146,30 @@ class Scene_puzzle1_caida extends Phaser.Scene{
         if( Phaser.Input.Keyboard.JustUp(this.nexusWalkDer) || Phaser.Input.Keyboard.JustUp(this.nexusWalkIz) || Phaser.Input.Keyboard.JustUp(this.nexusDown)
         || Phaser.Input.Keyboard.JustUp(this.nexusUp) ){
             this.nexus.body.setVelocity(0);
+        }
+
+        if(Phaser.Input.Keyboard.JustDown(this.abrir) && this.data.list.dracmas<500 && this.data.list.monedas<6){
+            this.chest.anims.play('abrir');
+            let cofreOpen = this.sound.add("cofreOpen",{loop:false});
+            cofreOpen.play();
+            
+            this.grupod = this.physics.add.group({
+                key: 'dracmas',
+                repeat: 1,
+                setXY: { x:460, y: 320, stepX: 80 }
+            });
+            
+            this.grupod.children.iterate( (girar) => {
+                girar.setScale(0.9);
+                girar.setDepth(3);
+                girar.body.allowGravity = false;
+                //girar.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+            });
+    
+            this.grupod.playAnimation('dracma');
+            //this.physics.add.collider(this.grupod,this.paredes0);
+            this.physics.add.overlap(this.nexus, this.grupod, this.recoger, null, this);
+            this.data.list.monedas+=2;
         }
     }
 

@@ -35,8 +35,8 @@ class Scene_estado extends Phaser.Scene{
         //console.log('Datos escena estado');
         //console.log(this.data.getAll());
         //this.score = 0;
-        this.titleDracmas = this.add.image(840, 45, 'cantDracmas').setScale(0.9);
-        this.scoreText = this.add.text(920, 30, '0', { fontSize: '32px', fill: '#fff' });
+        this.titleDracmas = this.add.image(825, 45, 'cantDracmas').setScale(0.9);
+        this.scoreText = this.add.text(915, 30, '0', { fontSize: '32px', fill: '#fff' });
 
         //Barra de vida
         this.barra = this.add.image(120, 50, 'barraVida');
@@ -86,10 +86,34 @@ class Scene_estado extends Phaser.Scene{
 
         //Recepción de evento al recoger monedas
         this.registry.events.on('recogeMoneda', (valorMoneda) => {
+            if(this.data.list.score<=980){
+                this.data.list.score+=valorMoneda;
+                this.scoreText.setText(this.data.list.score);
+            }
+            else{
+                this.tweens = this.add.tween({
+                    targets: [this.scoreText],
+                    ease: 'Linear',
+                    scaleY: {
+                        value: 1.1,
+                        duration: 200
+                    },
+                    scaleX:{
+                        value: 1.1,
+                        duration:200,
+                        offset: true
+                    },
+                    duration: 200,
+                    yoyo: true,
+                    repeat: -1
+                    //repeatDelay:5000,
+                    //hold: 2000,
+                    //delay: 3000
             //console.log("Recibe moneda");
-            this.data.list.score+=valorMoneda;
-            this.scoreText.setText(this.data.list.score);
             //console.log('Se ha emitido el evento score = ', this.score);
+                });
+            }
+
         });
 
         //Recepción de evento al morir

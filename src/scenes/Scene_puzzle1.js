@@ -16,9 +16,19 @@ class Scene_puzzle1 extends Phaser.Scene{
         this.load.animation('mCuevaAnim','mCueva/monstruo_fly_anim.json');
         this.load.atlas('nexus_head','nexusHead/nexus_head.png','nexusHead/nexus_head_atlas.json');
         this.load.animation('nexusHeadAnim','nexusHead/nexus_head_anim.json');
+        this.load.atlas('chest','cofre/chest.png','cofre/chest_atlas.json');
+        this.load.animation('chestAnim','cofre/chest_anim.json');
+        
+        this.load.atlas('dracmas','dracma/dracmas.png','dracma/dracma_atlas.json');
+        this.load.animation('dracmasAnim','dracma/dracma_anim.json');
+
+        this.load.atlas('key','key/key.png','key/key_atlas.json');
+        this.load.animation('keyAnim','key/key_anim.json');
+
 
         this.load.audio("fondopuzzle", ["../sounds/puzzle.mp3"]);
         
+        this.load.audio("moneda", ["../sounds/moneda.mp3"]);
         this.load.audio("golpe", ["../sounds/golpe.mp3"]);
         this.load.audio("sPuzzle8", ["../sounds/sPuzzle8.mp3"]);
         
@@ -28,8 +38,11 @@ class Scene_puzzle1 extends Phaser.Scene{
     }
 
     create() {
+        this.data.set('monedas', 0);
         
-        //console.log(this.data.getAll());
+        this.data.set('dracmas', 0);
+        
+        console.log(this.data.getAll());
 
         this.cameras.main.setViewport(0, 0, 1000, 640)
         .fadeOut(2000)
@@ -121,6 +134,26 @@ class Scene_puzzle1 extends Phaser.Scene{
             h.body.setSize(50,5);
         });
 
+        this.chest = this.physics.add.sprite(965,300,'chest').setInteractive().setScale(0.6);
+        this.chest.setDepth(2);
+        this.chest.setImmovable(true);
+        //this.chest.body.setMass(2);
+        this.chest.body.allowGravity = false;
+        this.chest.setCollideWorldBounds(true);
+
+        this.keys = this.physics.add.group();
+        this.keys.create(220.5, 526.5, 'key');
+        this.keys.create(730.5, 430.5, 'key');
+
+        this.keys.children.iterate((h) =>{
+            h.body.allowGravity = false;
+            h.setScale(0.7);
+            //h.setImmovable(true);
+            //h.body.setSize(50,5);
+        });
+
+        this.keys.playAnimation('key_roll');
+        //this.physics.add.collider(this.keys, this.platforms);
         
         this.nexus = this.physics.add.sprite(30, 600, 'nexus_head').setInteractive().setScale(1.3).setCollideWorldBounds(true);
         this.nexus.body.allowGravity = false;
@@ -137,6 +170,8 @@ class Scene_puzzle1 extends Phaser.Scene{
         this.physics.add.overlap(this.nexus,this.grupoMonstruos, this.choqueNexus, null, this);
         this.physics.add.overlap(this.nexus, this.hoyos, this.caida, null, this);
         this.physics.add.overlap(this.nexus, this.salida, this.salir, null, this);
+        this.physics.add.overlap(this.nexus, this.keys, this.toma_keys, null, this);
+
 
         //Controles
         //this.nexusWalkA = this.input.keyboard.addKey(keyCodes.U);
@@ -144,8 +179,34 @@ class Scene_puzzle1 extends Phaser.Scene{
         this.nexusWalkDer = this.input.keyboard.addKey(keyCodes.RIGHT);
         this.nexusUp = this.input.keyboard.addKey(keyCodes.UP);
         this.nexusDown = this.input.keyboard.addKey(keyCodes.DOWN);
-
+        this.abrir = this.input.keyboard.addKey(keyCodes.ENTER);
     }
+
+    toma_keys(nexus, keys){
+        console.log("Recoge llave");
+        keys.destroy();
+        //this.data.list.keys += 1;
+
+//Por si se suman a las llaves de la tienda aqui se descomenta
+        this.registry.events.emit('adquiereLlave');
+        let recoge = this.sound.add("moneda",{loop:false});
+        recoge.play();
+    }
+
+    recoger(nexus, dracmas)
+    {
+    //console.log("Emite moneda");
+       dracmas.destroy();
+       this.data.list.dracmas += 20;
+       //console.log(this.score);
+       this.registry.events.emit('recogeMoneda', 20);
+       //this.scene.launch('Scene_estado');
+    //    this.score += 20;
+       this.recoge = this.sound.add("moneda",{loop:false});
+       this.recoge.play();
+    //    this.scoreText.setText(this.score);
+    }
+
 
     choquePared(pared, monstruo){
         let direccion = monstruo.body.velocity.x;
@@ -316,6 +377,30 @@ class Scene_puzzle1 extends Phaser.Scene{
         if( Phaser.Input.Keyboard.JustUp(this.nexusWalkDer) || Phaser.Input.Keyboard.JustUp(this.nexusWalkIz) || Phaser.Input.Keyboard.JustUp(this.nexusDown)
         || Phaser.Input.Keyboard.JustUp(this.nexusUp) ){
             this.nexus.body.setVelocity(0);
+        }
+
+        if(Phaser.Input.Keyboard.JustDown(this.abrir) && this.data.list.dracmas<140 && this.data.list.monedas<6){
+            this.chest.anims.play('abrir');
+            let cofreOpen = this.sound.add("cofreOpen",{loop:false});
+            cofreOpen.play();
+            
+            this.grupod = this.physics.add.group({
+                key: 'dracmas',
+                repeat: 3,
+                setXY: { x:968, y: 180, stepY: 65 }
+            });
+            
+            this.grupod.children.iterate( (girar) => {
+                girar.setScale(0.9);
+                girar.setDepth(3);
+                girar.body.allowGravity = false;
+                //girar.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+            });
+    
+            this.grupod.playAnimation('dracma');
+            //this.physics.add.collider(this.grupod,this.paredes0);
+            this.physics.add.overlap(this.nexus, this.grupod, this.recoger, null, this);
+            this.data.list.monedas+=3;
         }
     }
 }
