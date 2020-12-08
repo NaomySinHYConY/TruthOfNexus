@@ -334,7 +334,7 @@ class Scene_1 extends Phaser.Scene{
             this.chest.anims.play('abrir');
             let cofreOpen = this.sound.add("cofreOpen",{loop:false});
             cofreOpen.play();
-            this.chest.destroy();
+            //this.chest.destroy();
             
             this.grupod = this.physics.add.group({
                 key: 'dracmas',

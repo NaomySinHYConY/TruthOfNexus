@@ -140,7 +140,7 @@ class Scene_tienda extends Phaser.Scene{
         this.nexus.setOrigin(0.5);
         this.nexus.setDepth(4);
         this.nexus.body.setSize(50,85);
-        this.nexus.body.setOffset(-10,0);
+        this.nexus.body.setOffset(30, 30);
         this.nexus.setCollideWorldBounds(true);
 
         //Controles de Nexus
@@ -583,14 +583,14 @@ class Scene_tienda extends Phaser.Scene{
             }else if(gameObject === this.btn_armas){
                 this.scene.start('Scene_armas');
             }else if(gameObject === this.btn_salir){
+                this.registry.events.emit('botonTienda','Scene_tienda');
                 //this.scene.resume(this.registry.list.escena);
                 this.scene.stop();
                 this.scene.resume('Scene_tienda');
             }
-
             
         });
-       
+        this.registry.events.emit('botonTiendaOff','Scene_tienda');
     }
 
 

@@ -9,11 +9,20 @@ class Scene_puzzle0 extends Phaser.Scene{
         console.log('Escena del primer puzzle, el tutorial');
     }
     preload(){
-        
+        //Karin
+        this.load.image('ayuda2_1','./assets/consejos/dKarin2_1.png');
+        this.load.image('ayuda2_2','./assets/consejos/dKarin2_2.png');
+        this.load.image('ayuda2_3','./assets/consejos/dKarin2_3.png');
+        this.load.image('ayuda2_4','./assets/consejos/dKarin2_4.png');
+        this.load.image('ayuda2_5','./assets/consejos/dKarin2_5.png');
         this.load.path = './assets/puzzle1/';
+        //Dialogos de Karin
+        
         this.load.image(['fondoP', 'fondo-izq', 'fondo-der', 'p1', 'p2', 'p3', 'p4', 'p5', 'p6', 'p7', 'p8', 'p9', 'p10', 'p11', 'p12', 'p13', 'p14', 'p15', 'p16', 'p17', 'p18', 'p19', 'p20', 'p21', 'p22', 'hoyo', 'salida']);
         // this.load.atlas('monstruo_fly','mCueva/monstruo_fly.png','mCueva/monstruo_fly_atlas.json');
         // this.load.animation('mCuevaAnim','mCueva/monstruo_fly_anim.json');
+        this.load.atlas('tucan','../tucan/tucan.png','../tucan/tucan_atlas.json');
+        this.load.animation('tucanAnim','../tucan/tucan_anim.json');
         this.load.atlas('nexus_head','nexusHead/nexus_head.png','nexusHead/nexus_head_atlas.json');
         this.load.animation('nexusHeadAnim','nexusHead/nexus_head_anim.json');
 
@@ -35,6 +44,31 @@ class Scene_puzzle0 extends Phaser.Scene{
     }
 
     create() {
+        const eventos = Phaser.Input.Events;
+        //Karin
+        this.tucan = this.add.sprite(85, 550, 'tucan').setInteractive().setScale(0.85).setDepth(2);
+        this.tucan.anims.play('tucan_fly');
+
+        this.consejo2_1 = this.add.image(120,500,'ayuda2_1').setDepth(3).setScale(0.17).setInteractive();
+        this.consejo2_2 = this.add.image(120,500,'ayuda2_2').setDepth(3).setScale(0.17).setVisible(false).setInteractive();
+        this.consejo2_3 = this.add.image(120,500,'ayuda2_3').setDepth(3).setScale(0.17).setVisible(false).setInteractive();
+        
+
+        var num = 1;
+
+        this.input.on(eventos.GAMEOBJECT_UP,(pointer,gameObject) =>{
+            num = num+1;
+            if(num === 2){
+                this.consejo2_1.setVisible(false);
+                this.consejo2_2.setVisible(true);
+            }else if(num === 3){
+                this.consejo2_2.setVisible(false);
+                this.consejo2_3.setVisible(true);
+            }else if(num === 4){
+                this.consejo2_3.setVisible(false);
+                this.tucan.destroy();
+            }
+        });
         
         //console.log(this.data.getAll());
         this.data.set('monedas', 0);

@@ -62,7 +62,7 @@ class Scene_armas extends Phaser.Scene{
         this.nexus.setOrigin(0.5);
         this.nexus.setDepth(4);
         this.nexus.body.setSize(50,85);
-        this.nexus.body.setOffset(-10,0);
+        this.nexus.body.setOffset(30, 30);
         this.nexus.setCollideWorldBounds(true);
 
         //Vendedor
@@ -117,7 +117,7 @@ class Scene_armas extends Phaser.Scene{
         //Candado
         this.candado = this.add.image(700,305,'candado').setOrigin(0).setScale(0.10).setDepth(5);
         //Dialogo del vendedor
-        this.dialogo = this.add.image(260,260,'dialogo').setScale(0.21).setOrigin(0).setDepth(4).setVisible(false);
+        this.dialogo = this.add.image(260,160,'dialogo').setScale(0.21).setOrigin(0).setDepth(4).setVisible(false);
         //Cargar items necesarios
 
         //--->>Hierro
@@ -135,7 +135,7 @@ class Scene_armas extends Phaser.Scene{
         this.hierro1.setDepth(4);
 
         //--->>Hierro
-        this.hierro2 = this.add.sprite(700, 430, 'hierro', 0).setOrigin(0);
+        this.hierro2 = this.add.sprite(685, 430, 'hierro', 0).setOrigin(0);
         this.anims.create({
             key: 'hierro_anim',
             frames: this.anims.generateFrameNumbers('hierro', {

@@ -61,21 +61,45 @@ class Scene_estado extends Phaser.Scene{
             this.data.set('botonT',escena);
             this.btn_tienda.setVisible(true);
         });
+        this.registry.events.on('botonTiendaOff',(escena) => {
+            this.data.set('botonT',escena);
+            this.btn_tienda.setVisible(false);
+        });
 
         this.registry.events.on('cobrarLlave', () => {
-            this.data.list.llaves--;
-            this.llavesText.setText(this.data.list.llaves);
+            if(this.data.list.llaves>0){
+                this.data.list.llaves--;
+                this.llavesText.setText(this.data.list.llaves);
+                this.registry.events.emit('abrirTienda');
+            }
+            else{
+                this.tweens = this.add.tween({
+                    targets: [this.contenedor],
+                    ease: 'Linear',
+                    y: 521,
+                    duration: 1000,
+                    yoyo: true,
+                    //repeatDelay:5000,
+                    hold: 2000,
+                    //delay: 3000
+                });
+                this.contenedor.setY(612);
+            }
+            
             console.log('Se ha emitido el evento cobranza de llaves ', this.data.list.llaves);
+        });
+
+        this.registry.events.on('abrirTienda', () => {
+            this.scene.launch('Scene_tienda',this.data.list.score,this.data.list.botonT);
+                    let open_door = this.sound.add("open_door",{loop:false});
+                    open_door.play();
         });
 
         this.btn_tienda = this.add.image(840,90,'btn_tienda').setScale(0.20).setInteractive().setDepth(4).setVisible(false);
             this.input.on(eventos.GAMEOBJECT_UP,(pointer,gameObject) =>{
                 if(gameObject === this.btn_tienda){
                     this.registry.events.emit('cobrarLlave');
-                    this.scene.launch('Scene_tienda',this.data.list.score,this.data.list.botonT);
-                    let open_door = this.sound.add("open_door",{loop:false});
-                    open_door.play();
-                    this.registry.events.emit('dame_datos', 0);
+                    //this.registry.events.emit('dame_datos', 0);
                 }
             });
 
@@ -114,6 +138,7 @@ class Scene_estado extends Phaser.Scene{
                 hold: 2000,
                 //delay: 3000
             });
+            this.contenedor.setY(612);
         });
 
         this.registry.events.on('talisman',(valor) => {
