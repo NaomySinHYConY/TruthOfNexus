@@ -117,7 +117,7 @@ class Scene_armas extends Phaser.Scene{
         //Candado
         this.candado = this.add.image(700,305,'candado').setOrigin(0).setScale(0.10).setDepth(5);
         //Dialogo del vendedor
-        this.dialogo = this.add.image(270,270,'dialogo').setScale(0.21).setOrigin(0).setDepth(4).setVisible(false);
+        this.dialogo = this.add.image(260,260,'dialogo').setScale(0.21).setOrigin(0).setDepth(4).setVisible(false);
         //Cargar items necesarios
 
         //--->>Hierro
@@ -180,7 +180,7 @@ class Scene_armas extends Phaser.Scene{
                 this.tweensTalk= this.add.tween({
                     targets: [this.dialogo],
                     ease:'Bounce',
-                    y:275,
+                    y:255,
                     duration:5000,
                     repeat: 0,
                     onStart: () => {

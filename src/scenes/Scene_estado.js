@@ -1,3 +1,5 @@
+
+
 class Scene_estado extends Phaser.Scene{
     constructor(){
         super({
@@ -38,29 +40,40 @@ class Scene_estado extends Phaser.Scene{
         
         //Final
         this.data.set('final',false);
-
-        const eventos = Phaser.Input.Events;
+        //Para los dracmas
+        this.titleDracmas = this.add.image(825, 45, 'cantDracmas').setScale(0.9);
+        this.scoreText = this.add.text(915, 30, '0', { fontSize: '32px', fill: '#fff' });
+        //Se agregan las imágenes del menú de boosters
+        this.botonBoosters = this.add.image(84, 18.5, 'botonBoosters').setInteractive();
+        this.boosters = this.add.image(83.5, 72.5, 'boosters');
+        this.llave = this.add.image(152.5, 74.5, 'llave');
+        this.escudo = this.add.image(14, 74.5, 'escudo').setVisible(this.data.list.escudo);
+        this.videncia = this.add.image(85, 74.5, 'videncia').setVisible(this.data.list.videncia);
+        this.llavesText = this.add.text(132, 77, this.data.list.llaves, { fontSize: '20px', fill: '#fff' });
+         //this.VidenciaText = this.add.text(122, 77, this.data.list.llaves, { fontSize: '20px', fill: '#fff' });
+         //this.EscudoText = this.add.text(112, 77, this.data.list.llaves, { fontSize: '20px', fill: '#fff' });
 
         this.registry.events.on('botonTienda',(escena) => {
             this.data.set('botonT',escena);
             this.btn_tienda.setVisible(true);
         });
 
+        this.registry.events.on('cobrarLlave', () => {
+            this.data.list.llaves--;
+            this.llavesText.setText(this.data.list.llaves);
+            console.log('Se ha emitido el evento cobranza de llaves ', this.data.list.llaves);
+        });
+
         this.btn_tienda = this.add.image(840,90,'btn_tienda').setScale(0.20).setInteractive().setDepth(4).setVisible(false);
             this.input.on(eventos.GAMEOBJECT_UP,(pointer,gameObject) =>{
                 if(gameObject === this.btn_tienda){
+                    this.registry.events.emit('cobrarLlave');
                     this.scene.launch('Scene_tienda',this.data.list.score,this.data.list.botonT);
                     let open_door = this.sound.add("open_door",{loop:false});
                     open_door.play();
                     this.registry.events.emit('dame_datos', 0);
                 }
             });
-    
-
-        this.titleDracmas = this.add.image(825, 45, 'cantDracmas').setScale(0.9);
-        this.scoreText = this.add.text(915, 30, '0', { fontSize: '32px', fill: '#fff' });
-
-        //this.btn_tienda = this.add.image();
 
         this.barra = this.add.image(120, 50, 'barraVida');
 
@@ -75,15 +88,7 @@ class Scene_estado extends Phaser.Scene{
         this.contenedor = this.add.container(415, 612);
         //this.contenedor = this.add.container(815, 521);
         //var container = this.add.container(400, 300);
-
-        //Se agregan las imágenes del menú de boosters
-        this.botonBoosters = this.add.image(84, 18.5, 'botonBoosters').setInteractive();
-        this.boosters = this.add.image(83.5, 72.5, 'boosters');
-        this.llave = this.add.image(152.5, 74.5, 'llave');
-        this.escudo = this.add.image(14, 74.5, 'escudo').setVisible(this.data.list.escudo);
-        this.videncia = this.add.image(85, 74.5, 'videncia').setVisible(this.data.list.videncia);
-        this.llavesText = this.add.text(132, 77, this.data.list.llaves, { fontSize: '20px', fill: '#fff' });
-
+        
         //Se agrega todo al contenedor para que aparezca junto
         this.contenedor.add(this.botonBoosters);
         this.contenedor.add(this.boosters);

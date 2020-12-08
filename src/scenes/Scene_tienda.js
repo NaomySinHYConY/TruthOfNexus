@@ -73,7 +73,7 @@ class Scene_tienda extends Phaser.Scene{
             spacing: 0
         });
 
-        this.load.spritesheet('llave', '/shop/items/llave.png', {
+        this.load.spritesheet('llave_tienda', '/shop/items/llave.png', {
             frameWidth: 60,
             frameHeight: 62,
             margin: 0,
@@ -102,7 +102,7 @@ class Scene_tienda extends Phaser.Scene{
         this.load.audio('laugh', 'sounds/laugh.mp3');
 
         this.load.image('btn_armas','/shop/armas/btn_armas.png');
-        this.load.image('piso','/shop/plataforma.png');
+        this.load.image('piso_tienda','/shop/plataforma.png');
 
         this.load.image('btn_salir','/shop/btn_salir.png');
     }
@@ -128,9 +128,9 @@ class Scene_tienda extends Phaser.Scene{
         this.fondoShop.setScale(1.8);
 
         //Piso
-        this.piso = this.physics.add.image(0,600,'piso').setOrigin(0).setDepth(3);
-        this.piso.setScale(1.3);
-        this.piso.setCollideWorldBounds(true);
+        this.piso_tienda = this.physics.add.image(0,600,'piso_tienda').setOrigin(0).setDepth(3);
+        this.piso_tienda.setScale(1.3);
+        this.piso_tienda.setCollideWorldBounds(true);
 
         //Nexus
         this.nexus = this.physics.add.sprite(80,300, 'nexus_all', 0).setInteractive();
@@ -138,7 +138,7 @@ class Scene_tienda extends Phaser.Scene{
         this.nexus.setName('Nexus');
         this.nexus.setFlipX(true);
         this.nexus.setOrigin(0.5);
-        this.nexus.setDepth(3);
+        this.nexus.setDepth(4);
         this.nexus.body.setSize(50,85);
         this.nexus.body.setOffset(-10,0);
         this.nexus.setCollideWorldBounds(true);
@@ -169,6 +169,7 @@ class Scene_tienda extends Phaser.Scene{
         this.vendedor.body.setOffset(35,20);
         this.vendedor.setDepth(3);
         this.vendedor.setCollideWorldBounds(true);
+
         //Diálogos del vendedor
         this.dialogo1 = this.add.image(270,270,'dialogo1').setScale(0.21).setOrigin(0).setDepth(5).setInteractive();
         this.dialogo2 = this.add.image(270,270,'dialogo2').setScale(0.21).setOrigin(0).setDepth(5).setVisible(false).setInteractive();
@@ -250,25 +251,26 @@ class Scene_tienda extends Phaser.Scene{
         this.hierro.setDepth(4);
 
         //--->>Llave
-        this.llave = this.add.sprite(680, 300, 'llave', 0).setOrigin(0).setVisible(false).setScale(2);
+        
+        this.llave_tienda = this.add.sprite(680, 300, 'llave_tienda', 0).setOrigin(0).setVisible(false).setScale(2);
         this.anims.create({
-            key: 'llave_anim',
-            frames: this.anims.generateFrameNumbers('llave', {
+            key: 'llave_tienda_anim',
+            frames: this.anims.generateFrameNumbers('llave_tienda', {
             start: 0,
             end: 8
             }),
             repeat: -1,
             frameRate: 8
         });
-        this.llave.anims.play('llave_anim');
-        this.llave.setDepth(4);
+        this.llave_tienda.anims.play('llave_tienda_anim');
+        this.llave_tienda.setDepth(4);
 
         //Botones para comprar
-        this.btn_comprar = this.add.image(820,500,'btn_comprar').setDepth(4).setInteractive().setScale(0.55);
+        this.btn_comprar = this.add.image(820,500,'btn_comprar').setDepth(7).setInteractive().setScale(0.55);
         //Botón para pasar al intercambio de armas
-        this.btn_armas = this.add.image(650,500,'btn_armas').setDepth(4).setInteractive().setScale(0.55);
+        this.btn_armas = this.add.image(650,500,'btn_armas').setDepth(7).setInteractive().setScale(0.55);
         //Botón para salir
-        this.btn_salir = this.add.image(850,620,'btn_salir').setScale(0.25).setInteractive().setDepth(5);
+        this.btn_salir = this.add.image(850,620,'btn_salir').setScale(0.25).setInteractive().setDepth(7);
         //Colisión entre el vendedor y Nexus
         
         this.physics.add.collider(this.nexus,this.vendedor, () => {
@@ -278,8 +280,8 @@ class Scene_tienda extends Phaser.Scene{
             this.vendedor.setVelocityY(0);
         });
 
-        this.physics.add.collider(this.nexus,this.piso);
-        this.physics.add.collider(this.vendedor,this.piso);
+        this.physics.add.collider(this.nexus,this.piso_tienda);
+        this.physics.add.collider(this.vendedor,this.piso_tienda);
 
         this.physics.add.overlap(this.nexus, this.vendedor, this.ataque, null, this);
 
@@ -366,7 +368,7 @@ class Scene_tienda extends Phaser.Scene{
                     this.talisman.setVisible(false);
                     this.diamante.setVisible(true);
                     this.hierro.setVisible(false);
-                    this.llave.setVisible(false);
+                    this.llave_tienda.setVisible(false);
                     this.cerveza.setVisible(false);
 
                     item = "diamante";
@@ -385,7 +387,7 @@ class Scene_tienda extends Phaser.Scene{
                     this.vida.setVisible(false);
                     this.talisman.setVisible(true);
                     this.hierro.setVisible(false);
-                    this.llave.setVisible(false);
+                    this.llave_tienda.setVisible(false);
                     this.cerveza.setVisible(false);
 
                     item = "talisman";
@@ -404,7 +406,7 @@ class Scene_tienda extends Phaser.Scene{
                     this.vida.setVisible(false);
                     this.talisman.setVisible(false);
                     this.hierro.setVisible(true);
-                    this.llave.setVisible(false);
+                    this.llave_tienda.setVisible(false);
                     this.cerveza.setVisible(false);
 
                     //Mover placa
@@ -421,7 +423,7 @@ class Scene_tienda extends Phaser.Scene{
                     this.vida.setVisible(false);
                     this.talisman.setVisible(false);
                     this.hierro.setVisible(false);
-                    this.llave.setVisible(true);
+                    this.llave_tienda.setVisible(true);
                     this.cerveza.setVisible(false);
 
                     //Mover placa
@@ -438,7 +440,7 @@ class Scene_tienda extends Phaser.Scene{
                     this.diamante.setVisible(false);
                     this.vida.setVisible(true);
                     this.hierro.setVisible(false);
-                    this.llave.setVisible(false);
+                    this.llave_tienda.setVisible(false);
                     this.cerveza.setVisible(false);
 
                     item = "vida";
@@ -460,7 +462,7 @@ class Scene_tienda extends Phaser.Scene{
                     this.talisman.setVisible(false);
                     this.diamante.setVisible(true);
                     this.hierro.setVisible(false);
-                    this.llave.setVisible(false);
+                    this.llave_tienda.setVisible(false);
                     this.cerveza.setVisible(false);
 
                     item = "diamante";
@@ -479,7 +481,7 @@ class Scene_tienda extends Phaser.Scene{
                     this.vida.setVisible(false);
                     this.talisman.setVisible(true);
                     this.hierro.setVisible(false);
-                    this.llave.setVisible(false);
+                    this.llave_tienda.setVisible(false);
                     this.cerveza.setVisible(false);
                     item = "talisman";
                      //Mover placa
@@ -497,7 +499,7 @@ class Scene_tienda extends Phaser.Scene{
                     this.vida.setVisible(false);
                     this.talisman.setVisible(false);
                     this.hierro.setVisible(true);
-                    this.llave.setVisible(false);
+                    this.llave_tienda.setVisible(false);
                     this.cerveza.setVisible(false);
 
                     //Mover placa
@@ -515,7 +517,7 @@ class Scene_tienda extends Phaser.Scene{
                     this.vida.setVisible(false);
                     this.talisman.setVisible(false);
                     this.hierro.setVisible(false);
-                    this.llave.setVisible(true);
+                    this.llave_tienda.setVisible(true);
                     this.cerveza.setVisible(false);
 
                     item = "llave";
@@ -534,7 +536,7 @@ class Scene_tienda extends Phaser.Scene{
                     this.vida.setVisible(false);
                     this.talisman.setVisible(false);
                     this.hierro.setVisible(false);
-                    this.llave.setVisible(false);
+                    this.llave_tienda.setVisible(false);
                     this.cerveza.setVisible(true);
 
                     item = "cerveza";
@@ -561,12 +563,15 @@ class Scene_tienda extends Phaser.Scene{
 
                 if(item === "diamante"){
                     this.registry.events.emit('diamantes', 1);
+                    this.registry.events.emit('adquiereEscudo');
                     console.log("Pediste un diamante");
                 }else if(item === "talisman"){
                     this.registry.events.emit('talismanes',1);
+                    this.registry.events.emit('adquiereVidencia');
                     console.log("Pediste un talisman");
                 }else if(item === "llave"){
                     this.registry.events.emit('llaves', 1);
+                    this.registry.events.emit('adquiereLlave');
                     console.log("Pediste una llave");
                 }else if(item === "vida"){
                     this.registry.events.emit('vidas',1);
