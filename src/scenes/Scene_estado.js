@@ -38,7 +38,7 @@ class Scene_estado extends Phaser.Scene{
             this.btn_tienda.setVisible(true);
         });
 
-        this.btn_tienda = this.add.image(830,90,'btn_tienda').setScale(0.25).setInteractive().setDepth(4).setVisible(false);
+        this.btn_tienda = this.add.image(840,90,'btn_tienda').setScale(0.20).setInteractive().setDepth(4).setVisible(false);
             this.input.on(eventos.GAMEOBJECT_UP,(pointer,gameObject) =>{
                 if(gameObject === this.btn_tienda){
                     this.scene.launch('Scene_tienda',this.data.list.score,this.data.list.botonT);

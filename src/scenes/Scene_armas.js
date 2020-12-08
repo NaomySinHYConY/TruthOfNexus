@@ -47,7 +47,7 @@ class Scene_armas extends Phaser.Scene{
         this.fondo.anims.play('fondo_anim');
         this.fondo.setScale(1.8);
         //Botón para salir
-        this.btn_salir = this.add.image(850,620,'btn_salir').setScale(0.25).setInteractive().setDepth(5);
+        this.btn_salir = this.add.image(850,620,'btn_salir').setScale(0.20).setInteractive().setDepth(5);
 
         //Piso
         this.piso = this.physics.add.image(0,600,'piso').setOrigin(0).setDepth(3);
@@ -176,10 +176,11 @@ class Scene_armas extends Phaser.Scene{
 
         this.input.on(eventos.GAMEOBJECT_UP,(pointer,gameObject) =>{
             if(gameObject === this.btn_adquirir){
-                console.log("lo presionaste");
                 this.dialogo.setVisible(true);
                 this.tweensTalk= this.add.tween({
                     targets: [this.dialogo],
+                    ease:'Bounce',
+                    y:275,
                     duration:5000,
                     repeat: 0,
                     onStart: () => {
