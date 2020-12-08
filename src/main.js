@@ -32,7 +32,7 @@ const config = {
     //     autoCenter: Phaser.Scale.CENTER_BOTH
     //     },
     backgroundColor: "#34495e", 	//Color de fondo del canvas ()
-    scene: [Bootloader, Scene_1, Scene_puzzle0, Scene_3, Scene_tienda, Scene_armas, Scene_puzzle1, Scene_puzzle1_caida, Scene_nivel5, Scene_puzzle2, Scene_puzzle2_caida, Scene_final, Scene_estado, Scene_gameOver],    //Aquí irá la lista de scenas del juego
+    scene: [Bootloader, Scene_1, Scene_puzzle0, Scene_3,  Scene_puzzle1, Scene_puzzle1_caida, Scene_nivel5, Scene_puzzle2, Scene_puzzle2_caida, Scene_final,Scene_tienda, Scene_armas, Scene_estado, Scene_gameOver],    //Aquí irá la lista de scenas del juego
     banner:{
         hidePhaser: true,
         text: "#fff00f",

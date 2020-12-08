@@ -128,9 +128,9 @@ class Scene_tienda extends Phaser.Scene{
         this.fondoShop.setScale(1.8);
 
         //Piso
-        this.piso = this.physics.add.image(0,600,'piso').setOrigin(0).setDepth(3);
-        this.piso.setScale(1.3);
-        this.piso.setCollideWorldBounds(true);
+        this.piso_tienda = this.physics.add.image(0,600,'piso').setOrigin(0).setDepth(3);
+        this.piso_tienda.setScale(1.3);
+        this.piso_tienda.setCollideWorldBounds(true);
 
         //Nexus
         this.nexus = this.physics.add.sprite(80,300, 'nexus_all', 0).setInteractive();
@@ -261,14 +261,14 @@ class Scene_tienda extends Phaser.Scene{
             frameRate: 8
         });
         this.llave.anims.play('llave_anim');
-        this.llave.setDepth(4);
+        this.llave.setDepth(5);
 
         //Botones para comprar
-        this.btn_comprar = this.add.image(820,500,'btn_comprar').setDepth(4).setInteractive().setScale(0.55);
+        this.btn_comprar = this.add.image(820,500,'btn_comprar').setDepth(7).setInteractive().setScale(0.55);
         //Botón para pasar al intercambio de armas
-        this.btn_armas = this.add.image(650,500,'btn_armas').setDepth(4).setInteractive().setScale(0.55);
+        this.btn_armas = this.add.image(650,500,'btn_armas').setDepth(7).setInteractive().setScale(0.55);
         //Botón para salir
-        this.btn_salir = this.add.image(850,620,'btn_salir').setScale(0.25).setInteractive().setDepth(5);
+        this.btn_salir = this.add.image(850,620,'btn_salir').setScale(0.25).setInteractive().setDepth(7);
         //Colisión entre el vendedor y Nexus
         
         this.physics.add.collider(this.nexus,this.vendedor, () => {

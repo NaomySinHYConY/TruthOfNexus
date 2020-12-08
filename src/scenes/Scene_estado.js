@@ -26,9 +26,11 @@ class Scene_estado extends Phaser.Scene{
 
         //Escudo->Diamantes
         this.data.set('escudo',false); 
+        this.data.set('diamantes',0);
 
         //Videncia ->Talismanes
         this.data.set('videncia',false);
+        this.data.set('talismanes',0)
 
         //Final
         this.data.set('final',false);
@@ -43,6 +45,7 @@ class Scene_estado extends Phaser.Scene{
         this.btn_tienda = this.add.image(840,90,'btn_tienda').setScale(0.20).setInteractive().setDepth(4).setVisible(false);
             this.input.on(eventos.GAMEOBJECT_UP,(pointer,gameObject) =>{
                 if(gameObject === this.btn_tienda){
+                    
                     this.scene.launch('Scene_tienda',this.data.list.score,this.data.list.botonT);
                     let open_door = this.sound.add("open_door",{loop:false});
                     open_door.play();

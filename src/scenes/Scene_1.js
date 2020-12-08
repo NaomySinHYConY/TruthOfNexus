@@ -52,6 +52,9 @@ class Scene_1 extends Phaser.Scene{
     }
     create() {
 
+        const eventos = Phaser.Input.Events;
+        const keyCodes = Phaser.Input.Keyboard.KeyCodes;
+
         this.time.delayedCall(2000, function(){   
             this.cameras.main.setViewport(0, 0, 1000, 640)
             .fadeOut(1000)
@@ -74,8 +77,7 @@ class Scene_1 extends Phaser.Scene{
         });
 
 
-        const eventos = Phaser.Input.Events;
-        const keyCodes = Phaser.Input.Keyboard.KeyCodes;
+        
         
         this.data.set('dracmas', 0);
         this.data.set('monedas', 0);
