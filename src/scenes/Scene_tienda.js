@@ -556,32 +556,36 @@ class Scene_tienda extends Phaser.Scene{
                 console.log("Estamos en el evento de la tienda, tienes: ");
                 console.log(this.data.get('score'));
 
+                if(item === "diamante" && this.data.get('score') <= precio){
+                    this.registry.events.emit('diamantes', 1);
+                    this.registry.events.emit('adquiereEscudo');
+                    console.log("Pediste un diamante");
+                }else if(item === "talisman" && this.data.get('score') <= precio){
+                    this.registry.events.emit('talismanes',1);
+                    this.registry.events.emit('adquiereVidencia');
+                    console.log("Pediste un talisman");
+                }else if(item === "llave" && this.data.get('score') <= precio){
+                    this.registry.events.emit('llaves', 1);
+                    this.registry.events.emit('adquiereLlave');
+                    console.log("Pediste una llave");
+                }else if(item === "vida" && this.data.get('score') <= precio){
+                    this.registry.events.emit('vidas',1);
+                    console.log("Pediste una vida");
+                }
+
                 this.registry.events.emit('cobrar', precio);
                 this.registry.events.emit('cobrarTienda', precio);
 
                 console.log("Te quedaste con: "+this.data.get('score'));
 
-                if(item === "diamante"){
-                    this.registry.events.emit('diamantes', 1);
-                    this.registry.events.emit('adquiereEscudo');
-                    console.log("Pediste un diamante");
-                }else if(item === "talisman"){
-                    this.registry.events.emit('talismanes',1);
-                    this.registry.events.emit('adquiereVidencia');
-                    console.log("Pediste un talisman");
-                }else if(item === "llave"){
-                    this.registry.events.emit('llaves', 1);
-                    this.registry.events.emit('adquiereLlave');
-                    console.log("Pediste una llave");
-                }else if(item === "vida"){
-                    this.registry.events.emit('vidas',1);
-                    console.log("Pediste una vida");
-                }
+                
                 
             }else if(gameObject === this.btn_armas){
                 this.scene.start('Scene_armas');
             }else if(gameObject === this.btn_salir){
-                this.scene.resume(this.registry.list.escena);
+                //this.scene.resume(this.registry.list.escena);
+                this.scene.stop();
+                this.scene.resume('Scene_tienda');
             }
 
             

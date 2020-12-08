@@ -28,6 +28,9 @@ class Scene_estado extends Phaser.Scene{
 
         //Escudo
         this.data.set('escudo',false);
+
+        //Videncia
+        this.data.set('videncia',false);
         
         //Cantidad de talismanes
         this.data.set('talismanes',0);
@@ -49,6 +52,7 @@ class Scene_estado extends Phaser.Scene{
         this.llave = this.add.image(152.5, 74.5, 'llave');
         this.escudo = this.add.image(14, 74.5, 'escudo').setVisible(this.data.list.escudo);
         this.videncia = this.add.image(85, 74.5, 'videncia').setVisible(this.data.list.videncia);
+
         this.llavesText = this.add.text(132, 77, this.data.list.llaves, { fontSize: '20px', fill: '#fff' });
          //this.VidenciaText = this.add.text(122, 77, this.data.list.llaves, { fontSize: '20px', fill: '#fff' });
          //this.EscudoText = this.add.text(112, 77, this.data.list.llaves, { fontSize: '20px', fill: '#fff' });
