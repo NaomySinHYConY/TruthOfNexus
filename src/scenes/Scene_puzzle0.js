@@ -15,6 +15,8 @@ class Scene_puzzle0 extends Phaser.Scene{
         this.load.image('ayuda2_3','./assets/consejos/dKarin2_3.png');
         this.load.image('ayuda2_4','./assets/consejos/dKarin2_4.png');
         this.load.image('ayuda2_5','./assets/consejos/dKarin2_5.png');
+        this.load.image('consejo_6','./assets/consejos/dKarin0_2.png');
+        this.load.image('consejo_7','./assets/consejos/dKarin0_1.png');
         this.load.path = './assets/puzzle1/';
         //Dialogos de Karin
         
@@ -52,8 +54,10 @@ class Scene_puzzle0 extends Phaser.Scene{
         this.consejo2_1 = this.add.image(120,500,'ayuda2_1').setDepth(3).setScale(0.17).setInteractive();
         this.consejo2_2 = this.add.image(120,500,'ayuda2_2').setDepth(3).setScale(0.17).setVisible(false).setInteractive();
         this.consejo2_3 = this.add.image(120,500,'ayuda2_3').setDepth(3).setScale(0.17).setVisible(false).setInteractive();
-        
 
+        this.consejo0_1 = this.add.image(120,500,'consejo_6').setDepth(3).setScale(0.17).setVisible(false).setInteractive();
+        this.consejo0_2 = this.add.image(120,500,'consejo_7').setDepth(3).setScale(0.17).setVisible(false).setInteractive();
+        
         var num = 1;
 
         this.input.on(eventos.GAMEOBJECT_UP,(pointer,gameObject) =>{
@@ -66,6 +70,12 @@ class Scene_puzzle0 extends Phaser.Scene{
                 this.consejo2_3.setVisible(true);
             }else if(num === 4){
                 this.consejo2_3.setVisible(false);
+                this.consejo0_1.setVisible(true);
+            }else if(num === 5){
+                this.consejo0_1.setVisible(false);
+                this.consejo0_2.setVisible(true);
+            }else if(num === 6){
+                this.consejo0_2.setVisible(false);
                 this.tucan.destroy();
             }
         });

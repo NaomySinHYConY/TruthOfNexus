@@ -1,3 +1,4 @@
+
 import Bootloader from "./scenes/Bootloader.js"
 import Scene_gameOver from "./scenes/Scene_gameOver.js"
 import Scene_estado from "./scenes/Scene_estado.js"
@@ -12,6 +13,7 @@ import Scene_final from "./scenes/Scene_final.js"
 import Scene_puzzle2 from "./scenes/Scene_puzzle2.js"
 import Scene_puzzle2_caida from "./scenes/Scene_puzzle2_caida.js"
 import Scene_nivel5 from "./scenes/Scene_nivel5.js"
+import Scene_pantallaFinal from "./scenes/Scene_pantallaFinal.js"
 
 const config = {
     title: "Curso Phaser",		    //Nombre del juego (opcional)
@@ -32,7 +34,7 @@ const config = {
     //     autoCenter: Phaser.Scale.CENTER_BOTH
     //     },
     backgroundColor: "#34495e", 	//Color de fondo del canvas ()
-    scene: [Bootloader, Scene_1, Scene_puzzle0, Scene_3, Scene_puzzle1, Scene_puzzle1_caida, Scene_nivel5, Scene_puzzle2, Scene_puzzle2_caida, Scene_final,Scene_tienda,Scene_armas, Scene_estado, Scene_gameOver],    //Aquí irá la lista de scenas del juego
+    scene: [Bootloader, Scene_1, Scene_puzzle0, Scene_3, Scene_puzzle1, Scene_puzzle1_caida, Scene_nivel5, Scene_puzzle2, Scene_puzzle2_caida, Scene_final,Scene_tienda,Scene_armas, Scene_estado, Scene_gameOver,Scene_pantallaFinal],    //Aquí irá la lista de scenas del juego
     banner:{
         hidePhaser: true,
         text: "#fff00f",
@@ -48,7 +50,7 @@ const config = {
             gravity:{
                 y:800
             },
-            debug: true
+            debug: false
         }
     }
 };

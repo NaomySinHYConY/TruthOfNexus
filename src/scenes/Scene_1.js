@@ -139,7 +139,7 @@ class Scene_1 extends Phaser.Scene{
         this.physics.add.existing(this.aCueva, true);
         this.aCueva.body.setSize(50, 400);
         this.aCueva.body.setOffset(60, 0);
-
+/*
         this.control = this.add.image(260,40,'aviso').setScale(0.3).setAlpha(0);
         this.control_2 = this.add.image(450,40,'aviso_1').setScale(0.3).setAlpha(0);
         this.control_3 = this.add.image(650,40,'aviso_2').setScale(0.3).setAlpha(0);
@@ -163,7 +163,7 @@ class Scene_1 extends Phaser.Scene{
                 this.control_2.setAlpha(0);
                 this.control_3.setAlpha(0);
             }
-        });
+        });*/
         //let cofreOpen = this.sound.add("cofreOpen",{loop:false});
         //Plataformas
         this.plat1 = this.add.image(0, 510, 'pl1').setInteractive().setOrigin(0).setScale(1.1);

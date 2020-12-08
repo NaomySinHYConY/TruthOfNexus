@@ -409,13 +409,15 @@ class Scene_final extends Phaser.Scene{
             this.registry.events.emit('vidasRestantes', this.data.list.vidas);
             this.scene.stop();
             //this.scene.launch('Scene_puzzle1');
+            this.scene.start('Scene_pantallaFinal');
+            /*
             this.scene.transition({
                 target: 'Scene_3',
                 duration: 1000,
                 moveAbove: true,
-                onUpdate: this.transitionOut,
+                onUpdate:this.transitionOut,
                 data: { x: 500, y: 320 }
-            });
+            });*/
         }
     }
 
