@@ -241,19 +241,25 @@ class Scene_estado extends Phaser.Scene{
         }); 
 
         
-        this.registry.events.on('shieldOn', () => {
-            //console.log("Recibe moneda");
-            this.data.list.escudo = true;
+        // this.registry.events.on('shieldOn', () => {
+        //     //console.log("Recibe moneda");
+        //     this.data.list.escudo = true;
 
-            //Aqui activamos el que se vea el escudo xd
-            /*
+        //     //Aqui activamos el que se vea el escudo xd
+        //     /*
             
-            */
-        });
+        //     */
+        // });
         
         this.registry.events.on('shieldOff', ()=>{
             this.data.list.escudo = false;
+            this.escudo.setVisible(false);
         });
+        this.registry.events.on('videnciaOff', ()=>{
+            this.data.list.videncia = false;
+            this.videncia.setVisible(false);
+        });
+        
 
         this.registry.events.on('finalOn', ()=>{
             this.data.list.final = true;
@@ -327,7 +333,11 @@ class Scene_estado extends Phaser.Scene{
     }
 
     update(time, delta) {
-
+        if(this.data.list.escudo==false){
+            this.barra.clearTint();
+        }else if(this.data.list.escudo==true){
+            this.barra.setTint(Math.random() * 0xffffff);
+        }
     }
 }
 export default Scene_estado;

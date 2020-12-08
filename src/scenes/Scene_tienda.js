@@ -192,7 +192,7 @@ class Scene_tienda extends Phaser.Scene{
         this.flechaD = this.add.image(880,350,'flechaDER').setScale(0.5).setInteractive().setDepth(4);
         //Cargar items
         //--->>Cerveza
-        this.cerveza = this.add.sprite(730,300,'beer',0).setOrigin(0).setScale(0.35).setDepth(4).setInteractive().setVisible(false);
+        this.cerveza = this.add.sprite(733,335,'beer',0).setOrigin(0).setScale(0.35).setDepth(4).setInteractive().setVisible(false);
         this.cerveza.anims.play('beer_idle');
         //--->>Vida
         this.vida = this.add.sprite(680, 300, 'vida', 0).setOrigin(0).setScale(1.5);
@@ -361,225 +361,228 @@ class Scene_tienda extends Phaser.Scene{
                     this.dialogo4.setVisible(false);
                     this.dialogo8.setVisible(false);
                 }
-            }else if(gameObject === this.flechaI){
-                contItem = contItem-1;
-                if(contItem === 2){                 //Diamante
-                    this.vida.setVisible(false);
-                    this.talisman.setVisible(false);
-                    this.diamante.setVisible(true);
-                    this.hierro.setVisible(false);
-                    this.llave_tienda.setVisible(false);
-                    this.cerveza.setVisible(false);
-
-                    item = "diamante";
-
-                    //Mover placas
-                    this.placaVida.setVisible(false);
-                    this.placaDiamante.setVisible(true);
-                    this.placaHierro.setVisible(false);
-                    this.placaTalisman.setVisible(false);
-                    this.placaLlave.setVisible(false);
-                    this.placaCerveza.setVisible(false);
-                    precio = 200;
-
-                }else if(contItem === 3 || contItem === 0){           //Talisman
-                    this.diamante.setVisible(false);
-                    this.vida.setVisible(false);
-                    this.talisman.setVisible(true);
-                    this.hierro.setVisible(false);
-                    this.llave_tienda.setVisible(false);
-                    this.cerveza.setVisible(false);
-
-                    item = "talisman";
-
-                    //Mover placa
-                    this.placaVida.setVisible(false);
-                    this.placaDiamante.setVisible(false);
-                    this.placaHierro.setVisible(false);
-                    this.placaTalisman.setVisible(true);
-                    this.placaLlave.setVisible(false);
-                    this.placaCerveza.setVisible(false);
-
-                    precio = 150;
-                }else if(contItem === 4){           //Hierro
-                    this.diamante.setVisible(false);
-                    this.vida.setVisible(false);
-                    this.talisman.setVisible(false);
-                    this.hierro.setVisible(true);
-                    this.llave_tienda.setVisible(false);
-                    this.cerveza.setVisible(false);
-
-                    //Mover placa
-                    this.placaVida.setVisible(false);
-                    this.placaDiamante.setVisible(false);
-                    this.placaHierro.setVisible(true);
-                    this.placaTalisman.setVisible(false);
-                    this.placaLlave.setVisible(false);
-                    this.placaCerveza.setVisible(false);
-                    
-                    precio = 150;
-                }else if(contItem === 5){           //Llave
-                    this.diamante.setVisible(false);
-                    this.vida.setVisible(false);
-                    this.talisman.setVisible(false);
-                    this.hierro.setVisible(false);
-                    this.llave_tienda.setVisible(true);
-                    this.cerveza.setVisible(false);
-
-                    //Mover placa
-                    this.placaVida.setVisible(false);
-                    this.placaDiamante.setVisible(false);
-                    this.placaHierro.setVisible(false);
-                    this.placaTalisman.setVisible(false);
-                    this.placaLlave.setVisible(true);
-                    this.placaCerveza.setVisible(false);
-                    
-                    precio = 50;
-                }else if(contItem === 1){           //Vida
-                    this.talisman.setVisible(false);
-                    this.diamante.setVisible(false);
-                    this.vida.setVisible(true);
-                    this.hierro.setVisible(false);
-                    this.llave_tienda.setVisible(false);
-                    this.cerveza.setVisible(false);
-
-                    item = "vida";
-
-                    //Mover placa
-                    this.placaVida.setVisible(true);
-                    this.placaDiamante.setVisible(false);
-                    this.placaHierro.setVisible(false);
-                    this.placaTalisman.setVisible(false);
-                    this.placaLlave.setVisible(false);
-                    this.placaCerveza.setVisible(false);
-
-                    precio = 100;
-                }
-            }else if(gameObject === this.flechaD){
-                contItem = contItem+1;
-                if(contItem === 2){ //Diamante
-                    this.vida.setVisible(false);
-                    this.talisman.setVisible(false);
-                    this.diamante.setVisible(true);
-                    this.hierro.setVisible(false);
-                    this.llave_tienda.setVisible(false);
-                    this.cerveza.setVisible(false);
-
-                    item = "diamante";
-
-                    //Mover placa
-                    this.placaVida.setVisible(false);
-                    this.placaDiamante.setVisible(true);
-                    this.placaHierro.setVisible(false);
-                    this.placaTalisman.setVisible(false);
-                    this.placaLlave.setVisible(false);
-                    this.placaCerveza.setVisible(false);
-                    precio = 200;
-                     
-                }else if(contItem === 3 || contItem === 0){ //Talisman
-                    this.diamante.setVisible(false);
-                    this.vida.setVisible(false);
-                    this.talisman.setVisible(true);
-                    this.hierro.setVisible(false);
-                    this.llave_tienda.setVisible(false);
-                    this.cerveza.setVisible(false);
-                    item = "talisman";
-                     //Mover placa
-                     this.placaVida.setVisible(false);
-                     this.placaDiamante.setVisible(false);
-                     this.placaHierro.setVisible(false);
-                     this.placaTalisman.setVisible(true);
-                     this.placaLlave.setVisible(false);
-                     this.placaCerveza.setVisible(false);
-
-                    precio = 150;
-                    
-                }else if(contItem === 4){ //Hierro
-                    this.diamante.setVisible(false);
-                    this.vida.setVisible(false);
-                    this.talisman.setVisible(false);
-                    this.hierro.setVisible(true);
-                    this.llave_tienda.setVisible(false);
-                    this.cerveza.setVisible(false);
-
-                    //Mover placa
-                    this.placaVida.setVisible(false);
-                    this.placaDiamante.setVisible(false);
-                    this.placaHierro.setVisible(true);
-                    this.placaTalisman.setVisible(false);
-                    this.placaLlave.setVisible(false);
-                    this.placaCerveza.setVisible(false);
-
-                    precio = 150;
-                    
-                }else if(contItem === 5){           //Llave
-                    this.diamante.setVisible(false);
-                    this.vida.setVisible(false);
-                    this.talisman.setVisible(false);
-                    this.hierro.setVisible(false);
-                    this.llave_tienda.setVisible(true);
-                    this.cerveza.setVisible(false);
-
-                    item = "llave";
-                    //Mover placa
-                    this.placaVida.setVisible(false);
-                    this.placaDiamante.setVisible(false);
-                    this.placaHierro.setVisible(false);
-                    this.placaTalisman.setVisible(false);
-                    this.placaLlave.setVisible(true);
-                    this.placaCerveza.setVisible(false);
-                    
-                    precio = 50;
-                   
-                }else if(contItem === 6){           //Cerveza
-                    this.diamante.setVisible(false);
-                    this.vida.setVisible(false);
-                    this.talisman.setVisible(false);
-                    this.hierro.setVisible(false);
-                    this.llave_tienda.setVisible(false);
-                    this.cerveza.setVisible(true);
-
-                    item = "cerveza";
-
-                    //Mover placa
-                    this.placaVida.setVisible(false);
-                    this.placaDiamante.setVisible(false);
-                    this.placaHierro.setVisible(false);
-                    this.placaTalisman.setVisible(false);
-                    this.placaLlave.setVisible(false);
-                    this.placaCerveza.setVisible(true);
-                    
-                    precio = 1000;
-                   
-                }
+            }else if(contItem>0 && contItem<7 && (gameObject==this.flechaI || gameObject == this.flechaD)){
+                if(gameObject === this.flechaI && contItem!=1){
+                    contItem = contItem-1;
+                    if(contItem === 2){                 //Diamante
+                        this.vida.setVisible(false);
+                        this.talisman.setVisible(false);
+                        this.diamante.setVisible(true);
+                        this.hierro.setVisible(false);
+                        this.llave_tienda.setVisible(false);
+                        this.cerveza.setVisible(false);
+    
+                        item = "diamante";
+    
+                        //Mover placas
+                        this.placaVida.setVisible(false);
+                        this.placaDiamante.setVisible(true);
+                        this.placaHierro.setVisible(false);
+                        this.placaTalisman.setVisible(false);
+                        this.placaLlave.setVisible(false);
+                        this.placaCerveza.setVisible(false);
+                        precio = 200;
+    
+                    }else if(contItem === 3 || contItem === 0){           //Talisman
+                        this.diamante.setVisible(false);
+                        this.vida.setVisible(false);
+                        this.talisman.setVisible(true);
+                        this.hierro.setVisible(false);
+                        this.llave_tienda.setVisible(false);
+                        this.cerveza.setVisible(false);
+    
+                        item = "talisman";
+    
+                        //Mover placa
+                        this.placaVida.setVisible(false);
+                        this.placaDiamante.setVisible(false);
+                        this.placaHierro.setVisible(false);
+                        this.placaTalisman.setVisible(true);
+                        this.placaLlave.setVisible(false);
+                        this.placaCerveza.setVisible(false);
+    
+                        precio = 150;
+                    }else if(contItem === 4){           //Hierro
+                        this.diamante.setVisible(false);
+                        this.vida.setVisible(false);
+                        this.talisman.setVisible(false);
+                        this.hierro.setVisible(true);
+                        this.llave_tienda.setVisible(false);
+                        this.cerveza.setVisible(false);
+    
+                        //Mover placa
+                        this.placaVida.setVisible(false);
+                        this.placaDiamante.setVisible(false);
+                        this.placaHierro.setVisible(true);
+                        this.placaTalisman.setVisible(false);
+                        this.placaLlave.setVisible(false);
+                        this.placaCerveza.setVisible(false);
+                        
+                        precio = 150;
+                    }else if(contItem === 5){           //Llave
+                        this.diamante.setVisible(false);
+                        this.vida.setVisible(false);
+                        this.talisman.setVisible(false);
+                        this.hierro.setVisible(false);
+                        this.llave_tienda.setVisible(true);
+                        this.cerveza.setVisible(false);
+    
+                        //Mover placa
+                        this.placaVida.setVisible(false);
+                        this.placaDiamante.setVisible(false);
+                        this.placaHierro.setVisible(false);
+                        this.placaTalisman.setVisible(false);
+                        this.placaLlave.setVisible(true);
+                        this.placaCerveza.setVisible(false);
+                        
+                        precio = 50;
+                    }else if(contItem === 1){           //Vida
+                        this.talisman.setVisible(false);
+                        this.diamante.setVisible(false);
+                        this.vida.setVisible(true);
+                        this.hierro.setVisible(false);
+                        this.llave_tienda.setVisible(false);
+                        this.cerveza.setVisible(false);
+    
+                        item = "vida";
+    
+                        //Mover placa
+                        this.placaVida.setVisible(true);
+                        this.placaDiamante.setVisible(false);
+                        this.placaHierro.setVisible(false);
+                        this.placaTalisman.setVisible(false);
+                        this.placaLlave.setVisible(false);
+                        this.placaCerveza.setVisible(false);
+    
+                        precio = 100;
+                    }
+                }else if(gameObject === this.flechaD && contItem<6){
+                    contItem = contItem+1;
+                    if(contItem === 2){ //Diamante
+                        this.vida.setVisible(false);
+                        this.talisman.setVisible(false);
+                        this.diamante.setVisible(true);
+                        this.hierro.setVisible(false);
+                        this.llave_tienda.setVisible(false);
+                        this.cerveza.setVisible(false);
+    
+                        item = "diamante";
+    
+                        //Mover placa
+                        this.placaVida.setVisible(false);
+                        this.placaDiamante.setVisible(true);
+                        this.placaHierro.setVisible(false);
+                        this.placaTalisman.setVisible(false);
+                        this.placaLlave.setVisible(false);
+                        this.placaCerveza.setVisible(false);
+                        precio = 200;
+                         
+                    }else if(contItem === 3 || contItem === 0){ //Talisman
+                        this.diamante.setVisible(false);
+                        this.vida.setVisible(false);
+                        this.talisman.setVisible(true);
+                        this.hierro.setVisible(false);
+                        this.llave_tienda.setVisible(false);
+                        this.cerveza.setVisible(false);
+                        item = "talisman";
+                         //Mover placa
+                         this.placaVida.setVisible(false);
+                         this.placaDiamante.setVisible(false);
+                         this.placaHierro.setVisible(false);
+                         this.placaTalisman.setVisible(true);
+                         this.placaLlave.setVisible(false);
+                         this.placaCerveza.setVisible(false);
+    
+                        precio = 150;
+                        
+                    }else if(contItem === 4){ //Hierro
+                        this.diamante.setVisible(false);
+                        this.vida.setVisible(false);
+                        this.talisman.setVisible(false);
+                        this.hierro.setVisible(true);
+                        this.llave_tienda.setVisible(false);
+                        this.cerveza.setVisible(false);
+    
+                        //Mover placa
+                        this.placaVida.setVisible(false);
+                        this.placaDiamante.setVisible(false);
+                        this.placaHierro.setVisible(true);
+                        this.placaTalisman.setVisible(false);
+                        this.placaLlave.setVisible(false);
+                        this.placaCerveza.setVisible(false);
+    
+                        precio = 150;
+                        
+                    }else if(contItem === 5){           //Llave
+                        this.diamante.setVisible(false);
+                        this.vida.setVisible(false);
+                        this.talisman.setVisible(false);
+                        this.hierro.setVisible(false);
+                        this.llave_tienda.setVisible(true);
+                        this.cerveza.setVisible(false);
+    
+                        item = "llave";
+                        //Mover placa
+                        this.placaVida.setVisible(false);
+                        this.placaDiamante.setVisible(false);
+                        this.placaHierro.setVisible(false);
+                        this.placaTalisman.setVisible(false);
+                        this.placaLlave.setVisible(true);
+                        this.placaCerveza.setVisible(false);
+                        
+                        precio = 50;
+                       
+                    }else if(contItem === 6){           //Cerveza
+                        this.diamante.setVisible(false);
+                        this.vida.setVisible(false);
+                        this.talisman.setVisible(false);
+                        this.hierro.setVisible(false);
+                        this.llave_tienda.setVisible(false);
+                        this.cerveza.setVisible(true);
+    
+                        item = "cerveza";
+    
+                        //Mover placa
+                        this.placaVida.setVisible(false);
+                        this.placaDiamante.setVisible(false);
+                        this.placaHierro.setVisible(false);
+                        this.placaTalisman.setVisible(false);
+                        this.placaLlave.setVisible(false);
+                        this.placaCerveza.setVisible(true);
+                        
+                        precio = 1000;
+                       
+                    }
+            }
+            
             }else if(gameObject === this.btn_comprar){
                 console.log("Estamos en el evento de la tienda, tienes: ");
-                console.log(item);
+                console.log('score');
                 console.log(this.data.get('score'));
-                this.data.get('score') <= precio;
+                //this.data.get('score') <= precio;
 
-                if(item === "diamante"){
-                    //this.registry.events.emit('diamantes', 1);
-                    this.registry.events.emit('adquiereEscudo');
-                    console.log("Pediste un diamante");
-                }else if(item === "talisman"){
-                    //this.registry.events.emit('talismanes',1);
-                    this.registry.events.emit('adquiereVidencia');
-                    console.log("Pediste un talisman");
-                }else if(item === "llave"){
-                    //this.registry.events.emit('llaves', 1);
-                    this.registry.events.emit('adquiereLlave');
-                    console.log("Pediste una llave");
-                }else if(item === "vida"){
-                    this.registry.events.emit('vidas');
-                    console.log("Pediste una vida");
+                if(this.data.get('score') >= precio){
+                    if(item === "diamante"){
+                        //this.registry.events.emit('diamantes', 1);
+                        this.registry.events.emit('adquiereEscudo');
+                        console.log("Pediste un diamante");
+                    }else if(item === "talisman"){
+                        //this.registry.events.emit('talismanes',1);
+                        this.registry.events.emit('adquiereVidencia');
+                        console.log("Pediste un talisman");
+                    }else if(item === "llave"){
+                        //this.registry.events.emit('llaves', 1);
+                        this.registry.events.emit('adquiereLlave');
+                        console.log("Pediste una llave");
+                    }else if(item === "vida"){
+                        this.registry.events.emit('vidas');
+                        console.log("Pediste una vida");
+                    }
+                    this.registry.events.emit('cobrar', precio);
+    
+                    console.log("Te quedaste con: "+this.data.get('score'));
                 }
-                this.registry.events.emit('cobrar', precio);
                 this.registry.events.emit('cobrarTienda', precio);
-
-                console.log("Te quedaste con: "+this.data.get('score'));
-
-                
                 
             }else if(gameObject === this.btn_armas){
                 this.scene.start('Scene_armas');

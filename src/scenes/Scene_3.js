@@ -32,6 +32,13 @@ class Scene_3 extends Phaser.Scene{
         this.load.atlas('key','key/key.png','key/key_atlas.json');
         this.load.animation('keyAnim','key/key_anim.json');
 
+        this.load.spritesheet('diamante', '/shop/items/diamante.png', {
+            frameWidth: 82.25,
+            frameHeight: 85,
+            margin: 0,
+            spacing: 0
+        });
+
         this.load.image('entrada','fondo/salida.png');
         this.load.image('plat2','fondo/plat2.png');
         this.load.image('piso','nivel5/piso.png');
@@ -104,9 +111,9 @@ class Scene_3 extends Phaser.Scene{
         this.platforms.create(880, 600, 'plat2').setOrigin(0).refreshBody();
 
     //plataformas voladoras
-        this.platforms.create(150, 500, 'plat2').setOrigin(0).refreshBody();
-        this.platforms.create(320, 400, 'plat2').setOrigin(0).refreshBody();
-        this.platforms.create(438, 200, 'plat2').setOrigin(0).refreshBody();
+        this.platforms.create(170, 500, 'plat2').setOrigin(0).refreshBody();
+        this.platforms.create(340, 400, 'plat2').setOrigin(0).refreshBody();
+        this.platforms.create(458, 200, 'plat2').setOrigin(0).refreshBody();
     
     //Piso de la muerte
         this.piso_de_muerte1 = this.physics.add.image(500, 600, 'piso').setInteractive().setOrigin(0).setScale(0.7);
@@ -128,7 +135,7 @@ class Scene_3 extends Phaser.Scene{
         this.minotauro.anims.play('idle');
 
     //Protagonista
-        this.nexus = this.physics.add.sprite(35,170, 'nexus_all', 0).setInteractive().setScale(1.9);
+        this.nexus = this.physics.add.sprite(35,170, 'nexus_all', 0).setInteractive().setScale(1);
         this.nexus.setName('Nexus');
         this.nexus.setFlipX(true);
         this.nexus.setOrigin(0.5);
@@ -250,17 +257,17 @@ class Scene_3 extends Phaser.Scene{
         if( Phaser.Input.Keyboard.JustUp(this.nexusAttack) || Phaser.Input.Keyboard.JustUp(this.nexusWalkDer) || Phaser.Input.Keyboard.JustUp(this.nexusWalkIz) || Phaser.Input.Keyboard.JustUp(this.nexusDown)){
             this.nexus.anims.play('stand');
             this.nexus.clearTint();
-            this.nexus.setScale(1.7);
+            this.nexus.setScale(1);
             this.nexus.setAngle(0);
             this.nexus.body.velocity.x = 0;
             this.nexus.body.velocity.y = 0;
         }
 
-        if(this.shield==false){
-            this.nexus.clearTint();
-        }else if(this.shield==true){
-            this.nexus.setTint(Math.random() * 0xffffff);
-        }
+        // if(this.shield==false){
+        //     this.nexus.clearTint();
+        // }else if(this.shield==true){
+        //     this.nexus.setTint(Math.random() * 0xffffff);
+        // }
     }
 
     muere_nexus()
@@ -378,6 +385,24 @@ class Scene_3 extends Phaser.Scene{
                 //     repeat: 0,
                 //     setXY:{ x:100, y:100}
                 // })
+
+                this.diamante = this.physics.add.sprite(100, 300, 'diamante', 0).setOrigin(0).setScale(0.6);
+                this.anims.create({
+                    key: 'diamante_anim',
+                    frames: this.anims.generateFrameNumbers('diamante', {
+                    start: 0,
+                    end: 8
+                }),
+                    repeat: -1,
+                    frameRate: 8
+                });
+                this.diamante.anims.play('diamante_anim');
+                this.diamante.setDepth(4);
+                this.diamante.body.setSize(60,60);
+                this.diamante.body.setOffset(10,10);
+                this.physics.add.collider(this.diamante, this.platforms);
+                this.physics.add.overlap(this.nexus, this.diamante, this.toma_diamante, null, this);
+
                 this.keys = this.physics.add.group({
                     key: 'key',
                     repeat: 1,
@@ -428,7 +453,8 @@ class Scene_3 extends Phaser.Scene{
             this.adios_muros();
 //COMENTAR LA SIGUIENTES 2 SI YA HAY BOOST 
             this.shield=true;
-            this.registry.events.emit('shieldOn');
+            //CAMBIO
+            this.registry.events.emit('adquiereEscudo');
             this.minotauro.destroy();
             
             
@@ -444,7 +470,7 @@ class Scene_3 extends Phaser.Scene{
             });
 
             this.shadows.children.iterate( (shadow) => {
-                shadow.setScale(1.5);
+                shadow.setScale(1);
                 shadow.setDepth(3);
             });
             this.shadows.setVelocityX(-30, 0);
@@ -453,13 +479,24 @@ class Scene_3 extends Phaser.Scene{
             this.physics.add.collider(this.shadows, this.platforms);
             this.physics.add.collider(this.shadows, this.platforms);
             this.physics.add.overlap(this.nexus, this.shadows, this.shadow_die, null, this);
-            this.piso_temp = this.physics.add.image(540,500,'plataforma_3').setInteractive().setScale(0.8,1.3).setOrigin(0);
+            this.piso_temp = this.physics.add.image(570,500,'plat2').setInteractive().setScale(0.8,1.3).setOrigin(0);
             this.physics.add.existing(this.piso_temp, true);
             this.piso_temp.body.setAllowGravity(false);
             this.physics.add.collider(this.nexus, this.piso_temp);
             this.physics.add.overlap(this.nexus, this.piso_temp, this.destruye_piso, null, this);
 
         }                
+    }
+
+    toma_diamante(nexus, keys){
+        console.log("Recoge escudo");
+        keys.destroy();
+        //this.data.list.keys += 1;
+
+//Por si se suman a las llaves de la tienda aqui se descomenta
+        this.registry.events.emit('adquiereEscudo');
+        let recoge = this.sound.add("moneda",{loop:false});
+        recoge.play();              
     }
 
     destruye_piso(){
@@ -509,7 +546,7 @@ class Scene_3 extends Phaser.Scene{
 
     booster(){
         this.shield=true;
-        this.registry.events.emit('shieldOn');
+        this.registry.events.emit('adquiereEscudo');
     }
 
 }
