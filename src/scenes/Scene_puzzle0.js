@@ -196,7 +196,7 @@ class Scene_puzzle0 extends Phaser.Scene{
         this.chest.body.allowGravity = false;
         this.chest.setCollideWorldBounds(true);
 
-        this.talisman = this.physics.add.sprite(38.5, 500, 'talisman', 0).setScale(0.6);
+        this.talisman = this.physics.add.sprite(38.5, 400, 'talisman', 0).setScale(0.6);
         this.anims.create({
             key: 'talisman_anim',
             frames: this.anims.generateFrameNumbers('talisman', {
