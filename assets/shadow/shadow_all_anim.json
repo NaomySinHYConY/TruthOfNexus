@@ -1,6 +1,78 @@
 {
     "anims": [
         {
+            "key": "shadow_walk",
+            "type": "frames",
+            "repeat": -1,
+            "frameRate": 10,
+            "frames": [
+                {
+                    "key": "shadow_all",
+                    "frame": "walk_1"
+                },
+                {
+                    "key": "shadow_all",
+                    "frame": "walk_2"
+                },
+                {
+                    "key": "shadow_all",
+                    "frame": "walk_3"
+                },
+                {
+                    "key": "shadow_all",
+                    "frame": "walk_4"
+                },
+                {
+                    "key": "shadow_all",
+                    "frame": "walk_5"
+                },
+                {
+                    "key": "shadow_all",
+                    "frame": "walk_6"
+                },
+                {
+                    "key": "shadow_all",
+                    "frame": "walk_7"
+                },
+                {
+                    "key": "shadow_all",
+                    "frame": "walk_8"
+                }
+            ]
+        },
+        {
+            "key": "shadow_stand",
+            "type": "frames",
+            "repeat": -1,
+            "frameRate": 10,
+            "frames": [
+                {
+                    "key": "shadow_all",
+                    "frame": "stand_1"
+                },
+                {
+                    "key": "shadow_all",
+                    "frame": "stand_2"
+                },
+                {
+                    "key": "shadow_all",
+                    "frame": "stand_3"
+                },
+                {
+                    "key": "shadow_all",
+                    "frame": "stand_4"
+                },
+                {
+                    "key": "shadow_all",
+                    "frame": "stand_5"
+                },
+                {
+                    "key": "shadow_all",
+                    "frame": "stand_6"
+                }
+            ]
+        },
+        {
             "key": "shadow_die",
             "type": "frames",
             "repeat": -1,
@@ -41,42 +113,6 @@
                 {
                     "key": "shadow_all",
                     "frame": "die_9"
-                },
-                {
-                    "key": "shadow_all",
-                    "frame": "die_10"
-                }
-            ]
-        },
-        {
-            "key": "shadow_stand",
-            "type": "frames",
-            "repeat": -1,
-            "frameRate": 10,
-            "frames": [
-                {
-                    "key": "shadow_all",
-                    "frame": "stand_1"
-                },
-                {
-                    "key": "shadow_all",
-                    "frame": "stand_2"
-                },
-                {
-                    "key": "shadow_all",
-                    "frame": "stand_3"
-                },
-                {
-                    "key": "shadow_all",
-                    "frame": "stand_4"
-                },
-                {
-                    "key": "shadow_all",
-                    "frame": "stand_5"
-                },
-                {
-                    "key": "shadow_all",
-                    "frame": "stand_6"
                 }
             ]
         }

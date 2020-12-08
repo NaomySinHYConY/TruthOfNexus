@@ -37,7 +37,7 @@ class Bootloader extends Phaser.Scene{
         this.dificultadAux = 1;
         this.volumenAux = 1;
         
-        this.fondo = this.add.image(450, 244, 'fondoI');
+        this.fondo = this.add.image(500, 320, 'fondoI').setScale(1);
         
         this.titulo = this.add.image(500, 70, 'titulo');
         this.menu = this.add.image(220, 480, 'menu');
@@ -68,7 +68,7 @@ class Bootloader extends Phaser.Scene{
         {font: '14px Arial', fill: '#ffffff'});
         this.txtNumVolumen = this.add.text(550, 440, "1", 
         {font: '16px Arial', fill: '#ffffff'});
-        this.fondo.setScale(1.7);
+        //this.fondo.setScale(1.7);
         this.menu_config.setScale(1.3);
         this.adorno.setScale(1.7);
         this.selecModoFacil();

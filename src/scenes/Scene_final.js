@@ -264,13 +264,7 @@ class Scene_final extends Phaser.Scene{
                     //delay: 100,
                     value: posInX+10,
                     ease: 'Circ',
-                    duration: 600
-                },
-                y:{
-                    //delay: 100,
-                    value: posInY--,
-                    duration: 600,
-                    offset: true
+                    duration: 300
                 },
                 repeat: 0,
                 onStart: () =>{

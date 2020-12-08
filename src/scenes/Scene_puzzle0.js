@@ -19,16 +19,18 @@ class Scene_puzzle0 extends Phaser.Scene{
 
         this.load.atlas('chest','cofre/chest.png','cofre/chest_atlas.json');
         this.load.animation('chestAnim','cofre/chest_anim.json');
+        
         this.load.atlas('dracmas','dracma/dracmas.png','dracma/dracma_atlas.json');
         this.load.animation('dracmasAnim','dracma/dracma_anim.json');
 
+        this.load.atlas('key','../key/key.png','../key/key_atlas.json');
+        this.load.animation('keyAnim','../key/key_anim.json');
+
         this.load.audio("fondopuzzle", ["../sounds/puzzle.mp3"]);
-        
+        this.load.audio("moneda", ["../sounds/moneda.mp3"]);
         this.load.audio("golpe", ["../sounds/golpe.mp3"]);
         this.load.audio("sPuzzle8", ["../sounds/sPuzzle8.mp3"]);
-        
         this.load.audio("sPuzzle15", ["../sounds/sPuzzle15.mp3"]);
-       
         this.load.audio("salida", ["../sounds/salida.mp3"]);
     }
 
@@ -112,7 +114,7 @@ class Scene_puzzle0 extends Phaser.Scene{
         } );
 
         this.hoyos0 = this.physics.add.group();
-        this.hoyos0.create(174.5, 2611.5, 'hoyo');
+        this.hoyos0.create(38.5, 311.5, 'hoyo');
         this.hoyos0.create(228.5, 289.5, 'hoyo');
         this.hoyos0.create(433, 478.5, 'hoyo');
         //this.hoyos0.create(228.5, 424.5, 'hoyo');
@@ -143,6 +145,21 @@ class Scene_puzzle0 extends Phaser.Scene{
         this.chest.body.allowGravity = false;
         this.chest.setCollideWorldBounds(true);
 
+        this.keys = this.physics.add.group();
+        this.keys.create(220.5, 526.5, 'key');
+        this.keys.create(730.5, 430.5, 'key');
+
+        this.keys.children.iterate((h) =>{
+            h.body.allowGravity = false;
+            h.setScale(0.7);
+            //h.setImmovable(true);
+            //h.body.setSize(50,5);
+        });
+
+        this.keys.playAnimation('key_roll');
+        //this.physics.add.collider(this.keys, this.platforms);
+        this.physics.add.overlap(this.nexus, this.keys, this.toma_keys, null, this);
+
 
         //this.physics.add.collider(this.paredes0,this.grupoMonstruos, this.choquePared, null, this);
         this.physics.add.collider(this.fondoder0, this.nexus);
@@ -161,6 +178,17 @@ class Scene_puzzle0 extends Phaser.Scene{
         this.nexusDown = this.input.keyboard.addKey(keyCodes.DOWN);
         this.abrir = this.input.keyboard.addKey(keyCodes.ENTER);
 
+    }
+
+    toma_keys(nexus, keys){
+        console.log("Recoge llave");
+        keys.destroy();
+        //this.data.list.keys += 1;
+
+//Por si se suman a las llaves de la tienda aqui se descomenta
+        this.registry.events.emit('adquiereLlave');
+        let recoge = this.sound.add("moneda",{loop:false});
+        recoge.play();
     }
 
     recoger(nexus, dracmas)

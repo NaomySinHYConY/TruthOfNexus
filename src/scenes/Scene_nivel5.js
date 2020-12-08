@@ -158,7 +158,7 @@ class Scene_nivel5 extends Phaser.Scene{
         this.shadows.children.iterate( (p) => {
             p.body.setSize(60, 90);
             p.setOffset(10, -5);
-            p.anims.play('shadow_stand');
+            p.anims.play('shadow_walk');
             p.body.velocity.x = 100;  
             if(p.name == "shadow2" || p.name == "shadow3"){
                 p.setFlipX(true);
@@ -186,7 +186,7 @@ class Scene_nivel5 extends Phaser.Scene{
             end: 4
             }),
             repeat: -1,
-            frameRate: 4 
+            frameRate: 15 
         });
         this.ball_1.anims.play('ball_1_anim');
 
@@ -375,13 +375,7 @@ class Scene_nivel5 extends Phaser.Scene{
                         //delay: 100,
                         value: posInX+10,
                         ease: 'Circ',
-                        duration: 600
-                    },
-                    y:{
-                        //delay: 100,
-                        value: posInY--,
-                        duration: 600,
-                        offset: true
+                        duration: 300
                     },
                     repeat: 0,
                     onStart: () =>{
@@ -427,7 +421,7 @@ class Scene_nivel5 extends Phaser.Scene{
     recoger_llave(nexus, key){
         key.destroy();
         this.data.list.keys += 1;
-        //this.registry.events.emit('recogeKey', 20);
+        this.registry.events.emit('adquiereLlave');
         let recoge = this.sound.add("moneda",{loop:false});
         recoge.play();
     }
@@ -551,9 +545,9 @@ class Scene_nivel5 extends Phaser.Scene{
         win.play();
         this.registry.events.emit('vidasRestantes', this.data.list.vidas);
         this.scene.stop();
-        this.scene.launch('Secene_puzzle1');
+        this.scene.start('Secene_puzzle2');
         this.scene.transition({
-            target: 'Scene_puzzle1',
+            target: 'Scene_puzzle2',
             duration: 2000,
             moveAbove: true,
             onUpdate: this.transitionOut,

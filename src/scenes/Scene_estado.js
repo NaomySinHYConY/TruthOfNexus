@@ -26,6 +26,9 @@ class Scene_estado extends Phaser.Scene{
         //Escudo
         this.data.set('escudo',false);
 
+        //Videncia
+        this.data.set('videncia',false);
+
         //Final
         this.data.set('final',false);
 
@@ -46,7 +49,7 @@ class Scene_estado extends Phaser.Scene{
         });
 
         //Contenedor de los boosters
-        this.contenedor = this.add.container(29, 611);
+        this.contenedor = this.add.container(415, 612);
         //this.contenedor = this.add.container(815, 521);
         //var container = this.add.container(400, 300);
 
@@ -54,8 +57,8 @@ class Scene_estado extends Phaser.Scene{
         this.botonBoosters = this.add.image(84, 18.5, 'botonBoosters').setInteractive();
         this.boosters = this.add.image(83.5, 72.5, 'boosters');
         this.llave = this.add.image(152.5, 74.5, 'llave');
-        this.escudo = this.add.image(14, 74.5, 'escudo');
-        this.videncia = this.add.image(85, 74.5, 'videncia');
+        this.escudo = this.add.image(14, 74.5, 'escudo').setVisible(this.data.list.escudo);
+        this.videncia = this.add.image(85, 74.5, 'videncia').setVisible(this.data.list.videncia);
         this.llavesText = this.add.text(132, 77, this.data.list.llaves, { fontSize: '20px', fill: '#fff' });
 
         //Se agrega todo al contenedor para que aparezca junto
@@ -91,7 +94,7 @@ class Scene_estado extends Phaser.Scene{
 
         //Recepción de evento al morir
         this.registry.events.on('menosVida', () => {
-            //console.log("Recibe muerte");
+            console.log("Recibe muerte");
             //Comprobamos si hay escudo activo
             if(this.data.list.escudo==false){
                 this.data.list.vidas--;
@@ -111,6 +114,7 @@ class Scene_estado extends Phaser.Scene{
         this.registry.events.on('shieldOn', () => {
             //console.log("Recibe moneda");
             this.data.list.escudo = true;
+
             //Aqui activamos el que se vea el escudo xd
             /*
             
@@ -139,6 +143,18 @@ class Scene_estado extends Phaser.Scene{
             this.data.list.llaves++;
             this.llavesText.setText(this.data.list.llaves);
             console.log('Se ha emitido el evento de llaves ', this.data.list.llaves);
+        });
+        this.registry.events.on('adquiereEscudo', () => {
+            //console.log("Recibe moneda");
+            this.data.list.escudo = true;
+            //this.llavesText.setText(this.data.list.llaves);
+            console.log('Se ha emitido el evento de escudo ', this.data.list.escudo);
+        });
+        this.registry.events.on('adquiereVidencia', () => {
+            //console.log("Recibe moneda");
+            this.data.list.videncia = true;
+            //this.llavesText.setText(this.data.list.llaves);
+            console.log('Se ha emitido el evento de videncia ', this.data.list.videncia);
         });
         //});        
     }

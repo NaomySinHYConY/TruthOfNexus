@@ -33,6 +33,8 @@ class Scene_3 extends Phaser.Scene{
         this.load.animation('keyAnim','key/key_anim.json');
 
         this.load.image('entrada','fondo/salida.png');
+        this.load.image('plat2','fondo/plat2.png');
+        this.load.image('piso','nivel5/piso.png');
 
     }
 
@@ -63,22 +65,22 @@ class Scene_3 extends Phaser.Scene{
 
     //plataformas
         this.platforms = this.physics.add.staticGroup();
-        this.platforms.create(  0, 635, 'plataforma_3_gris').setScale(2, 1).setOrigin(0).refreshBody();
-        this.platforms.create(180, 635, 'plataforma_3_gris').setScale(2, 1).setOrigin(0).refreshBody();
-        this.platforms.create(360, 635, 'plataforma_3_gris').setScale(2, 1).setOrigin(0).refreshBody();
-        this.platforms.create(880, 635, 'plataforma_3_gris').setScale(2, 1).setOrigin(0).refreshBody();
+        this.platforms.create(  0, 600, 'plat2').setOrigin(0).refreshBody();
+        this.platforms.create(180, 600, 'plat2').setOrigin(0).refreshBody();
+        this.platforms.create(360, 600, 'plat2').setOrigin(0).refreshBody();
+        this.platforms.create(880, 600, 'plat2').setOrigin(0).refreshBody();
 
     //plataformas voladoras
-        this.platforms.create(150, 500, 'plataforma_3_gris').setScale(1.8, 0.9).setOrigin(0).refreshBody();
-        this.platforms.create(320, 400, 'plataforma_3_gris').setScale(1.8, 0.3).setOrigin(0).refreshBody();
-        this.platforms.create(438, 200, 'plataforma_3_gris').setScale(2.2, 0.3).setOrigin(0).refreshBody();
+        this.platforms.create(150, 500, 'plat2').setOrigin(0).refreshBody();
+        this.platforms.create(320, 400, 'plat2').setOrigin(0).refreshBody();
+        this.platforms.create(438, 200, 'plat2').setOrigin(0).refreshBody();
     
     //Piso de la muerte
-        this.piso_de_muerte1 = this.physics.add.image(540, 639, 'plataforma_3').setInteractive().setScale(2, 1.3).setOrigin(0);
-        this.piso_de_muerte2 = this.physics.add.image(720, 639, 'plataforma_3').setInteractive().setScale(2, 1.3).setOrigin(0);
+        this.piso_de_muerte1 = this.physics.add.image(500, 600, 'piso').setInteractive().setOrigin(0).setScale(0.7);
+        //this.piso_de_muerte2 = this.physics.add.image(720, 629, 'plat2').setInteractive().setOrigin(0);
         this.physics.add.existing(this.piso_de_muerte1, true);
-        this.physics.add.existing(this.piso_de_muerte2, true);
-        this.piso_de_muerte2.body.setAllowGravity(false);
+        //this.physics.add.existing(this.piso_de_muerte2, true);
+        //this.piso_de_muerte2.body.setAllowGravity(false);
         this.piso_de_muerte1.body.setAllowGravity(false);
 
     //Sombras Enemigos
@@ -135,7 +137,7 @@ class Scene_3 extends Phaser.Scene{
         this.physics.add.collider(this.nexus, this.entrada, this.avanza_nivel, null, this);
     //Escena de muerte
         this.physics.add.overlap(this.nexus, this.piso_de_muerte1, this.muere_nexus, null, this);
-        this.physics.add.overlap(this.nexus, this.piso_de_muerte2, this.muere_nexus, null, this);
+        //this.physics.add.overlap(this.nexus, this.piso_de_muerte2, this.muere_nexus, null, this);
 
     //Madrazos, man es que soy sanguinario  loco
         this.physics.add.overlap(this.nexus, this.minotauro, this.ataque, null, this);
@@ -184,12 +186,7 @@ class Scene_3 extends Phaser.Scene{
                 x:{
                     value: posInX+10,
                     ease: 'Circ',
-                    duration: 600
-                },
-                y:{
-                    value: posInY--,
-                    duration: 600,
-                    offset: true
+                    duration: 300
                 },
                 repeat: 0,
                 onStart: () =>{
@@ -411,7 +408,7 @@ class Scene_3 extends Phaser.Scene{
                 shadow.setDepth(3);
             });
             this.shadows.setVelocityX(-30, 0);
-            this.shadows.playAnimation('shadow_stand');
+            this.shadows.playAnimation('shadow_walk');
 
             this.physics.add.collider(this.shadows, this.platforms);
             this.physics.add.collider(this.shadows, this.platforms);

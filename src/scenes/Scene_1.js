@@ -160,10 +160,10 @@ class Scene_1 extends Phaser.Scene{
         this.nexus.setCollideWorldBounds(true);
         this.nexus.anims.play('stand');
 
-        this.chest = this.physics.add.sprite(500,300,'chest').setInteractive();
-        this.chest.setDepth(2);
+        this.chest = this.physics.add.staticSprite(500,350,'chest').setInteractive();
+        this.chest.setDepth(1);
         //this.chest.body.setMass(2);
-        this.chest.setCollideWorldBounds(true);
+        //this.chest.setCollideWorldBounds(true);
         
         //Controles:
         //this.nexusWalkA = this.input.keyboard.addKey(keyCodes.U);
@@ -176,10 +176,10 @@ class Scene_1 extends Phaser.Scene{
         this.abrir = this.input.keyboard.addKey(keyCodes.ENTER);
 
         //Colisiones
-        this.physics.add.collider(this.nexus,this.chest, () => {
-            this.chest.setVelocity(0);
-            this.chest.setAcceleration(0);
-        });
+        // this.physics.add.collider(this.nexus,this.chest, () => {
+        //     this.chest.setVelocity(0);
+        //     this.chest.setAcceleration(0);
+        // });
 
         this.physics.add.collider(this.nexus,this.plat1);
         //this.physics.add.collider(this.nexus,this.aCueva);
@@ -193,10 +193,10 @@ class Scene_1 extends Phaser.Scene{
         });
         
 
-        this.physics.add.collider(this.chest,this.plat1);
-        this.physics.add.collider(this.chest,this.plat2);
-        this.physics.add.collider(this.chest,this.fondo);
-        this.physics.add.collider(this.chest,this.plat3);
+        // this.physics.add.collider(this.chest,this.plat1);
+        // this.physics.add.collider(this.chest,this.plat2);
+        // this.physics.add.collider(this.chest,this.fondo);
+        // this.physics.add.collider(this.chest,this.plat3);
 
         // this.physics.add.collider(this.fuego,this.plat1);
         // this.physics.add.collider(this.fuego,this.plat2);
@@ -355,19 +355,13 @@ class Scene_1 extends Phaser.Scene{
             //this.nexus.anims.play('attack');
             this.tweensAtaque = this.add.tween({
                 targets: [this.nexus],
-                ease: 'Power2',
+                //ease: 'Power2',
                 //y:posInY+50,
                 x:{
                     //delay: 100,
                     value: posInX+10,
                     ease: 'Circ',
-                    duration: 600
-                },
-                y:{
-                    //delay: 100,
-                    value: posInY--,
-                    duration: 600,
-                    offset: true
+                    duration: 300
                 },
                 repeat: 0,
                 onStart: () =>{
