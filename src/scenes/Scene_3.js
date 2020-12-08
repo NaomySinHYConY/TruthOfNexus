@@ -382,7 +382,7 @@ class Scene_3 extends Phaser.Scene{
         this.data.list.keys += 1;
 
 //Por si se suman a las llaves de la tienda aqui se descomenta
-//this.registry.events.emit('recogeKey', 20);
+        this.registry.events.emit('adquiereLlave');
         let recoge = this.sound.add("moneda",{loop:false});
         recoge.play();
 
