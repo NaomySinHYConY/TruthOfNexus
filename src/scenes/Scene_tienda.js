@@ -5,10 +5,12 @@ class Scene_tienda extends Phaser.Scene{
         });
     }
 
-    init(cantdracmas) {
+    init(cantdracmas,escena) {
         console.log('Escena de la tienda');
         console.log("Tienes: " + cantdracmas);
         this.data.set('score', cantdracmas);
+        console.log("Estabas en la escena: " + escena);
+        this.data.set('escena',escena);
     }
 
     preload(){
@@ -573,6 +575,8 @@ class Scene_tienda extends Phaser.Scene{
                 
             }else if(gameObject === this.btn_armas){
                 this.scene.start('Scene_armas');
+            }else if(gameObject === this.btn_salir){
+                this.scene.resume(this.registry.list.escena);
             }
 
             

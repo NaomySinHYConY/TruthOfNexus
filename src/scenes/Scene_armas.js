@@ -191,7 +191,8 @@ class Scene_armas extends Phaser.Scene{
                     }
                 });
             }else if(gameObject === this.btn_salir){
-                //this.scene.resume('Scene_3');
+                this.scene.stop();
+                this.scene.resume('Scene_tienda');
             }
         });
     }

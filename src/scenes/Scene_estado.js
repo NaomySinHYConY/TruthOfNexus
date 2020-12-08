@@ -9,8 +9,10 @@ class Scene_estado extends Phaser.Scene{
         console.log('Escena de estado');
     }
     preload(){
+        this.load.audio('open_door', './assets/sounds/open_door.mp3');
         this.load.path = './assets/estado/';      
         this.load.image(['barraVida','cantDracmas', 'montoVida','btn_tienda']);
+
     } 
     create() {
         //Cantidad de dracmas
@@ -26,10 +28,27 @@ class Scene_estado extends Phaser.Scene{
         this.data.set('talismanes',0);
         //Cantidad de diamantes
         this.data.set('diamantes',0);
+        //Para saber si ya se activa el boton
+        this.data.set('botonT',"");
 
-        //console.log('Datos escena estado');
-        //console.log(this.data.getAll());
-        //this.score = 0;
+        const eventos = Phaser.Input.Events;
+
+        this.registry.events.on('botonTienda',(escena) => {
+            this.data.set('botonT',escena);
+            this.btn_tienda.setVisible(true);
+        });
+
+        this.btn_tienda = this.add.image(830,90,'btn_tienda').setScale(0.25).setInteractive().setDepth(4).setVisible(false);
+            this.input.on(eventos.GAMEOBJECT_UP,(pointer,gameObject) =>{
+                if(gameObject === this.btn_tienda){
+                    this.scene.launch('Scene_tienda',this.data.list.score,this.data.list.botonT);
+                    let open_door = this.sound.add("open_door",{loop:false});
+                    open_door.play();
+                    this.registry.events.emit('dame_datos', 0);
+                }
+            });
+    
+
         this.titleDracmas = this.add.image(840, 45, 'cantDracmas').setScale(0.9);
         this.scoreText = this.add.text(920, 30, '0', { fontSize: '32px', fill: '#fff' });
 
