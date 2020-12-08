@@ -50,9 +50,9 @@ class Scene_armas extends Phaser.Scene{
         this.btn_salir = this.add.image(850,620,'btn_salir').setScale(0.20).setInteractive().setDepth(5);
 
         //Piso
-        this.piso = this.physics.add.image(0,600,'piso').setOrigin(0).setDepth(3);
-        this.piso.setScale(1.3);
-        this.piso.setCollideWorldBounds(true);
+        this.piso_tienda = this.physics.add.image(0,600,'piso_tienda').setOrigin(0).setDepth(3);
+        this.piso_tienda.setScale(1.3);
+        this.piso_tienda.setCollideWorldBounds(true);
 
         //Nexus
         this.nexus = this.physics.add.sprite(80,300, 'nexus_all', 0).setInteractive();
@@ -117,7 +117,7 @@ class Scene_armas extends Phaser.Scene{
         //Candado
         this.candado = this.add.image(700,305,'candado').setOrigin(0).setScale(0.10).setDepth(5);
         //Dialogo del vendedor
-        this.dialogo = this.add.image(260,160,'dialogo').setScale(0.21).setOrigin(0).setDepth(4).setVisible(false);
+        this.dialogo = this.add.image(250,160,'dialogo').setScale(0.21).setOrigin(0).setDepth(4).setVisible(false);
         //Cargar items necesarios
 
         //--->>Hierro

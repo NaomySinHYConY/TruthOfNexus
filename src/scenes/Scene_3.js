@@ -45,6 +45,8 @@ class Scene_3 extends Phaser.Scene{
 
         this.load.image('ayuda2_6','consejos/dKarin2_6.png');
         this.load.image('ayuda2_7','consejos/dKarin2_7.png');
+        this.load.image('consejo3_1','consejos/dKarin3_1.png');
+        this.load.image('consejo3_2','consejos/dKarin3_2.png');
 
         this.load.audio('open_door', 'sounds/open_door.mp3');
     }
@@ -81,6 +83,8 @@ class Scene_3 extends Phaser.Scene{
 
         this.consejo2_6 = this.add.image(240,450,'ayuda2_6').setDepth(3).setScale(0.17).setInteractive();
         this.consejo2_7 = this.add.image(240,450,'ayuda2_7').setDepth(3).setScale(0.17).setVisible(false).setInteractive();
+        this.consejo3_1 = this.add.image(240,450,'consejo3_1').setDepth(3).setScale(0.17).setVisible(false).setInteractive();
+        this.consejo3_2 = this.add.image(240,450,'consejo3_2').setDepth(3).setScale(0.17).setVisible(false).setInteractive();
 
         var num = 1;
 
@@ -91,6 +95,12 @@ class Scene_3 extends Phaser.Scene{
                 this.consejo2_7.setVisible(true);
             }else if(num === 3){
                 this.consejo2_7.setVisible(false);
+                this.consejo3_1.setVisible(true);
+            }else if(num === 4){
+                this.consejo3_1.setVisible(false);
+                this.consejo3_2.setVisible(true);
+            }else if(num === 5){
+                this.consejo3_2.setVisible(false);
                 this.mono.destroy();
             }
         });
