@@ -9,8 +9,9 @@ class Scene_estado extends Phaser.Scene{
         console.log('Escena de estado');
     }
     preload(){
+        this.load.audio('open_door', './assets/sounds/open_door.mp3');
         this.load.path = './assets/estado/';      
-        this.load.image(['barraVida','cantDracmas', 'montoVida', 'boosters', 'botonBoosters', 'llave', 'escudo', 'videncia', 'barraVida_enemigo','montoVida_enemigo']);
+        this.load.image(['barraVida','cantDracmas', 'montoVida', 'boosters', 'botonBoosters', 'llave', 'escudo', 'videncia', 'barraVida_enemigo','montoVida_enemigo','btn_tienda']);
     } 
     create() {
         const eventos = Phaser.Input.Events;
@@ -23,22 +24,37 @@ class Scene_estado extends Phaser.Scene{
         //Llaves que tiene de la tienda
         this.data.set('llaves', 0);
 
-        //Escudo
-        this.data.set('escudo',false);
+        //Escudo->Diamantes
+        this.data.set('escudo',false); 
 
-        //Videncia
+        //Videncia ->Talismanes
         this.data.set('videncia',false);
 
         //Final
         this.data.set('final',false);
 
-        //console.log('Datos escena estado');
-        //console.log(this.data.getAll());
-        //this.score = 0;
-        this.titleDracmas = this.add.image(825, 45, 'cantDracmas').setScale(0.9);
-        this.scoreText = this.add.text(915, 30, '0', { fontSize: '32px', fill: '#fff' });
+        this.data.set('botonT',"");
 
-        //Barra de vida
+        this.registry.events.on('botonTienda',(escena) => {
+            this.data.set('botonT',escena);
+            this.btn_tienda.setVisible(true);
+        });
+
+        this.btn_tienda = this.add.image(840,90,'btn_tienda').setScale(0.20).setInteractive().setDepth(4).setVisible(false);
+            this.input.on(eventos.GAMEOBJECT_UP,(pointer,gameObject) =>{
+                if(gameObject === this.btn_tienda){
+                    this.scene.launch('Scene_tienda',this.data.list.score,this.data.list.botonT);
+                    let open_door = this.sound.add("open_door",{loop:false});
+                    open_door.play();
+                    this.registry.events.emit('dame_datos', 0);
+                }
+            });
+    
+
+        this.titleDracmas = this.add.image(840, 45, 'cantDracmas').setScale(0.9);
+        this.scoreText = this.add.text(920, 30, '0', { fontSize: '32px', fill: '#fff' });
+
+
         this.barra = this.add.image(120, 50, 'barraVida');
 
         //Vidas
@@ -84,6 +100,15 @@ class Scene_estado extends Phaser.Scene{
             });
         });
 
+        
+        this.registry.events.on('talisman',(valor) => {
+            this.data.list.talismanes+=valor;
+        });
+
+        this.registry.events.on('diamantes',(valor) => {
+            this.data.list.diamantes+=valor;
+        });
+
         //Recepción de evento al recoger monedas
         this.registry.events.on('recogeMoneda', (valorMoneda) => {
             if(this.data.list.score<=980){
@@ -106,15 +131,9 @@ class Scene_estado extends Phaser.Scene{
                     duration: 200,
                     yoyo: true,
                     repeat: -1
-                    //repeatDelay:5000,
-                    //hold: 2000,
-                    //delay: 3000
-            //console.log("Recibe moneda");
-            //console.log('Se ha emitido el evento score = ', this.score);
                 });
             }
-
-        });
+        }); 
 
         //Recepción de evento al morir
         this.registry.events.on('menosVida', () => {
@@ -180,7 +199,35 @@ class Scene_estado extends Phaser.Scene{
             //this.llavesText.setText(this.data.list.llaves);
             console.log('Se ha emitido el evento de videncia ', this.data.list.videncia);
         });
-        //});        
+     
+        
+        
+        this.registry.events.on('cobrar', (cantidad) => {
+            if(this.data.list.score < cantidad){
+                console.log("No te alcanza");
+            }else if(this.data.list.score <= 0){
+                this.scoreText.setText(0);
+                console.log("No tienes dracmas");
+            }else if(this.data.list.score >= cantidad){
+                this.data.list.score -= cantidad;
+                this.scoreText.setText(this.data.list.score);
+            }
+            
+        });
+
+        this.registry.events.on('robarDracmas',() => {
+            this.data.set('score',0);
+            this.scoreText.setText(this.data.list.score);
+        });
+
+        this.registry.events.on('dame_datos', (datos) => {
+            this.registry.events.emit('setDracmas3', this.data.list.score);
+            this.scoreText.setText(this.data.list.score);
+            this.registry.events.emit('vidasRestantes3', this.data.list.vidas);
+            console.log('Se ha emitido el evento Get Data ');
+            console.log("");
+            console.log("");
+        });
     }
 
     click(){
