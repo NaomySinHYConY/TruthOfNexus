@@ -17,6 +17,13 @@ class Scene_puzzle0 extends Phaser.Scene{
         this.load.image('ayuda2_5','./assets/consejos/dKarin2_5.png');
         this.load.image('consejo_6','./assets/consejos/dKarin0_2.png');
         this.load.image('consejo_7','./assets/consejos/dKarin0_1.png');
+        
+        this.load.spritesheet('talisman', './assets/shop/items/talisman.png', {
+            frameWidth: 82.25,
+            frameHeight: 85,
+            margin: 0,
+            spacing: 0
+        });
         this.load.path = './assets/puzzle1/';
         //Dialogos de Karin
         
@@ -169,7 +176,7 @@ class Scene_puzzle0 extends Phaser.Scene{
         
         this.hoyos0.children.iterate((h) =>{
             h.body.allowGravity = false;
-            h.alpha = 0.9;
+            h.alpha = 0.1;
             h.setImmovable(true);
             h.body.setSize(50,5);
         });
@@ -189,6 +196,20 @@ class Scene_puzzle0 extends Phaser.Scene{
         this.chest.body.allowGravity = false;
         this.chest.setCollideWorldBounds(true);
 
+        this.talisman = this.physics.add.sprite(38.5, 500, 'talisman', 0).setScale(0.6);
+        this.anims.create({
+            key: 'talisman_anim',
+            frames: this.anims.generateFrameNumbers('talisman', {
+            start: 0,
+            end: 8
+            }),
+            repeat: -1,
+            frameRate: 8
+        });
+        this.talisman.body.allowGravity = false;
+        this.talisman.anims.play('talisman_anim');
+        this.talisman.setDepth(4);
+
         this.keys = this.physics.add.group();
         this.keys.create(220.5, 526.5, 'key');
         this.keys.create(730.5, 430.5, 'key');
@@ -203,6 +224,7 @@ class Scene_puzzle0 extends Phaser.Scene{
         this.keys.playAnimation('key_roll');
         //this.physics.add.collider(this.keys, this.platforms);
         this.physics.add.overlap(this.nexus, this.keys, this.toma_keys, null, this);
+        this.physics.add.overlap(this.nexus, this.talisman, this.toma_talisman, null, this);
 
 
         //this.physics.add.collider(this.paredes0,this.grupoMonstruos, this.choquePared, null, this);
@@ -222,6 +244,8 @@ class Scene_puzzle0 extends Phaser.Scene{
         this.nexusDown = this.input.keyboard.addKey(keyCodes.DOWN);
         this.abrir = this.input.keyboard.addKey(keyCodes.ENTER);
 
+        this.videncia = false;
+
     }
 
     toma_keys(nexus, keys){
@@ -233,6 +257,20 @@ class Scene_puzzle0 extends Phaser.Scene{
         this.registry.events.emit('adquiereLlave');
         let recoge = this.sound.add("moneda",{loop:false});
         recoge.play();
+    }
+
+    toma_talisman(nexus, keys){
+        console.log("Recoge talisman");
+        keys.destroy();
+        //this.data.list.keys += 1;
+        this.videncia=true;
+//Por si se suman a las llaves de la tienda aqui se descomenta
+        this.registry.events.emit('adquiereVidencia');
+        let recoge = this.sound.add("moneda",{loop:false});
+        recoge.play();
+        this.hoyos0.children.iterate((h) =>{
+            h.alpha = 0.9;
+        });
     }
 
     recoger(nexus, dracmas)
@@ -343,6 +381,10 @@ class Scene_puzzle0 extends Phaser.Scene{
                 
             }, 
         });
+        if(this.videncia==true){
+            this.videncia=false;
+            this.registry.events.emit('videnciaOff');
+        }
     }
 
     update(time, delta) {
