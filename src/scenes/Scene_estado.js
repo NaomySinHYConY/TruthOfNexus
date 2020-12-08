@@ -33,10 +33,10 @@ class Scene_estado extends Phaser.Scene{
         this.data.set('videncia',false);
         
         //Cantidad de talismanes
-        this.data.set('talismanes',0);
+        //this.data.set('talismanes',0);
 
         //Cantidad de diamantes
-        this.data.set('diamantes', 0);
+        //this.data.set('diamantes', 0);
 
         //Para saber si ya se activa el boton
         this.data.set('botonT',"");
@@ -141,13 +141,15 @@ class Scene_estado extends Phaser.Scene{
             this.contenedor.setY(612);
         });
 
-        this.registry.events.on('talisman',(valor) => {
-            this.data.list.talismanes+=valor;
-        });
+        // this.registry.events.on('talisman',(valor) => {
+        //     this.data.list.talismanes+=valor;
+        //     this.escudo.setVisible(true);
+        // });
 
-        this.registry.events.on('diamantes',(valor) => {
-            this.data.list.diamantes+=valor;
-        });
+        // this.registry.events.on('diamantes',(valor) => {
+        //     this.data.list.diamantes+=valor;
+        //     this.escudo.setVisible(true);
+        // });
 
         //Recepción de evento al recoger monedas
         this.registry.events.on('recogeMoneda', (valorMoneda) => {
@@ -214,11 +216,24 @@ class Scene_estado extends Phaser.Scene{
             if(this.data.list.escudo==false){
                 this.data.list.vidas--;
                 //console.log(this.data.list.vidas);
-                this.grupoV.getChildren()[this.data.list.vidas].destroy();
+                this.grupoV.getChildren()[this.data.list.vidas].setVisible(false);
                 if(this.data.list.vidas <= 0){
                     this.scene.start('Scene_gameOver');
                     this.scene.stop();
                 }
+            }
+            // this.score+=valorMoneda;
+            // this.scoreText.setText(this.score);
+            //console.log('Se ha emitido el evento score = ', this.score);
+        }); 
+
+        this.registry.events.on('vidas', () => {
+            console.log("Recibe vida");
+            //Comprobamos si hay escudo activo
+            if(this.data.list.vidas<4){
+                //console.log(this.data.list.vidas);
+                this.grupoV.getChildren()[this.data.list.vidas].setVisible(true);
+                this.data.list.vidas++;
             }
             // this.score+=valorMoneda;
             // this.scoreText.setText(this.score);
@@ -259,15 +274,18 @@ class Scene_estado extends Phaser.Scene{
             this.llavesText.setText(this.data.list.llaves);
             console.log('Se ha emitido el evento de llaves ', this.data.list.llaves);
         });
+        
         this.registry.events.on('adquiereEscudo', () => {
             //console.log("Recibe moneda");
             this.data.list.escudo = true;
+            this.escudo.setVisible(true);
             //this.llavesText.setText(this.data.list.llaves);
             console.log('Se ha emitido el evento de escudo ', this.data.list.escudo);
         });
         this.registry.events.on('adquiereVidencia', () => {
             //console.log("Recibe moneda");
             this.data.list.videncia = true;
+            this.videncia.setVisible(true);
             //this.llavesText.setText(this.data.list.llaves);
             console.log('Se ha emitido el evento de videncia ', this.data.list.videncia);
         });

@@ -165,6 +165,8 @@ class Scene_3 extends Phaser.Scene{
         this.physics.add.collider(this.platforms, this.nexus);
         this.physics.add.collider(this.platforms, this.minotauro);
         this.data.set('vidas',4);
+        this.physics.add.overlap(this.piso_de_muerte1, this.minotauro, this.muereMin, null, this);
+        
 
     //CAmbio de escena
         this.physics.add.collider(this.nexus, this.entrada, this.avanza_nivel, null, this);
@@ -178,6 +180,10 @@ class Scene_3 extends Phaser.Scene{
     //PowerUps
         this.shield = false;
 
+    }
+
+    muereMin(){
+        this.minotauro.anims.play('die_mino');
     }
 
     update(){
@@ -480,6 +486,10 @@ class Scene_3 extends Phaser.Scene{
                 win.play();        
             }
             this.registry.events.emit('vidasRestantes', this.data.list.vidas);
+            if(this.shield==true){
+                this.shield=false;
+                this.registry.events.emit('shieldOff');
+            }
             this.scene.stop();
             this.scene.start('Scene_puzzle1');
             this.registry.events.emit('botonTienda','Scene_3');

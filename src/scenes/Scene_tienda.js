@@ -338,7 +338,7 @@ class Scene_tienda extends Phaser.Scene{
         var contador = 0;
         var contItem = 1;
         var precio = 0;
-        var item = "";
+        var item = "vida";
         this.input.on(eventos.GAMEOBJECT_UP,(pointer,gameObject) =>{
             console.log(contItem);
             if(gameObject === this.vendedor){
@@ -554,25 +554,26 @@ class Scene_tienda extends Phaser.Scene{
                 }
             }else if(gameObject === this.btn_comprar){
                 console.log("Estamos en el evento de la tienda, tienes: ");
+                console.log(item);
                 console.log(this.data.get('score'));
+                this.data.get('score') <= precio;
 
-                if(item === "diamante" && this.data.get('score') <= precio){
-                    this.registry.events.emit('diamantes', 1);
+                if(item === "diamante"){
+                    //this.registry.events.emit('diamantes', 1);
                     this.registry.events.emit('adquiereEscudo');
                     console.log("Pediste un diamante");
-                }else if(item === "talisman" && this.data.get('score') <= precio){
-                    this.registry.events.emit('talismanes',1);
+                }else if(item === "talisman"){
+                    //this.registry.events.emit('talismanes',1);
                     this.registry.events.emit('adquiereVidencia');
                     console.log("Pediste un talisman");
-                }else if(item === "llave" && this.data.get('score') <= precio){
-                    this.registry.events.emit('llaves', 1);
+                }else if(item === "llave"){
+                    //this.registry.events.emit('llaves', 1);
                     this.registry.events.emit('adquiereLlave');
                     console.log("Pediste una llave");
-                }else if(item === "vida" && this.data.get('score') <= precio){
-                    this.registry.events.emit('vidas',1);
+                }else if(item === "vida"){
+                    this.registry.events.emit('vidas');
                     console.log("Pediste una vida");
                 }
-
                 this.registry.events.emit('cobrar', precio);
                 this.registry.events.emit('cobrarTienda', precio);
 

@@ -26,6 +26,7 @@ class Scene_armas extends Phaser.Scene{
 
         this.load.image('candado','/shop/armas/candado.png');
         this.load.image('dialogo','/shop/armas/dialogoV9.png');
+        this.load.image('plat2','/fondo/plat2.png');
        
     }
 
@@ -53,6 +54,11 @@ class Scene_armas extends Phaser.Scene{
         this.piso = this.physics.add.image(0,600,'piso').setOrigin(0).setDepth(3);
         this.piso.setScale(1.3);
         this.piso.setCollideWorldBounds(true);
+
+        this.plat = this.physics.add.image(0,420,'plat2').setScale(1.7).setOrigin(0).setDepth(3);
+        //this.plat;
+        this.plat.body.allowGravity = false;
+        //this.piso.setCollideWorldBounds(true);
 
         //Nexus
         this.nexus = this.physics.add.sprite(80,300, 'nexus_all', 0).setInteractive();
@@ -135,7 +141,7 @@ class Scene_armas extends Phaser.Scene{
         this.hierro1.setDepth(4);
 
         //--->>Hierro
-        this.hierro2 = this.add.sprite(685, 430, 'hierro', 0).setOrigin(0);
+        this.hierro2 = this.add.sprite(695, 430, 'hierro', 0).setOrigin(0);
         this.anims.create({
             key: 'hierro_anim',
             frames: this.anims.generateFrameNumbers('hierro', {
@@ -149,7 +155,7 @@ class Scene_armas extends Phaser.Scene{
         this.hierro2.setDepth(4);
 
         //--->>Hierro
-        this.hierro3 = this.add.sprite(815, 430, 'hierro', 0).setOrigin(0);
+        this.hierro3 = this.add.sprite(813, 430, 'hierro', 0).setOrigin(0);
         this.anims.create({
             key: 'hierro_anim',
             frames: this.anims.generateFrameNumbers('hierro', {
@@ -189,6 +195,8 @@ class Scene_armas extends Phaser.Scene{
                     },
                     onComplete: () => {
                         this.dialogo.setAlpha(0);
+                        this.dialogo.setX(260);
+                        this.dialogo.setY(160);
                     }
                 });
             }else if(gameObject === this.btn_salir){
@@ -228,40 +236,40 @@ class Scene_armas extends Phaser.Scene{
             });
         }
 
-        if(Phaser.Input.Keyboard.JustDown(this.nexusAttack)){
-            this.nexus.anims.play('attack');
-             if(this.nexus.flipX){
-                 //this.nexus.body.setSize(70,85);
-                 this.nexus.body.setOffset(20, 10);
-             }
-             else{
-                 //this.nexus.body.setSize(70,85);
-                 this.nexus.body.setOffset(-20, 10);
-             }
-            this.tweensAtaque = this.add.tween({
-                targets: [this.nexus],
-                ease: 'Power2',
-                //y:posInY+50,
-                x:{
-                    value: posInX+10,
-                    ease: 'Circ',
-                    duration: 300
-                },
-                y:{
-                    value: posInY--,
-                    duration: 300,
-                    offset: true
-                },
-                repeat: 0,
-                onComplete: () => {
-                    this.nexus.anims.play('stand');
-                    //this.nexus.body.setSize(50,85);
-                    this.nexus.setOffset(0);
-                    this.nexus.setX(posInX);
-                    this.nexus.setY(posInY);
-                }
-            });
-        }
+        // if(Phaser.Input.Keyboard.JustDown(this.nexusAttack)){
+        //     this.nexus.anims.play('attack');
+        //      if(this.nexus.flipX){
+        //          //this.nexus.body.setSize(70,85);
+        //          this.nexus.body.setOffset(20, 10);
+        //      }
+        //      else{
+        //          //this.nexus.body.setSize(70,85);
+        //          this.nexus.body.setOffset(-20, 10);
+        //      }
+        //     this.tweensAtaque = this.add.tween({
+        //         targets: [this.nexus],
+        //         ease: 'Power2',
+        //         //y:posInY+50,
+        //         x:{
+        //             value: posInX+10,
+        //             ease: 'Circ',
+        //             duration: 300
+        //         },
+        //         y:{
+        //             value: posInY--,
+        //             duration: 300,
+        //             offset: true
+        //         },
+        //         repeat: 0,
+        //         onComplete: () => {
+        //             this.nexus.anims.play('stand');
+        //             //this.nexus.body.setSize(50,85);
+        //             this.nexus.setOffset(0);
+        //             this.nexus.setX(posInX);
+        //             this.nexus.setY(posInY);
+        //         }
+        //     });
+        // }
 
         if( Phaser.Input.Keyboard.JustUp(this.nexusAttack) || Phaser.Input.Keyboard.JustUp(this.nexusWalkDer) || Phaser.Input.Keyboard.JustUp(this.nexusWalkIz) || Phaser.Input.Keyboard.JustUp(this.nexusDown)
         || Phaser.Input.Keyboard.JustUp(this.nexusJump) ){
