@@ -34,13 +34,25 @@ class Scene_gameOver extends Phaser.Scene{
         this.input.on(eventos.GAMEOBJECT_DOWN, (pointer, gameObject) => {
             if(gameObject.name == 'Salir'){
                 //this.scene.bringToTop('Bootloader');
-                this.scene.start('Bootloader');
-                this.scene.stop('Scene_1');
-                this.scene.stop('Scene_estado');
-                this.scene.stop('Scene_puzzle1');
-                this.scene.stop('Scene_puzzle1_caida');
-                this.scene.stop('Scene_3');
-                this.scene.stop();
+                // this.scene.stop('Scene_1');
+                // this.scene.stop('Scene_puzzle1');
+                // this.scene.stop('Scene_puzzle1_caida');
+                // this.scene.stop('Scene_puzzle2');
+                // this.scene.stop('Scene_puzzle2_caida');
+                // this.scene.stop('Scene_estado');
+                // console.log(this.scene.manager.scenes);
+
+                // this.scene.start('Scene_1');
+                // this.scene.start('Scene_puzzle1');
+                // this.scene.start('Scene_puzzle1_caida');
+                // this.scene.start('Scene_puzzle2');
+                // this.scene.start('Scene_puzzle2_caida');
+                // this.scene.start('Scene_estado');
+                // this.scene.start('Bootloader');
+
+                // console.log(this.scene.manager.scenes);
+
+                // this.scene.stop();
 
                 location.reload();
             }

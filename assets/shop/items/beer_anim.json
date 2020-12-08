@@ -1,0 +1,44 @@
+{
+    "anims": [
+        {
+            "key": "beer_idle",
+            "type": "frames",
+            "repeat": -1,
+            "frameRate": 12,
+            "frames": [
+                {
+                    "key": "beer",
+                    "frame": "beer_1"
+                },
+                {
+                    "key": "beer",
+                    "frame": "beer_2"
+                },
+                {
+                    "key": "beer",
+                    "frame": "beer_3"
+                },
+                {
+                    "key": "beer",
+                    "frame": "beer_4"
+                },
+                {
+                    "key": "beer",
+                    "frame": "beer_5"
+                },
+                {
+                    "key": "beer",
+                    "frame": "beer_6"
+                },
+                {
+                    "key": "beer",
+                    "frame": "beer_7"
+                },
+                {
+                    "key": "beer",
+                    "frame": "beer_8"
+                }
+            ]
+        }
+    ]
+}

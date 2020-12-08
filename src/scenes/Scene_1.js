@@ -39,8 +39,19 @@ class Scene_1 extends Phaser.Scene{
         this.load.audio('hit', 'sounds/hit.mp3');
         this.load.audio('impressive', 'sounds/impressive.mp3');
         this.load.audio('shadowDie', 'sounds/shadowDie.mp3');
+
+        //Karin
+        this.load.atlas('mono_all','mono/mono_all.png','mono/mono_all_atlas.json');
+        this.load.animation('monoAnim','mono/mono_all_anim.json');
+        //Dialogos de Karin
+        this.load.image('ayuda_1','/consejos/dKarin_1.png');
+        this.load.image('ayuda_2','/consejos/dKarin_2.png');
+        this.load.image('ayuda_3','/consejos/dKarin_3.png');
+        this.load.image('ayuda_4','/consejos/dKarin_4.png');
+        this.load.image('ayuda_5','/consejos/dKarin_5.png');
     }
     create() {
+
         this.time.delayedCall(2000, function(){   
             this.cameras.main.setViewport(0, 0, 1000, 640)
             .fadeOut(1000)
@@ -87,10 +98,43 @@ class Scene_1 extends Phaser.Scene{
         this.fondo.anims.play('fondo_anim');
         this.fondo.body.setSize(1000, 40);
         this.fondo.body.setOffset(0, 570);
+
+        //Karin
+        this.mono = this.physics.add.sprite(20,400,'mono').setInteractive();
+        this.mono.setDepth(3);
+        this.mono.anims.play('mono_jump');
+        this.mono.setCollideWorldBounds(true);
+
+        this.consejo_1 = this.add.image(100,450,'ayuda_1').setDepth(3).setScale(0.17).setInteractive();
+        this.consejo_2 = this.add.image(100,450,'ayuda_2').setDepth(3).setScale(0.17).setVisible(false).setInteractive();
+        this.consejo_3 = this.add.image(100,450,'ayuda_3').setDepth(3).setScale(0.17).setVisible(false).setInteractive();
+        this.consejo_4 = this.add.image(100,450,'ayuda_4').setDepth(3).setScale(0.17).setVisible(false).setInteractive();
+        this.consejo_5 = this.add.image(100,450,'ayuda_5').setDepth(3).setScale(0.17).setVisible(false).setInteractive();
+
+        var num = 1;
+
+        this.input.on(eventos.GAMEOBJECT_UP,(pointer,gameObject) =>{
+            num = num+1;
+            if(num === 2){
+                this.consejo_1.setVisible(false);
+                this.consejo_2.setVisible(true);
+            }else if(num === 3){
+                this.consejo_2.setVisible(false);
+                this.consejo_3.setVisible(true);
+            }else if(num === 4){
+                this.consejo_3.setVisible(false);
+                this.consejo_4.setVisible(true);
+            }else if(num === 5){
+                this.consejo_4.setVisible(false);
+                this.consejo_5.setVisible(true);
+            }else if(num === 6){
+                this.consejo_5.setVisible(false);
+                this.mono.destroy();
+            }
+        });
+
         
-        // this.titleDracmas = this.add.image(860, 45, 'cantDracmas').setScale(0.9);
-        // this.score = 0;
-        // this.scoreText = this.add.text(940, 30, '0', { fontSize: '32px', fill: '#fff' });
+        
         this.aCueva = this.add.image(920, 330, 'aCueva').setInteractive().setOrigin(0).setScale(0.15);
         this.physics.add.existing(this.aCueva, true);
         this.aCueva.body.setSize(50, 400);
@@ -210,7 +254,7 @@ class Scene_1 extends Phaser.Scene{
         // this.physics.add.collider(this.fuego_2,this.plat3);
         // this.physics.add.collider(this.fuego_2,this.nexus);
 
-        //this.physics.add.collider(this.shadow,this.fondo);
+        this.physics.add.collider(this.mono,this.plat1);
 
         //this.physics.add.overlap(this.nexus, this.fuego, this.muere_nexus, null, this);
         //this.physics.add.overlap(this.nexus, this.fuego_2, this.muere_nexus, null, this);
@@ -290,6 +334,7 @@ class Scene_1 extends Phaser.Scene{
             this.chest.anims.play('abrir');
             let cofreOpen = this.sound.add("cofreOpen",{loop:false});
             cofreOpen.play();
+            this.chest.destroy();
             
             this.grupod = this.physics.add.group({
                 key: 'dracmas',
@@ -518,7 +563,7 @@ class Scene_1 extends Phaser.Scene{
             /*
             en ganar() de escea nivel 1
             this.scene.transition({
-                target: 'Scene_puzzle1',
+                target:'Scene_puzzle1',
                 duration: 1000,
                 moveAbove: true,
                 onUpdate: this.transitionOut,
